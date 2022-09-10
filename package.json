@@ -1,0 +1,32 @@
+{
+  "name": "blog-lost-pieces",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Locietta <locietta@qq.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@neilsustc/markdown-it-katex": "^1.0.0",
+    "@types/fs-extra": "^9.0.13",
+    "@types/katex": "^0.14.0",
+    "@types/markdown-it": "^12.2.3",
+    "@types/node": "^18.7.16",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
+    "@typescript-eslint/types": "^5.36.2",
+    "@vue/compiler-sfc": "^3.2.39",
+    "eslint": "^8.23.0",
+    "eslint-plugin-vue": "^9.4.0",
+    "fs-extra": "^10.1.0",
+    "gray-matter": "^4.0.3",
+    "typescript": "^4.8.3",
+    "vitepress": "^1.0.0-alpha.13",
+    "vue": "^3.2.39",
+    "vue-eslint-parser": "^9.1.0"
+  },
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs"
+  },
+  "dependencies": {}
+}
