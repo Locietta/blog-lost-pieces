@@ -63,6 +63,12 @@ h3 {
 }
 /* pc + mobile end */
 
+/* Logo */
+
+div.Layout > header > div > div > div.VPNavBarTitle > a > img {
+    height: 66%
+}
+
 /*tags and archives page style*/
 .article {
     padding: 4px 0 4px 25px;
