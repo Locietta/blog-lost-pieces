@@ -27,5 +27,7 @@
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs"
   },
-  "dependencies": {}
+  "dependencies": {
+    "katex": "^0.16.2"
+  }
 }
