@@ -35,7 +35,7 @@ export async function generatePaginationPages(pageSize: number) {
   let pagesNum = allPagesLength % pageSize === 0 ? allPagesLength / pageSize : allPagesLength / pageSize + 1
   pagesNum = parseInt(pagesNum.toString())
 
-  const paths = path.resolve('./')
+  const paths = path.resolve('./docs')
   if (allPagesLength > 0) {
     for (let i = 1; i < pagesNum + 1; i++) {
       const page = `

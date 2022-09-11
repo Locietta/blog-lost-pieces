@@ -1,11 +1,11 @@
 ---
-date: 2022-09-11
+date: 2020-07-30
 title: 在WSL上安装并配置zsh
 tags:
   - zsh
   - wsl
   - 配置
-description: 一篇旧文，测试显示效果
+description: 一篇旧文，用于测试显示效果
 ---
 
 # 在 WSL 上安装并配置 zsh
