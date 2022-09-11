@@ -1,5 +1,5 @@
 import { defineConfigWithTheme } from 'vitepress'
-import mk from '@neilsustc/markdown-it-katex'
+import mk from './markdown-it-katex'
 import { getPosts, generatePaginationPages } from './theme/server_utils'
 
 export default async () => {
