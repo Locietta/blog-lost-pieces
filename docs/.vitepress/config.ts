@@ -4,7 +4,7 @@ import { getPosts, generatePaginationPages } from './theme/server_utils'
 
 export default async () => {
   const pageSize = 2
-  // await generatePaginationPages(pageSize)
+  await generatePaginationPages(pageSize)
 
   return defineConfigWithTheme({
     title: 'Hello VitePress',
@@ -14,7 +14,7 @@ export default async () => {
         md.use(mk)
       }
     },
-    base: '/',
+    base: '/blog-lost-pieces/',
     head: [['link', { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css' }]],
     themeConfig: {
       posts: await getPosts(),
