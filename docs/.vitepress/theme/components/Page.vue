@@ -20,8 +20,9 @@
 
 <script lang="ts" setup>
 import { withBase } from 'vitepress'
+import { Post } from '../functions';
 const props = defineProps({
-    posts: Array,
+    posts: Array<Post>,
     pageCurrent: Number,
     pagesNum: Number
 })

@@ -1,6 +1,6 @@
 <template>
     <div class="tags">
-        <span @click="toggleTag(key)" v-for="(item, key) in data" class="tag">
+        <span @click="toggleTag(key.toString())" v-for="(item, key) in data" class="tag">
             {{ key }} <strong>{{data[key].length}}</strong>
         </span>
     </div>
