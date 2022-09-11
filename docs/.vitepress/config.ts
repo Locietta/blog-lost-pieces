@@ -7,14 +7,14 @@ export default async () => {
   await generatePaginationPages(pageSize)
 
   return defineConfigWithTheme({
-    title: 'Hello VitePress',
+    title: "Lost Pieces - Locietta's Blog",
     description: 'Just playing around.',
     markdown: {
       config: (md) => {
         md.use(mk)
       }
     },
-    base: '/blog-lost-pieces/',
+    base: '/',
     head: [['link', { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css' }]],
     themeConfig: {
       posts: await getPosts(),
