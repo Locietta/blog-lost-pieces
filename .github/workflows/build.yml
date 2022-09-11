@@ -1,0 +1,27 @@
+name: Build
+on:
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - '**'
+jobs:
+  Vitepress_build:
+    runs-on: ubuntu-latest
+    container: locietta/loia-dev-base:latest
+    name: Vitepress Deploy
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup and build
+      shell: bash
+      run: |
+        yarn install
+        yarn docs:build
+        cd docs/.vitepress/dist
+        touch .nojekyll
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
+        git init
+        git add -A
+        git commit -m autobuild
+        git push -f https://$GITHUB_ACTOR:${{secrets.GITHUB_TOKEN}}@github.com/$GITHUB_REPOSITORY.git master:gh-pages
