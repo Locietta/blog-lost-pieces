@@ -71,6 +71,8 @@ $$
 \end{aligned}
 $$
 
+$$\int_a^b f(x)\mathrm{d}x \sim F_n(X) = \dfrac{1}{n}\sum^n_{k=1}\dfrac{f(X_k)}{\color{red} PDF(X_k)}$$
+
 $$
 \begin{aligned}
 E[F_n(X)] &= E\left[\frac{1}{n}\sum^n_{k=1}\dfrac{f(X_k)}{PDF(X_k)}\right]\\
