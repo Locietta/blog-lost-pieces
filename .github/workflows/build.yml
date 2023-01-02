@@ -18,8 +18,8 @@ jobs:
     - name: Setup and build
       shell: bash
       run: |
-        yarn install
-        yarn docs:build
+        pnpm i
+        pnpm docs:build
         cd docs/.vitepress/dist
         touch .nojekyll
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"

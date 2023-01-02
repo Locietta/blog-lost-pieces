@@ -1,6 +1,10 @@
 node_modules
-yarn-error.log
-yarn.lock
 dist
 .vscode
 docs/**.md
+
+# vitepress cache
+docs/.vitepress/cache
+
+# pnpm lock
+pnpm-lock.yaml
