@@ -3,7 +3,7 @@ import mk from './markdown-it-katex'
 import { getPosts, generatePaginationPages } from './theme/server_utils'
 
 export default async () => {
-  const pageSize = 2
+  const pageSize = 6
   await generatePaginationPages(pageSize)
 
   return defineConfigWithTheme({
