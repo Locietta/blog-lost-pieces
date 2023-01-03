@@ -16,8 +16,8 @@
 
   /* pure theme color */
   --li-dot-color: #737373;
-  --title-color: #334155;
-  --date-color: #64748b;
+  --title-color: #73ad93;
+  --date-color: #65b486;
   --date-font-family: Georgia, sans-serif;
   --tag-bg: #eff6ff;
 }
@@ -103,6 +103,7 @@ div.Layout > header > div > div > div.VPNavBarTitle > a > img {
 .title {
   color: var(--title-color);
   font-size: 0.9375rem;
+  font-weight: 600;
 }
 
 .title:hover {
@@ -112,6 +113,11 @@ div.Layout > header > div > div > div.VPNavBarTitle > a > img {
 .date {
   color: var(--date-color);
   font-family: var(--date-font-family);
+}
+
+.update-date {
+  color: var(--date-color);
+  font-size: small;
 }
 
 /*mobile*/

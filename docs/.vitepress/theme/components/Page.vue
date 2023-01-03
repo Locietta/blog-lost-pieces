@@ -10,6 +10,9 @@
         </div>
         <p class="describe" v-html="article.frontMatter.description">
         </p>
+        <time v-if=article.frontMatter.update class="update-date">
+            Updated at {{ article.frontMatter.update }}
+        </time>
     </div>
 
     <div class="pagination">
@@ -42,7 +45,7 @@ const props = defineProps({
 
 .list-li {
     font-size: 1.0625rem;
-    font-weight: 500;
+    font-weight: 600;
     margin: 0.1rem 0;
 }
 
