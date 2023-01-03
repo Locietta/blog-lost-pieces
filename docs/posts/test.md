@@ -1,6 +1,6 @@
 ---
 date: 2022-09-11
-title: 测试
+title: 测试显示效果
 tags:
   - vitepress
   - markdown
@@ -99,9 +99,17 @@ $$
 
 ## 二级标题
 
+> 二级标题会出现在右侧标题导航中
+
 ### 三级标题
 
 #### 四级标题
 
 > 最多支持4级标题
 
+超链接：https://blog.locietta.xyz/
+
+超链接文字：[原地TP](https://blog.locietta.xyz/posts/test.html)
+
+GitHub Style 表情符号:
+:100: :tada:
