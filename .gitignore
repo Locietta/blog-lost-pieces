@@ -2,6 +2,7 @@ node_modules
 dist
 .vscode
 docs/**.md
+.npmrc
 
 # vitepress cache
 docs/.vitepress/cache

@@ -14,6 +14,7 @@ export default async () => {
         md.use(mk)
       }
     },
+    lastUpdated: true,
     base: '/',
     head: [
       ['link', { rel: 'icon', href: '/L_32x32.ico' }],

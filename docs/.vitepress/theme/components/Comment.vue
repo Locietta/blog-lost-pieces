@@ -1,30 +1,42 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
-import { useData } from 'vitepress'
-const { theme } = useData()
-const { repo, issueTerm = 'pathname', themes = 'github-light' } = theme.value.comment
-const utterancesRef = ref()
+import { useData, useRoute } from 'vitepress'
+
+const { frontmatter } = useData()
+const giscusRef = ref()
+const { path } = useRoute()
+
+console.log(frontmatter.value.page)
+console.log(path)
+
 onMounted(() => {
-    if (repo) {
-        let utterances = document.createElement('script')
-        utterances.async = true
-        utterances.setAttribute('src', 'https://utteranc.es/client.js')
-        utterances.setAttribute('repo', repo)
-        utterances.setAttribute('issue-term', issueTerm)
-        utterances.setAttribute('theme', themes)
-        utterances.setAttribute('crossorigin', 'anonymous')
-        utterancesRef.value.appendChild(utterances)
-    }
+    let giscus = document.createElement('script')
+    giscus.async = true
+    giscus.setAttribute('src', 'https://giscus.app/client.js')
+    giscus.setAttribute('data-repo', 'Locietta/blog-lost-pieces')
+    giscus.setAttribute('data-repo-id', 'R_kgDOH-URKw')
+    giscus.setAttribute('data-category', 'Announcements')
+    giscus.setAttribute('data-category-id', 'DIC_kwDOH-URK84CTZKy')
+    giscus.setAttribute('data-mapping', 'pathname')
+    giscus.setAttribute('data-strict', '0')
+    giscus.setAttribute('data-reactions-enabled', '1')
+    giscus.setAttribute('data-emit-metadata', '0')
+    giscus.setAttribute('data-input-position', 'top')
+    giscus.setAttribute('data-theme', 'preferred_color_scheme')
+    giscus.setAttribute('data-loading', 'lazy')
+    giscus.setAttribute('crossorigin', 'anonymous')
+    giscusRef.value.appendChild(giscus)
 })
 </script>
 
 <template>
-    <div ref="utterancesRef"></div>
+    <div ref="giscusRef"></div>
 </template>
 
 <style>
 /*global  style*/
-.utterances {
+.giscus {
+    padding-top: 1.0625rem;
     max-width: inherit !important;
 }
 </style>
