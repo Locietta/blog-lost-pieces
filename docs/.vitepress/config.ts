@@ -44,7 +44,9 @@ export default async () => {
             { text: 'Zhihu', link: 'https://www.zhihu.com/people/wang-ling-xin-94' }
           ]
         }
-      ]
+      ],
+
+      socialLinks: [{ icon: 'github', link: 'https://github.com/Locietta/blog-lost-pieces' }]
     },
     srcExclude: ['README.md']
   })
