@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import type { EnhanceAppContext } from 'vitepress'
 
 import DefaultTheme from 'vitepress/theme'
 
@@ -13,7 +13,7 @@ import './custom.css'
 export default {
   ...DefaultTheme,
   Layout: NewLayout,
-  enhanceApp({ app }: { app: App }) {
+  enhanceApp({ app }: EnhanceAppContext) {
     // register global compoment
     app.component('Tags', Tags)
     app.component('Archives', Archives)

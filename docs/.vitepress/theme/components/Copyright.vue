@@ -14,7 +14,7 @@ const website = theme.value.website
 const webTitle = site.value.title
 </script>
 
-<style>
+<style scoped>
 .site-footer {
     color: #999;
     height: 50px;

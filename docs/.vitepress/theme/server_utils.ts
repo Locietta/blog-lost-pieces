@@ -44,7 +44,6 @@ export async function generatePaginationPages(pageSize: number) {
     for (let i = 1; i < pagesNum + 1; i++) {
       const page = `
 ---
-page: true
 lastUpdated: false
 date: 2021-06-30
 title: ${i === 1 ? 'home' : 'page_' + i}
