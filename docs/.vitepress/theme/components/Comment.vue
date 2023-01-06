@@ -1,6 +1,6 @@
 <template>
-    <div class="comments">
-        <component v-if="showComment" :is="'script'" src="https://giscus.app/client.js" 
+    <div class="comments" v-if="show">
+        <component v-if="refreshKey" :is="'script'" src="https://giscus.app/client.js" 
             :data-repo="'Locietta/blog-lost-pieces'" 
             :data-repo-id="'R_kgDOH-URKw'"
             :data-category="'Announcements'"
@@ -16,21 +16,24 @@
 
 <script lang="ts" setup>
 import { useData, useRoute } from 'vitepress'
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 
-const { isDark } = useData()
-
+const { isDark, frontmatter } = useData()
 const route = useRoute()
-const showComment = ref(true)
-watch(
-    () => route.path,
-    () => {
-        showComment.value = false
-        setTimeout(() => {
-            showComment.value = true
-        }, 150)
-    }
-)
+
+const show = computed(() => !frontmatter.value.disableComment)
+
+const refreshKey = ref(true)
+
+const refreshComment = () => {
+    refreshKey.value = false
+    setTimeout(() => {
+        refreshKey.value = true
+    }, 150)
+}
+
+watch(() => route.path, refreshComment)
+watch(isDark, refreshComment)
 </script>
 <style scoped>
 .comments {

@@ -5,6 +5,7 @@ type Post = {
     title: string
     tags?: string[]
     description?: string
+    disableComment?: boolean
   }
   regularPath: string
 }

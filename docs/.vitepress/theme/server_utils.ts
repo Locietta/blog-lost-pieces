@@ -46,6 +46,7 @@ lastUpdated: false
 date: 2021-06-30
 title: ${i === 1 ? 'home' : 'page_' + i}
 sidebar: false
+disableComment: true
 ---
 <script setup>
 import Page from "./.vitepress/theme/components/Page.vue";
