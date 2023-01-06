@@ -1,14 +1,3 @@
-export type Post = {
-  frontMatter: {
-    date: string
-    update?: string
-    title: string
-    tags?: string[]
-    description?: string
-  }
-  regularPath: string
-}
-
 export function initTags(post: Post[]) {
   const data: any = {}
   for (let index = 0; index < post.length; index++) {

@@ -3,8 +3,6 @@ import matter from 'gray-matter'
 import fs from 'fs-extra'
 import path from 'path'
 
-import type { Post } from './functions'
-
 export async function getPosts() {
   let paths = await getPostMDFilePaths()
   let posts: Post[] = await Promise.all(
