@@ -1,18 +1,23 @@
 <template>
-    <div style="padding-top: 10px">
-        <div v-for="yearList in data">
-            <div class="year">
-                {{ yearList[0].frontMatter.date.split('-')[0] }}
-            </div>
-            <a :href="withBase(article.regularPath)" v-for="(article, index) in yearList" :key="index" class="article">
-                <div class="title">
-                    <div class="title-o"></div>
-                    {{ article.frontMatter.title }}
-                </div>
-                <div class="date">{{ article.frontMatter.date.slice(5) }}</div>
-            </a>
+  <div style="padding-top: 10px">
+    <div v-for="yearList in data">
+      <div class="year">
+        {{ yearList[0].frontMatter.date.split('-')[0] }}
+      </div>
+      <a
+        :href="withBase(article.regularPath)"
+        v-for="(article, index) in yearList"
+        :key="index"
+        class="article"
+      >
+        <div class="title">
+          <div class="title-o"></div>
+          {{ article.frontMatter.title }}
         </div>
+        <div class="date">{{ article.frontMatter.date.slice(5) }}</div>
+      </a>
     </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -26,8 +31,8 @@ const data = computed(() => useYearSort(theme.value.posts))
 
 <style scoped>
 .year {
-    padding: 16px 0 8px 0;
-    font-size: 1.2rem;
-    font-weight: 600;
+  padding: 16px 0 8px 0;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 </style>
