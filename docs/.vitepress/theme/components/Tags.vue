@@ -51,12 +51,15 @@ const toggleTag = (tag: string) => {
   background-color: var(--tag-bg);
   transition: 0.4s;
   border-radius: 3px;
-  color: var(--c-brand);
+  color: var(--tag-text);
   cursor: pointer;
 }
 
 .tag strong {
-  color: #222;
+  padding-left: 0.125rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--tag-count);
 }
 
 .header {

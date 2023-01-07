@@ -12,19 +12,25 @@
   --font-family-mono: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 
   --header-height: 3.6rem;
-  --code-bg-color: #52525b;
 
   /* pure theme color */
   --li-dot-color: #737373;
-  --title-color: #73ad93;
+  --title-color: var(--vp-c-brand);
   --date-color: #65b486;
   --date-font-family: Georgia, sans-serif;
+
+  /* tag color */
+  --tag-count: #111;
+  --tag-text: var(--c-brand);
   --tag-bg: #eff6ff;
 }
 
 .dark {
   --c-brand: #65b486;
   --c-brand-light: #aaa;
+  --tag-text: #fff;
+  /* --tag-bg: #408460; */
+  --tag-bg: var(--title-color);
 }
 
 /*theme reset*/
@@ -34,12 +40,12 @@ a:link {
 
 .content a[rel~='noopener']:link,
 a[rel~='noopener']:visited {
-  color: var(--c-brand);
+  color: var(--vp-c-text-1);
   font-weight: 500 !important;
 }
 
 .content a[rel~='noopener']:hover {
-  color: var(--title-color);
+  color: var(--vp-c-brand);
   border-bottom: 1px solid;
 }
 

@@ -48,7 +48,7 @@ const props = defineProps({
 
 <style scoped>
 .post-list {
-  border-bottom: 1px dashed var(--c-divider-light);
+  border-bottom: 1px dashed var(--c-divider);
   padding: 1rem 0 0 0;
 }
 
@@ -58,7 +58,7 @@ const props = defineProps({
   justify-content: space-between;
 }
 
-.post-title {
+.vp-doc .post-title a{
   font-size: 1.0625rem;
   font-weight: 600;
   margin: 0.1rem 0;
