@@ -8,7 +8,7 @@
       <div class="post-title">
         <a :href="withBase(article.regularPath)"> {{ article.frontMatter.title }}</a>
       </div>
-      <time class="post-date">
+      <time class="date">
         {{ article.frontMatter.date }}
       </time>
     </div>
@@ -138,7 +138,7 @@ const props = defineProps({
     margin: 0.5rem 0 1rem;
   }
 
-  .post-date {
+  .date {
     font-size: 0.8125rem;
   }
 }

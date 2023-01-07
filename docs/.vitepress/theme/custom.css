@@ -1,12 +1,12 @@
 /*keep the change things*/
 :root {
-  --c-divider-light: #e2e8f0;
-  --c-divider-dark: rgba(84, 84, 88, 0.48);
+  --c-divider: #e2e8f0;
 
   --c-brand: #333;
   /*  don't forget change the --tag-bg for tags */
-  --c-brand-light: #333;
+  --c-brand-light: #888;
 
+  /* TODO: self-contained fonts */
   --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans',
     'Helvetica Neue', sans-serif;
   --font-family-mono: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
@@ -22,6 +22,11 @@
   --tag-bg: #eff6ff;
 }
 
+.dark {
+  --c-brand: #65b486;
+  --c-brand-light: #aaa;
+}
+
 /*theme reset*/
 a:link {
   text-decoration: none;
@@ -29,12 +34,13 @@ a:link {
 
 .content a[rel~='noopener']:link,
 a[rel~='noopener']:visited {
-  color: #06f;
-  border-bottom: 1px solid #06f;
+  color: var(--c-brand);
+  font-weight: 500 !important;
 }
 
 .content a[rel~='noopener']:hover {
-  color: #000;
+  color: var(--title-color);
+  border-bottom: 1px solid;
 }
 
 h1 {
@@ -53,26 +59,13 @@ h3 {
 }
 
 .container {
-  max-width: 58rem !important;
+  max-width: 68rem !important;
 }
 
 /* pc + mobile start */
-.sidebar-links {
-  padding: 0.5rem 0;
-}
 
-.sidebar > .sidebar-links > .sidebar-link + .sidebar-link {
-  padding-top: 0;
-}
-
-.sidebar > .sidebar-links > .sidebar-link > .sidebar-link-item {
-  font-size: 0.875rem;
-  padding: 0.1rem 0 0.1rem 1.2rem;
-}
-
-.sidebar > .sidebar-links > .sidebar-link > .sidebar-links > .sidebar-link > .sidebar-link-item {
-  font-size: 0.875rem;
-  padding: 0.2rem 1.5rem 0.2rem 2rem;
+.VPDoc.has-aside .content-container {
+  max-width: 68rem !important;
 }
 
 /* pc + mobile end */
@@ -121,21 +114,14 @@ div.Layout > header > div > div > div.VPNavBarTitle > a > img {
 }
 
 /*mobile*/
-@media screen and (max-width: 720px) {
-  .sidebar-button {
-    left: 0.5rem;
+@media screen and (max-width: 768px) {
+  .VPDoc {
+    padding-top: 10px !important;
+    padding-bottom: 20px !important;
   }
 
-  .page {
-    min-height: calc(100vh - 3rem);
-  }
-
-  h1 {
-    font-size: 1.25rem;
-  }
-
-  .container {
-    padding: 0 1.3rem !important;
+  .vp-doc h1 {
+    font-size: 1.25rem !important;
   }
 
   .article {
@@ -150,7 +136,7 @@ div.Layout > header > div > div > div.VPNavBarTitle > a > img {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 17em;
+    width: 16.5em;
   }
 }
 
@@ -190,7 +176,7 @@ div.Layout > header > div > div > div.VPNavBarTitle > a > img {
   }
 
   .sidebar > .sidebar-links {
-    border-left: 1px solid var(--c-divider-light);
+    border-left: 1px solid var(--c-divider);
   }
 
   .sidebar-link-item {
@@ -201,7 +187,7 @@ div.Layout > header > div > div > div.VPNavBarTitle > a > img {
 
 /* hide sidebar when width is too small*/
 @media screen and (min-width: 720px) and (max-width: 1380px) {
-  .sidebar {
+  .VPDoc .aside {
     display: none;
   }
 }
