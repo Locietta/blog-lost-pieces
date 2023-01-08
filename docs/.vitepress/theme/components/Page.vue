@@ -22,6 +22,11 @@
     >
       Updated at {{ article.frontMatter.update }}
     </time>
+    <div class="post-tag">
+      <span v-for="item in article.frontMatter.tags"
+        ><a :href="withBase(`/pages/tags.html?tag=${item}`)"> {{ item }}</a></span
+      >
+    </div>
   </div>
 
   <div class="pagination">
@@ -58,7 +63,26 @@ const props = defineProps({
   justify-content: space-between;
 }
 
-.vp-doc .post-title a{
+.post-tag span {
+  display: inline-block;
+  padding: 0px 7px;
+  background-color: var(--tag-bg);
+  margin: 0.25rem 0.5rem 0.75rem 0;
+  transition: 0.4s;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.post-tag span a {
+  color: var(--vp-c-text-1);
+  font-size: x-small;
+}
+
+.post-tag span a:hover {
+  color: var(--tag-hover);
+}
+
+.vp-doc .post-title a {
   font-size: 1.0625rem;
   font-weight: 600;
   margin: 0.1rem 0;
@@ -71,8 +95,8 @@ const props = defineProps({
   -webkit-line-clamp: 3;
   overflow: hidden;
   color: #71717a;
-  margin: 0.625rem 0 1rem;
-  line-height: 1.5rem;
+  margin: 0.625rem 0 0.375rem;
+  line-height: 1.5rem
 }
 
 .pagination {

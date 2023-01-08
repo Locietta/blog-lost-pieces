@@ -23,14 +23,16 @@
   --tag-count: #111;
   --tag-text: var(--c-brand);
   --tag-bg: #eff6ff;
+  --tag-hover: var(--vp-c-brand);
 }
 
 .dark {
   --c-brand: #65b486;
   --c-brand-light: #aaa;
   --tag-text: #fff;
-  /* --tag-bg: #408460; */
-  --tag-bg: var(--title-color);
+  --tag-bg: #318f5d;
+  /* --tag-bg: var(--title-color); */
+  --tag-hover: #111;
 }
 
 /*theme reset*/
@@ -47,7 +49,6 @@ a[rel~='noopener']:visited {
 
 .content a[rel~='noopener']:hover {
   color: var(--vp-c-brand);
-  border-bottom: 1px solid;
 }
 
 h1 {
