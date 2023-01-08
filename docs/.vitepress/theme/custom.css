@@ -36,6 +36,7 @@
 /*theme reset*/
 a:link {
   text-decoration: none;
+  word-break: break-all;
 }
 
 .content a[rel~='noopener']:link,
