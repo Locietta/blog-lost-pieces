@@ -8,7 +8,7 @@ export async function getPosts() {
   let posts: Post[] = await Promise.all(
     paths.map(async (item) => {
       const content = await fs.readFile(item, 'utf-8')
-      const { data } = matter(content) as any as { data: Post['frontMatter'] }
+      const data = matter(content).data as Post['frontMatter']
 
       data.date = _convertDate(data.date)
       if (data.update) {

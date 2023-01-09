@@ -6,7 +6,7 @@ export default async () => {
   const pageSize = 6
   await generatePaginationPages(pageSize)
 
-  return defineConfigWithTheme({
+  return defineConfigWithTheme<LoiaThemeConfig>({
     title: "Lost Pieces - Locietta's Blog",
     description: 'Just playing around.',
     markdown: {

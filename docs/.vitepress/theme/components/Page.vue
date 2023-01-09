@@ -44,11 +44,11 @@
 <script lang="ts" setup>
 import { withBase } from 'vitepress'
 
-const props = defineProps({
-  posts: Array<Post>,
-  pageCurrent: Number,
-  pagesNum: Number
-})
+const props = defineProps<{
+  posts: Array<Post>
+  pageCurrent: number
+  pagesNum: number
+}>()
 </script>
 
 <style scoped>
@@ -96,7 +96,7 @@ const props = defineProps({
   overflow: hidden;
   color: #71717a;
   margin: 0.625rem 0 0.375rem;
-  line-height: 1.5rem
+  line-height: 1.5rem;
 }
 
 .pagination {
