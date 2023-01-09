@@ -9,6 +9,7 @@ import Page from './components/Page.vue'
 import Comment from './components/Comment.vue'
 
 import './custom.css'
+import 'katex/dist/katex.min.css'
 
 export default {
   ...DefaultTheme,
