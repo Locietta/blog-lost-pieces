@@ -37,7 +37,7 @@ function isValidDelim(state: StateInline, pos: number) {
 }
 
 function math_inline(state: StateInline, silent: boolean) {
-  let start, match, token, res, pos, esc_count
+  let start, match, token, res, pos
 
   if (state.src[state.pos] !== '$') {
     return false

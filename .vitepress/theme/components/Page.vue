@@ -12,10 +12,7 @@
         {{ article.frontMatter.date }}
       </time>
     </div>
-    <p
-      class="describe"
-      v-html="article.frontMatter.description"
-    ></p>
+    <p class="describe">{{ article.frontMatter.description }}</p>
     <time
       v-if="article.frontMatter.update"
       class="update-date"
@@ -23,7 +20,9 @@
       Updated at {{ article.frontMatter.update }}
     </time>
     <div class="post-tag">
-      <span v-for="item in article.frontMatter.tags"
+      <span
+        v-for="item in article.frontMatter.tags"
+        :key="item"
         ><a :href="withBase(`/pages/tags.html?tag=${item}`)"> {{ item }}</a></span
       >
     </div>
@@ -31,10 +30,10 @@
 
   <div class="pagination">
     <a
-      class="link"
-      :class="{ active: pageCurrent === i }"
       v-for="i in pagesNum"
       :key="i"
+      class="link"
+      :class="{ active: pageCurrent === i }"
       :href="withBase(i === 1 ? '/index.html' : `/page_${i}.html`)"
       >{{ i }}</a
     >
@@ -44,7 +43,7 @@
 <script lang="ts" setup>
 import { withBase } from 'vitepress'
 
-const props = defineProps<{
+defineProps<{
   posts: Array<Post>
   pageCurrent: number
   pagesNum: number

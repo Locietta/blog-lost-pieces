@@ -1,22 +1,29 @@
 module.exports = {
   env: {
     browser: true,
-    es2020: true,
+    es2022: true,
     node: true
+  },
+  globals: {
+    Post: 'readonly',
+    LoiaThemeConfig: 'readonly'
   },
   extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', 'plugin:prettier/recommended'],
   parser: 'vue-eslint-parser',
   parserOptions: {
     parser: '@typescript-eslint/parser',
-    ecmaVersion: 2020,
+    ecmaVersion: 2022,
     sourceType: 'module',
+    project: ['./tsconfig.json'],
+    extraFileExtensions: ['vue'],
     ecmaFeatures: {
       tsx: true
     }
   },
   plugins: ['vue', '@typescript-eslint'],
-  ignorePatterns: ['dist/', 'node_modules/', '*.json', '.temp/'],
+  ignorePatterns: ['dist/', 'cache/', 'node_modules/', '*.json', '.temp/', '*.d.ts'],
   rules: {
-    'array-bracket-newline': ['error', 'consistent']
+    'array-bracket-newline': ['error', 'consistent'],
+    'vue/multi-word-component-names': 0
   }
 }

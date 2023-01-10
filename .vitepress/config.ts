@@ -21,7 +21,7 @@ export default async () => {
       ['meta', { name: 'keywords', content: "Locietta's Blog" }],
       ['meta', { name: 'description', content: "Lost Pieces - Locietta's Blog" }],
       ['meta', { name: 'author', content: 'Locietta' }],
-      ['meta', { name: 'robots', content: 'all' }],
+      ['meta', { name: 'robots', content: 'all' }]
     ],
     themeConfig: {
       posts: await getPosts(),

@@ -1,18 +1,19 @@
 <template>
   <div class="tags">
     <span
-      @click="toggleTag(key.toString())"
       v-for="(item, key) in data"
+      :key="key"
       class="tag"
+      @click="toggleTag(key.toString())"
     >
       {{ key }} <strong>{{ data[key].length }}</strong>
     </span>
   </div>
   <div class="header">{{ selectedTag }}</div>
   <a
-    :href="withBase(article.regularPath)"
     v-for="(article, index) in data[selectedTag]"
     :key="index"
+    :href="withBase(article.regularPath)"
     class="article"
   >
     <div class="title">

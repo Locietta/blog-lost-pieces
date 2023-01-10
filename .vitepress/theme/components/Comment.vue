@@ -1,11 +1,11 @@
 <template>
   <div
-    class="comments"
     v-if="show"
+    class="comments"
   >
     <component
-      v-if="refreshKey"
       :is="'script'"
+      v-if="refreshKey"
       src="https://giscus.app/client.js"
       :data-repo="'Locietta/blog-lost-pieces'"
       :data-repo-id="'R_kgDOH-URKw'"
