@@ -43,7 +43,6 @@ export async function generatePaginationPages(pageSize: number) {
       const page = `
 ---
 lastUpdated: false
-date: 2021-06-30
 title: ${i === 1 ? 'home' : 'page_' + i}
 sidebar: false
 disableComment: true
@@ -52,7 +51,6 @@ disableComment: true
 import Page from "./.vitepress/theme/components/Page.vue";
 import { useData } from "vitepress";
 const { theme } = useData();
-const pageSize = theme.value.pageSize;
 const posts = theme.value.posts.slice(${pageSize * (i - 1)},${pageSize * i})
 </script>
 <Page :posts="posts" :pageCurrent="${i}" :pagesNum="${pagesNum}" />
