@@ -21,7 +21,7 @@ export async function getPosts() {
 
       return {
         frontMatter: data,
-        regularPath: `/${item.replace('.md', '.html').slice(5)}`
+        regularPath: `/${item.replace('.md', '.html')}`
       }
     })
   )
@@ -37,7 +37,7 @@ export async function generatePaginationPages(pageSize: number) {
   let pagesNum = allPagesLength % pageSize === 0 ? allPagesLength / pageSize : allPagesLength / pageSize + 1
   pagesNum = parseInt(pagesNum.toString())
 
-  const paths = path.resolve('./docs')
+  const paths = path.resolve('.')
   if (allPagesLength > 0) {
     for (let i = 1; i < pagesNum + 1; i++) {
       const page = `
@@ -75,7 +75,7 @@ function _compareDate(obj1: Post, obj2: Post) {
 }
 
 async function getPostMDFilePaths() {
-  let paths = await globby(['docs/posts/**.md'], {
+  let paths = await globby(['posts/**.md'], {
     ignore: ['node_modules', 'README.md']
   })
   return paths.filter((item) => item.includes('posts/'))

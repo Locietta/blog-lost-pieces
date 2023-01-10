@@ -1,11 +1,12 @@
 node_modules
 dist
 .vscode
-docs/**.md
+/**.md
 .npmrc
+!README.md
 
 # vitepress cache
-docs/.vitepress/cache
+.vitepress/cache
 
 # pnpm lock
 pnpm-lock.yaml

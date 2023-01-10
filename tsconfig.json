@@ -16,6 +16,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["docs/.vitepress/**/*.ts", "docs/.vitepress/**/*.d.ts", "docs/.vitepress/**/*.tsx", "docs/.vitepress/**/*.vue", "shims.d.ts"],
+  "include": [".vitepress/**/*.ts", ".vitepress/**/*.d.ts", ".vitepress/**/*.tsx", ".vitepress/**/*.vue", "shims.d.ts"],
   "exclude": ["dist", "node_modules"]
 }
