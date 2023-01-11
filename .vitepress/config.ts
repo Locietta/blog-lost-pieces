@@ -17,11 +17,12 @@ export default async () => {
     lastUpdated: true,
     base: '/',
     head: [
-      ['link', { rel: 'icon', href: '/L_32x32.ico' }],
+      ['meta', { charset: 'utf-8' }],
       ['meta', { name: 'keywords', content: "Locietta's Blog" }],
       ['meta', { name: 'description', content: "Lost Pieces - Locietta's Blog" }],
       ['meta', { name: 'author', content: 'Locietta' }],
-      ['meta', { name: 'robots', content: 'all' }]
+      ['meta', { name: 'robots', content: 'all' }],
+      ['link', { rel: 'icon', href: '/L_32x32.ico' }]
     ],
     themeConfig: {
       posts: await getPosts(),
