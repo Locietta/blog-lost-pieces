@@ -15,13 +15,13 @@ module.exports = {
     ecmaVersion: 2022,
     sourceType: 'module',
     project: ['./tsconfig.json'],
-    extraFileExtensions: ['vue'],
+    extraFileExtensions: ['.vue'],
     ecmaFeatures: {
       tsx: true
     }
   },
   plugins: ['vue', '@typescript-eslint'],
-  ignorePatterns: ['dist/', 'cache/', 'node_modules/', '*.json', '.temp/', '*.d.ts'],
+  ignorePatterns: ['dist/', 'cache/', 'node_modules/', '*.json', '.temp/', '*.d.ts', '.eslintrc.cjs'],
   rules: {
     'array-bracket-newline': ['error', 'consistent'],
     'vue/multi-word-component-names': 0
