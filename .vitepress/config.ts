@@ -10,6 +10,7 @@ export default async () => {
     title: "Lost Pieces - Locietta's Blog",
     description: 'Just playing around.',
     markdown: {
+      theme: { light: 'light-plus', dark: 'dark-plus' },
       config: (md) => {
         md.use(mk, {
           strict: (errorCode: string) => {

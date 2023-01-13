@@ -24,6 +24,7 @@
   --tag-text: var(--c-brand);
   --tag-bg: #eff6ff;
   --tag-hover: var(--vp-c-brand);
+  --vp-code-block-bg: #f7f7f7;
 }
 
 .dark {
@@ -34,6 +35,8 @@
   --tag-count: #111;
   /* --tag-bg: var(--title-color); */
   --tag-hover: #111;
+  /* --vp-code-block-bg: #292d3e; */
+  --vp-code-block-bg: #1a1a1a;
 }
 
 /*theme reset*/
