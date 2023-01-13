@@ -11,7 +11,15 @@ export default async () => {
     description: 'Just playing around.',
     markdown: {
       config: (md) => {
-        md.use(mk)
+        md.use(mk, {
+          strict: (errorCode: string) => {
+            if (errorCode == 'newLineInDisplayMode') {
+              return 'ignore'
+            } else {
+              return 'warn'
+            }
+          }
+        })
       }
     },
     lastUpdated: true,
