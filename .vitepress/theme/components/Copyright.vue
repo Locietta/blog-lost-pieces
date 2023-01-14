@@ -32,7 +32,7 @@ const webTitle = site.value.title
   width: 100%;
 }
 .vitepress {
-  color: #222;
+  color: var(--vp-c-text-1);
   font-weight: 700;
 }
 </style>
