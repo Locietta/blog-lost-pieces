@@ -1,5 +1,6 @@
 ---
 date: 2022-09-11
+update: 2023-01-14
 title: 测试显示效果
 tags:
   - vitepress
@@ -7,11 +8,41 @@ tags:
 description: 测试显示效果
 ---
 
-# Hello
+# {{ $frontmatter.title }}
+
+## Vanilla Markdown Syntax
+
+> 二级标题会出现在右侧标题导航中
 
 content, just for test
 
 试试中文
+
+文字 normal
+
+**加粗文字** **bold**
+
+_斜体文字_ _italic_
+
+**_加粗斜体_** **_bold italic_**
+
+> 中文字体似乎没有对应的斜体版本...
+
+超链接：https://blog.locietta.xyz/
+
+超链接文字：[原地 TP](https://blog.locietta.xyz/posts/test.html)
+
+图片（SMMS 图床）：
+
+![跑了张AI图测试图床XD](https://s2.loli.net/2023/01/14/w9AWTZ8Gs5M4iek.png)
+
+> 跑了张 AI 图用来测试，欸嘿
+
+### 三级标题
+
+#### 四级标题
+
+> 最多支持 4 级标题
 
 > 引用
 >
@@ -28,6 +59,10 @@ content, just for test
 1. aaaa
 2. ssss
    1. dddd
+
+> 缩进列表不会改变编号/圆点样式
+
+### 代码块
 
 行间代码`git init`
 
@@ -53,6 +88,8 @@ void serialize(std::ostream &os, const T &val) {
     }
 }
 ```
+
+### 数学公式（KaTeX）
 
 $$
 \mathbf{a} = (x_1, y_1, z_1)\\
@@ -83,34 +120,72 @@ E[F_n(X)] &= E\left[\frac{1}{n}\sum^n_{k=1}\dfrac{f(X_k)}{PDF(X_k)}\right]\\
 \end{aligned}
 $$
 
-行间公式行间公式行间公式行间公式行间公式行间公式行间公式行间公式行间公式行间公式
+行间公式行间公式行间公式行间公式行间公式行间公式行间公式行间公式行间公式行间公式行间公式
 行间公式$\mathrm{e}^{i\theta} = \cos \theta + i \sin \theta$行间公式行间公式行间公式行间公式行间公式行间公式行间公式行间公式行间公式行间公式行间公式
 
-
-文字 normal
-
-**加粗文字** **bold**
-
-*斜体文字* *italic*
-
-***加粗斜体*** ***bold italic***
-
-> 中文字体似乎没有对应的斜体版本...
-
-## 二级标题
-
-> 二级标题会出现在右侧标题导航中
-
-### 三级标题
-
-#### 四级标题
-
-> 最多支持4级标题
-
-超链接：https://blog.locietta.xyz/
-
-超链接文字：[原地TP](https://blog.locietta.xyz/posts/test.html)
+## Extended Markdown Syntax
 
 GitHub Style 表情符号:
 :100: :tada:
+
+### 特殊容器块
+
+::: info
+This is an info block.
+:::
+
+::: tip 提示
+This is a tip.
+:::
+
+::: warning
+This is a warning.
+:::
+
+:::danger 标题可以随便取
+DANGER!!!
+:::
+
+::: details
+verbose content, collapsed on default
+:::
+
+### 代码块扩展
+
+```cpp{13}
+template <typename T>
+class Singleton {
+public:
+    static T &getInstance() {
+        static T instance{_{}};
+        return instance;
+    }
+
+    Singleton(const Singleton &) = delete;
+    Singleton &operator=(const Singleton) = delete;
+
+protected:
+    struct _ {};
+    Singleton() = default;
+};
+```
+
+```cpp:line-numbers
+template <typename T>
+class Singleton {
+public:
+    static T &getInstance() {
+        static T instance{_{}};
+        return instance;
+    }
+
+    Singleton(const Singleton &) = delete;
+    Singleton &operator=(const Singleton) = delete;
+
+protected:
+    struct _ {};
+    Singleton() {}         // [!code  error]
+    Singleton() = default; // [!code  warning]
+};
+```
 
