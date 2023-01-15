@@ -125,8 +125,18 @@ $$
 
 ## Extended Markdown Syntax
 
+### Github 扩展
+
 GitHub Style 表情符号:
-:100: :tada:
+:100: :tada: :tea: :coffee: :smile:
+
+Github Style 表格：
+
+| Tables        |      Are      |                        Cool |
+| ------------- | :-----------: | --------------------------: |
+| col 3 is      | right-aligned |                       $1600 |
+| col 2 is      |   centered    |            $e^{\pi i} = -1$ |
+| zebra stripes |   are neat    | `constexpr int abs(int x);` |
 
 ### 特殊容器块
 
@@ -157,7 +167,7 @@ template <typename T>
 class Singleton {
 public:
     static T &getInstance() {
-        static T instance{_{}};
+        static T instance{_{}}; // Focused here! // [!code focus]
         return instance;
     }
 
@@ -184,8 +194,7 @@ public:
 
 protected:
     struct _ {};
-    Singleton() {}         // [!code  error]
-    Singleton() = default; // [!code  warning]
+    Singleton() {}         // [!code --]
+    Singleton() = default; // [!code ++]
 };
 ```
-
