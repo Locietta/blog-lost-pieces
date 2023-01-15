@@ -8,7 +8,9 @@ My blog powered by [Vitepress](https://vitepress.vuejs.org/), for notes and life
 
 主要的改动：
 * 改用giscus作为评论系统，评论默认开启，除非在frontmatter里指定`disableComment: true`
-* 使用katex支持数学公式渲染
+* 使用KaTeX支持数学公式渲染
 * 使用TS，类型标注全覆盖
+* 支持嵌入tweet，将Embed Tweet生成的html代码去除`<script>`标签后放入`<Tweet></Tweet>`组件中即可
+* 一些针对light/dark模式的琐碎样式改动
 
-作为个人博客的话反正也不需要太多花里胡哨的功能。
+作为个人博客的话反正也不需要太多花里胡哨的功能，这样就挺好。
