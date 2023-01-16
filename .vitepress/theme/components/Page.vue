@@ -23,7 +23,7 @@
       <span
         v-for="item in article.frontMatter.tags"
         :key="item"
-        ><a :href="withBase(`/pages/tags.html?tag=${item}`)"> {{ item }}</a></span
+        ><a :href="withBase(`/pages/tags?tag=${item}`)"> {{ item }}</a></span
       >
     </div>
   </div>
@@ -34,7 +34,7 @@
       :key="i"
       class="link"
       :class="{ active: pageCurrent === i }"
-      :href="withBase(i === 1 ? '/index.html' : `/page_${i}.html`)"
+      :href="withBase(i === 1 ? '' : `/page_${i}`)"
       >{{ i }}</a
     >
   </div>

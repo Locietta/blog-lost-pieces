@@ -23,6 +23,7 @@ export default async () => {
         })
       }
     },
+    cleanUrls: 'with-subfolders',
     lastUpdated: true,
     base: '/',
     head: [
