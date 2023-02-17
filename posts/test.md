@@ -1,6 +1,6 @@
 ---
 date: 2022-09-11
-update: 2023-01-14
+update: 2023-02-17
 title: 测试显示效果
 tags:
   - vitepress
@@ -220,3 +220,24 @@ protected:
     Singleton() = default; // [!code ++]
 };
 ```
+
+### 黑幕
+
+<Shade>
+猜猜我是谁？
+</Shade>
+
+<br/>
+
+<Shade hover="真拿你没办法">
+真的要看吗？
+</Shade>
+
+<br/>
+
+
+::: details
+<Shade>
+在容器块里也有用的！
+</Shade>
+:::

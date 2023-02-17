@@ -20,6 +20,9 @@
   --tag-bg: #eff6ff;
   --tag-hover: var(--vp-c-brand);
 
+  --shade-bg: var(--c-brand);
+  --shade-text: var(--vp-c-bg);
+
   --vp-custom-block-details-code-bg: #e7e7f3;
   --vp-code-line-number-color: var(--c-brand);
   --vp-code-block-bg: #f7f7f7;
@@ -38,6 +41,10 @@
   --tag-count: #111;
   /* --tag-bg: var(--title-color); */
   --tag-hover: #111;
+
+  --shade-bg: #dfdfdf;
+  --shade-text: var(--vp-c-bg);
+
   /* --vp-code-block-bg: #292d3e; */
   --vp-custom-block-details-code-bg: #1f1f2f;
   --vp-code-block-bg: #1a1a1a;
