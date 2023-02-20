@@ -236,7 +236,10 @@ void push_back(vector *self, int x) {
 `pop_back`很简单，只要`size--`就好，并不需要回收内存。`reserve`的实现则和`push_back`中重分配内存的部分类似。
 
 ```cpp
-void pop_back(vector *self) { self->size--; }
+void pop_back(vector *self) {
+    assert(self->size && "pop element on empty array!");
+    self->size--;
+}
 
 void reserve(vector *self, size_t new_capacity) {
     if (new_capacity <= self->capacity) return; // `reserve` never shrinks
@@ -249,11 +252,14 @@ void reserve(vector *self, size_t new_capacity) {
 }
 ```
 
+给空的数组`pop_back`是作死行为，所以加个断言<Shade>但你硬要release模式调试的话也管不到你</Shade>。标准规定`std::vector`这种情况下触发UB，不要求检查。
+
 :::details 纯C部分的完整代码
 
 反正可以折叠，就全贴在这啦~
 
 ```cpp
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -263,6 +269,7 @@ typedef struct vector {
     int *arr;
 } vector;
 
+/// Geometrically increase capacity
 size_t calc_new_capacity(size_t old_capacity, size_t new_size) {
     if (old_capacity > SIZE_MAX - old_capacity / 2) return SIZE_MAX;
     const size_t new_capacity = old_capacity + old_capacity / 2;
@@ -270,6 +277,7 @@ size_t calc_new_capacity(size_t old_capacity, size_t new_size) {
     return new_capacity;
 }
 
+/// Add an element at the end
 void push_back(vector *self, int x) {
     if (self->size == self->capacity) {
         const size_t new_capacity = calc_new_capacity(self->capacity, self->size + 1);
@@ -282,8 +290,13 @@ void push_back(vector *self, int x) {
     self->arr[self->size++] = x;
 }
 
-void pop_back(vector *self) { self->size--; }
+/// Remove and element from the end
+void pop_back(vector *self) {
+    assert(self->size); // don't `pop_back` on an empty array
+    self->size--;
+}
 
+/// Reserve more capacity to git rid of reallocation when `push_back`
 void reserve(vector *self, size_t new_capacity) {
     if (new_capacity <= self->capacity) return; // `reserve` never shrinks
 
@@ -299,7 +312,7 @@ void reserve(vector *self, size_t new_capacity) {
 
 int main(int argc, const char *argv[]) {
     vector v;
-    v = vector_init();
+    v = vector_init(); // ctor
 
     reserve(&v, 1000);
 
@@ -309,7 +322,7 @@ int main(int argc, const char *argv[]) {
 
     printf("\nsize: %zu, capacity: %zu\n", v.size, v.capacity);
 
-    vector_destroy(v);
+    vector_destroy(v); // dtor
 }
 ```
 :::
