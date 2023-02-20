@@ -56,6 +56,10 @@
   padding: 16px 0;
 }
 
+.vp-doc .custom-block div[class*='language-'] code {
+  background-color: var(--vp-custom-block-details-code-bg);
+}
+
 /*theme reset*/
 a:link {
   text-decoration: none;
