@@ -24,6 +24,8 @@
   --shade-text: var(--vp-c-bg);
 
   --vp-custom-block-details-code-bg: #e7e7f3;
+  --details-code-block-bg: var(--vp-custom-block-details-code-bg);
+
   --vp-code-line-number-color: var(--c-brand);
   --vp-code-block-bg: #f7f7f7;
   --vp-code-line-highlight-color: rgba(0, 0, 0, 0.2);
@@ -47,6 +49,8 @@
 
   /* --vp-code-block-bg: #292d3e; */
   --vp-custom-block-details-code-bg: #1f1f2f;
+  --details-code-block-bg: var(--vp-code-block-bg);
+
   --vp-code-block-bg: #1a1a1a;
   --vp-code-line-number-color: var(--c-brand-light);
   --vp-code-line-highlight-color: rgba(0, 0, 0, 1);
@@ -56,8 +60,9 @@
   padding: 16px 0;
 }
 
-.vp-doc .custom-block div[class*='language-'] code {
-  background-color: var(--vp-custom-block-details-code-bg);
+.vp-doc .custom-block div[class*='language-'] code,
+.vp-doc .custom-block div[class*='language-'] pre {
+  background-color: var(--details-code-block-bg);
 }
 
 /*theme reset*/
