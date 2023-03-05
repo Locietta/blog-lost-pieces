@@ -1,5 +1,6 @@
 import { defineConfigWithTheme } from 'vitepress'
 import mk from './theme/markdown-it-katex'
+import img_cap from './theme/markdown-it-img-caption'
 import { getPosts, generatePaginationPages } from './theme/server_utils'
 
 export default async () => {
@@ -12,7 +13,7 @@ export default async () => {
     markdown: {
       theme: { light: 'light-plus', dark: 'dark-plus' },
       config: (md) => {
-        md.use(mk, {
+        md.use(img_cap).use(mk, {
           strict: (errorCode: string) => {
             if (errorCode == 'newLineInDisplayMode') {
               return 'ignore'

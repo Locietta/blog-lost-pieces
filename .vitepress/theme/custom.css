@@ -65,6 +65,17 @@
   background-color: var(--details-code-block-bg);
 }
 
+div.image-div img {
+  margin: 0 auto;
+}
+
+span.img-caption {
+  font-size: small;
+  display: block;
+  text-align: center;
+  color: var(--c-brand-light)
+}
+
 /*theme reset*/
 a:link {
   text-decoration: none;
