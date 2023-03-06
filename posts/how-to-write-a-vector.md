@@ -16,7 +16,7 @@ description: 变长数组容器，结合我现在对C++的一些理解来写写�
 只是中间咕咕了好久...
 :::
 
-用到的实例代码在[Locietta/loia_vector](https://github.com/Locietta/loia_vector)中可以找到。
+用到的示例代码在[Locietta/loia_vector](https://github.com/Locietta/loia_vector)中可以找到。
 
 :::danger WIP
 还在施工中，现在就写了一小部分，猴年马月能写好吧（大概）
@@ -192,11 +192,13 @@ int main(int argc, const char *argv[]) {
 
 ### 整型溢出
 
-好吧，还有一件事：`size`和`capacity`会不会溢出？
+好吧，还有一件事：**`size`和`capacity`会不会溢出？**
 
 我们随手指定这两个量都是`int`类型，这其实是有问题的。因为 64 位环境下有可能出现超出`INT_MAX`大小的数组，使用`int`将无法处理。因此这里首先应该将类型改为`size_t`。
 
-那这样之后还会溢出吗？在 64 位下通常不会了，但 32 位下还是很有可能溢出的，需要添加额外的代码来处理溢出。所以还需要一些修修补补：
+**那这样之后还会溢出吗？**
+
+考虑到分配的内存大小是指数增长的，所以还是容易溢出，尤其是 32 位下。所以我们还需要一些修修补补：
 
 ```cpp
 typedef struct vector {
@@ -227,7 +229,7 @@ void push_back(vector *self, int x) {
 :::details Off Topic: 64 位下不会溢出？
 **TL;DR: 64 位系统下，在`size_t`溢出之前，你会先 OOM.** <Shade hover="可喜可贺">可喜可贺</Shade>
 
-虽然我正文里写的是通常不会，但事实上就是不会。毕竟现在没有能够用上 64 位全部寻址空间这么大的物理内存，同时操作系统现在也不能把 64 位全用来寻址虚拟内存。常见的 64 位系统使用四级/五级页表，事实上只能寻址 48/57 位虚拟内存。
+虽说理论上内存扩张几百次之后就会溢出，但问题是现在并不存在能用完64位地址空间的内存——既没有能够用上 64 位全部寻址空间这么大的物理内存，又没有可以把 64 位全用来寻址虚拟内存的操作系统。常见的 64 位系统使用四级/五级页表，事实上只能寻址 48/57 位虚拟内存。
 
 :::
 
@@ -252,7 +254,7 @@ void reserve(vector *self, size_t new_capacity) {
 }
 ```
 
-给空的数组`pop_back`是作死行为，所以加个断言<Shade>但你硬要release模式调试的话也管不到你</Shade>。标准规定`std::vector`这种情况下触发UB，不要求检查。
+给空的数组`pop_back`是作死行为，所以加个断言<Shade>但这救不了坚持release模式调试的人</Shade>。标准规定`std::vector`这种情况下触发UB，不要求检查。
 
 :::details 纯C部分的完整代码
 
@@ -331,7 +333,7 @@ int main(int argc, const char *argv[]) {
 
 
 
-###
+### ctor/dtor与RAII
 
 <!-- :::details Q: 为啥不用 realloc？
 **TL;DR: 这个简陋的例子里能用，但之后会遇到其他问题。所以为了一致性这里先不用，留到后文讨论。**
