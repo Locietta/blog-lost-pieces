@@ -153,7 +153,32 @@ This is a warning.
 :::
 
 :::danger 标题可以随便取
-DANGER!!!
+DANGER!!! 
+
+test code & formula in blocks:
+
+`cat hello.txt | rg world`
+
+```lua
+-- function is first-class member!
+local _gcd = function (a, b)
+  if b == 0 then
+    return a
+  end
+  return _gcd(b, a % b)
+end
+-- the function who kill the bilibili server once XD
+-- that's why we'd like a typed version of lua
+```
+
+Stroke's: $\int_{\Omega}\mathrm{d}\omega = \int_{\partial \Omega}\omega$
+$$
+\begin{aligned}
+\sum_{i=0}^{n-1} \dfrac{i+1}{2^i} &= \sum_{i=0}^{n-1} \left(\dfrac{i+2}{2^{i-1}} - \dfrac{i+3}{2^i}\right)\\
+&= 4 - \dfrac{n+2}{2^{n-1}}
+  
+\end{aligned}
+$$
 :::
 
 ::: details
