@@ -60,6 +60,7 @@
   padding: 16px 0;
 }
 
+.vp-doc .custom-block code,
 .vp-doc .custom-block div[class*='language-'] code,
 .vp-doc .custom-block div[class*='language-'] pre {
   background-color: var(--details-code-block-bg);
