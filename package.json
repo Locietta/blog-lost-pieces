@@ -34,7 +34,7 @@
     "build": "vitepress build",
     "lint": "eslint '.vitepress/**/*.{ts,vue}'",
     "lint-fix": "eslint --fix '.vitepress/**/*.{ts,vue}'",
-    "serve": "vitepress serve"
+    "serve": "vitepress build && vitepress serve"
   },
   "dependencies": {
     "katex": "^0.16.7"
