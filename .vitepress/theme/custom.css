@@ -21,7 +21,7 @@
   --tag-hover: var(--vp-c-brand);
 
   --shade-bg: var(--c-brand);
-  --shade-text: var(--vp-c-bg);
+  --shade-text: var(--vp-c-bg-soft);
 
   --vp-custom-block-details-code-bg: #e7e7f3;
   --details-code-block-bg: var(--vp-custom-block-details-code-bg);
@@ -45,7 +45,7 @@
   --tag-hover: #111;
 
   --shade-bg: #dfdfdf;
-  --shade-text: var(--vp-c-bg);
+  --shade-text: var(--vp-c-bg-soft);
 
   /* --vp-code-block-bg: #292d3e; */
   --vp-custom-block-details-code-bg: #1f1f2f;
