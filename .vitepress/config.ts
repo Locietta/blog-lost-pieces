@@ -9,7 +9,7 @@ export default async () => {
 
   return defineConfigWithTheme<LoiaThemeConfig>({
     title: "Lost Pieces - Locietta's Blog",
-    description: 'Just playing around.',
+    description: 'Life Record & Tech Share',
     markdown: {
       theme: { light: 'light-plus', dark: 'dark-plus' },
       config: (md) => {
@@ -28,9 +28,7 @@ export default async () => {
     lastUpdated: true,
     base: '/',
     head: [
-      ['meta', { charset: 'utf-8' }],
       ['meta', { name: 'keywords', content: "Locietta's Blog" }],
-      ['meta', { name: 'description', content: "Lost Pieces - Locietta's Blog" }],
       ['meta', { name: 'author', content: 'Locietta' }],
       ['meta', { name: 'robots', content: 'all' }],
       ['link', { rel: 'icon', href: '/L_32x32.ico' }]
