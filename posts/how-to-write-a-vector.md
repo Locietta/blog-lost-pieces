@@ -21,7 +21,7 @@ description: 变长数组容器，结合我现在对C++的一些理解来写写�
 :::danger WIP
 还在施工中，现在就写了一小部分，猴年马月能写好吧（大概）
 
-接下来开写c with class的部分，然后是模板和一些魔法。大概还得讨论realloc, iterator/ranges, trivally-copyable, 强异常安全之类的话题，结合一些C++20/23的语法。希望这么多东西都能缝合进这篇文章里(X)
+接下来开写 c with class 的部分，然后是模板和一些魔法。大概还得讨论 realloc, iterator/ranges, trivally-copyable, 强异常安全之类的话题，结合一些 C++20/23 的语法。希望这么多东西都能缝合进这篇文章里(X)
 
 :::
 
@@ -229,7 +229,7 @@ void push_back(vector *self, int x) {
 :::details Off Topic: 64 位下不会溢出？
 **TL;DR: 64 位系统下，在`size_t`溢出之前，你会先 OOM.** <Shade hover="可喜可贺">可喜可贺</Shade>
 
-虽说理论上内存扩张几百次之后就会溢出，但问题是现在并不存在能用完64位地址空间的内存——既没有能够用上 64 位全部寻址空间这么大的物理内存，又没有可以把 64 位全用来寻址虚拟内存的操作系统。常见的 64 位系统使用四级/五级页表，事实上只能寻址 48/57 位虚拟内存。
+虽说理论上内存扩张几百次之后就会溢出，但问题是现在并不存在能用完 64 位地址空间的内存——既没有能够用上 64 位全部寻址空间这么大的物理内存，又没有可以把 64 位全用来寻址虚拟内存的操作系统。常见的 64 位系统使用四级/五级页表，事实上只能寻址 48/57 位虚拟内存。
 
 :::
 
@@ -254,9 +254,9 @@ void reserve(vector *self, size_t new_capacity) {
 }
 ```
 
-给空的数组`pop_back`是作死行为，所以加个断言<Shade>但这救不了坚持release模式调试的人</Shade>。标准规定`std::vector`这种情况下触发UB，不要求检查。
+给空的数组`pop_back`是作死行为，所以加个断言<Shade>但这救不了坚持 release 模式调试的人</Shade>。标准规定`std::vector`这种情况下触发 UB，不要求检查。
 
-:::details 纯C部分的完整代码
+:::details 纯 C 部分的完整代码
 
 反正可以折叠，就全贴在这啦~
 
@@ -327,13 +327,12 @@ int main(int argc, const char *argv[]) {
     vector_destroy(v); // dtor
 }
 ```
+
 :::
 
 ## 欢迎来到 C with Class
 
-
-
-### ctor/dtor与RAII
+### ctor/dtor 与 RAII
 
 <!-- :::details Q: 为啥不用 realloc？
 **TL;DR: 这个简陋的例子里能用，但之后会遇到其他问题。所以为了一致性这里先不用，留到后文讨论。**

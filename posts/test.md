@@ -153,7 +153,7 @@ This is a warning.
 :::
 
 :::danger 标题可以随便取
-DANGER!!! 
+DANGER!!!
 
 test code & formula in blocks:
 
@@ -172,13 +172,15 @@ end
 ```
 
 Stroke's: $\int_{\Omega}\mathrm{d}\omega = \int_{\partial \Omega}\omega$
+
 $$
 \begin{aligned}
 \sum_{i=0}^{n-1} \dfrac{i+1}{2^i} &= \sum_{i=0}^{n-1} \left(\dfrac{i+2}{2^{i-1}} - \dfrac{i+3}{2^i}\right)\\
 &= 4 - \dfrac{n+2}{2^{n-1}}
-  
+
 \end{aligned}
 $$
+
 :::
 
 ::: details
@@ -259,7 +261,6 @@ protected:
 </Shade>
 
 <br/>
-
 
 ::: details
 <Shade>
