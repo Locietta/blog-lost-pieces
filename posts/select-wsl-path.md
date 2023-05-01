@@ -2,6 +2,7 @@
 date: 2020-10-08
 title: 自定义WSL的安装位置，别再装到C盘啦
 tags:
+  - windows
   - wsl
   - 配置
 description: 自定义WSL安装路径，适用于WSL1和WSL2
