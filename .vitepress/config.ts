@@ -2,6 +2,7 @@ import { defineConfigWithTheme } from 'vitepress'
 import mk from './theme/markdown-it-katex'
 import img_fig from './theme/markdown-it-img-figure'
 import { getPosts, generatePaginationPages } from './theme/server_utils'
+import custom_components from './theme/custom_component'
 
 export default async () => {
   const pageSize = 6
@@ -59,6 +60,13 @@ export default async () => {
 
       socialLinks: [{ icon: 'github', link: 'https://github.com/Locietta/blog-lost-pieces' }]
     },
-    srcExclude: ['README.md']
+    srcExclude: ['README.md'],
+    vue: {
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => custom_components.includes(tag)
+        }
+      }
+    }
   })
 }
