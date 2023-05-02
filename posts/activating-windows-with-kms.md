@@ -81,7 +81,4 @@ Mondo许可证是个神奇的内部许可证，可以让你使用Office的全部
 [早先是可以通过Office365来体验Copilot的](https://www.coolhub.top/archives/235)，但微软实际上并没有把Copilot开放给大众使用。之前大家的体验是切换到dogfood更新通道，然后通过一些注册表hack来访问copilot服务。
 
 最近这个口子似乎被堵上了（悲）。不过如果只是为了copilot跑来用Office365那还是大可不必。毕竟当前只支持英文，输出质量也比较一般，相比起来Notion AI和ChatGPT还是够用的。
-<Shade></Shade> <!-- work around for hydration mismatch -->
-<!-- don't know why this happen -->
-<!-- reproduce & report it to vitepress if I have time -->
 :::
