@@ -66,11 +66,11 @@
   background-color: var(--details-code-block-bg);
 }
 
-div.image-div img {
+figure img {
   margin: 0 auto;
 }
 
-span.img-caption {
+figcaption {
   font-size: small;
   display: block;
   text-align: center;
