@@ -14,7 +14,9 @@ export default async () => {
       theme: { light: 'light-plus', dark: 'dark-plus' },
       config: (md) => {
         md.use(img_fig, {
-          figcaption: true
+          figcaption: true,
+          lazy: true,
+          async: true
         }).use(mk, {
           strict: (errorCode: string) => {
             if (errorCode == 'newLineInDisplayMode') {
