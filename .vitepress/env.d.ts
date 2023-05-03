@@ -4,6 +4,10 @@ declare module '*.vue' {
   export default component
 }
 
+declare interface Window {
+  twttr: any
+}
+
 type Post = {
   frontMatter: {
     date: string

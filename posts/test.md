@@ -194,7 +194,9 @@ verbose content, collapsed on default
 ### Embeded Tweet
 
 ::: details Click Me To View Kita-Chan~
-<Tweet>
+<Tweet id="1614087229701488641"> </Tweet>
+
+<!-- <Tweet>
 
   <blockquote class="twitter-tweet">
     <p
@@ -210,7 +212,7 @@ verbose content, collapsed on default
     &mdash; 唄茶Utacha (@Utacha0912)
     <a href="https://twitter.com/Utacha0912/status/1614087229701488641?ref_src=twsrc%5Etfw">January 14, 2023</a>
   </blockquote>
-</Tweet>
+</Tweet> -->
 :::
 
 ### 代码块扩展

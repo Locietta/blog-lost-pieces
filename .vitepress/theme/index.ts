@@ -6,7 +6,7 @@ import NewLayout from './components/NewLayout.vue'
 import Archives from './components/Archives.vue'
 import Tags from './components/Tags.vue'
 import Page from './components/Page.vue'
-import Tweet from './components/Tweet.vue'
+import { Tweet } from './components/twitter'
 import Shade from './components/Shade.vue'
 
 import './custom.css'
