@@ -36,4 +36,9 @@ const data = computed(() => useYearSort(theme.value.posts))
   font-size: 1.2rem;
   font-weight: 600;
 }
+
+.vp-doc a:hover {
+  text-decoration: none;
+}
+
 </style>

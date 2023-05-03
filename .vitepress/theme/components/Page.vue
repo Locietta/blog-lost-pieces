@@ -79,6 +79,7 @@ defineProps<{
 
 .post-tag span a:hover {
   color: var(--tag-hover);
+  text-decoration: none;
 }
 
 .vp-doc .post-title a {

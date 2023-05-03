@@ -80,6 +80,10 @@ const toggleTag = (tag: string) => {
   text-align: center;
 }
 
+.vp-doc a:hover {
+  text-decoration: none;
+}
+
 @media screen and (max-width: 700px) {
   .header {
     font-size: 1.5rem;
