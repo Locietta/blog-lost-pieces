@@ -194,25 +194,7 @@ verbose content, collapsed on default
 ### Embeded Tweet
 
 ::: details Click Me To View Kita-Chan~
-<Tweet id="1614087229701488641"> </Tweet>
-
-<!-- <Tweet>
-
-  <blockquote class="twitter-tweet">
-    <p
-      lang="ja"
-      dir="ltr"
-    >
-      喜多❤️<a
-        href="https://twitter.com/hashtag/%E3%81%BC%E3%81%A3%E3%81%A1%E3%83%BB%E3%81%96%E3%83%BB%E3%82%8D%E3%81%A3%E3%81%8F?src=hash&amp;ref_src=twsrc%5Etfw"
-        >#ぼっち・ざ・ろっく</a
-      >
-      <a href="https://t.co/xZcht5n0Pj">pic.twitter.com/xZcht5n0Pj</a>
-    </p>
-    &mdash; 唄茶Utacha (@Utacha0912)
-    <a href="https://twitter.com/Utacha0912/status/1614087229701488641?ref_src=twsrc%5Etfw">January 14, 2023</a>
-  </blockquote>
-</Tweet> -->
+<Tweet tweet-id="1614087229701488641" />
 :::
 
 ### 代码块扩展
