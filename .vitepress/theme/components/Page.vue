@@ -52,8 +52,8 @@ defineProps<{
 
 <style scoped>
 .post-list {
-  border-bottom: 1px dashed var(--c-divider);
-  padding: 1rem 0 0 0;
+  border-bottom: 1px solid var(--c-divider);
+  padding: 1rem 0 0.25rem 0;
 }
 
 .post-header {
