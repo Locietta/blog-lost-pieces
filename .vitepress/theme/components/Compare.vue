@@ -1,5 +1,5 @@
 <template>
-  <ImgComparisonSlider class="img-compare rendered">
+  <ImgCompare class="img-compare rendered">
     <figure
       slot="first"
       class="before"
@@ -35,7 +35,7 @@
         vector-effect="non-scaling-stroke"
       ></path>
     </svg>
-  </ImgComparisonSlider>
+  </ImgCompare>
   <figcaption
     v-if="title"
     class="img-compare-title"
@@ -44,8 +44,18 @@
   </figcaption>
 </template>
 <script setup lang="ts">
+import { defineComponent, h } from 'vue'
 
-import { ImgComparisonSlider } from './ImgComparisonSlider'
+if (!import.meta.env.SSR) {
+  import('img-comparison-slider')
+}
+
+const ImgCompare = defineComponent({
+  name: 'ImgCompare',
+  setup(_, { slots }) {
+    return () => h('img-comparison-slider', slots.default?.())
+  }
+})
 
 const props = withDefaults(
   defineProps<{
