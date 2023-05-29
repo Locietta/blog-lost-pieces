@@ -7,7 +7,6 @@
   "license": "MIT",
   "devDependencies": {
     "@algolia/client-search": "^4.17.0",
-    "@img-comparison-slider/vue": "^8.0.0",
     "@types/fs-extra": "^11.0.1",
     "@types/katex": "^0.16.0",
     "@types/markdown-it": "^12.2.3",
@@ -24,9 +23,11 @@
     "fs-extra": "^11.1.1",
     "globby": "^13.1.4",
     "gray-matter": "^4.0.3",
+    "img-comparison-slider": "^8.0.0",
     "prettier": "^2.8.8",
     "prettier-eslint": "^15.0.1",
     "typescript": "^5.0.4",
+    "vite": "^4.3.9",
     "vitepress": "1.0.0-alpha.75",
     "vue": "^3.2.47",
     "vue-eslint-parser": "^9.1.1"

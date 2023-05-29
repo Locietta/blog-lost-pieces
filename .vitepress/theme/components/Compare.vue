@@ -44,7 +44,8 @@
   </figcaption>
 </template>
 <script setup lang="ts">
-import { ImgComparisonSlider } from '@img-comparison-slider/vue'
+
+import { ImgComparisonSlider } from './ImgComparisonSlider'
 
 const props = withDefaults(
   defineProps<{
