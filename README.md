@@ -6,11 +6,22 @@ My blog powered by [Vitepress](https://vitepress.vuejs.org/), for notes and life
 
 拿Vitepress搭的个人博客，魔改了[airene的主题](https://github.com/airene/vitepress-blog-pure)，我也不懂前端，所以很多东西都是能用就行。
 
+支持的所有feature可参考https://blog.locietta.xyz/posts/test
+
 主要的改动：
-* 改用giscus作为评论系统，评论默认开启，除非在frontmatter里指定`disableComment: true`
-* 使用KaTeX支持数学公式渲染
 * 使用TS，类型标注全覆盖
-* 支持嵌入tweet，将Embed Tweet生成的html代码去除`<script>`标签后放入`<Tweet></Tweet>`组件中即可
+* 改用giscus作为评论系统，具体见下文
+* 使用KaTeX支持数学公式渲染
+* 支持嵌入tweet，用法是`<Tweet tweet-id="<推特id>" />`或者`<Tweet tweet-url="推特url" />`
+* 一个图片对比控件，图形学/图像处理的结果展示还是需要这么个东西
 * 一些针对light/dark模式的琐碎样式改动
 
 作为个人博客的话反正也不需要太多花里胡哨的功能，这样就挺好。
+
+### 关于评论
+
+改用了giscus来做评论，基于issue的方案主要问题是会污染博客仓库的issue（我不想多开一个仓库😢）。改成基于discussion的方案就没有这个问题了，同时还能支持楼中楼回复。
+
+用法上，在`.vitepress/config.ts`里指定`themeConfig: { comment: true }`就可以开启所有页面的评论，也可以在各个文章的frontmatter里覆盖全局设置。
+
+需要在`giscusConfig`中填入必要的配置后才能使用评论相关功能，具体可参考https://giscus.app/zh-CN
