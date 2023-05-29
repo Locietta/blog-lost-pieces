@@ -44,6 +44,12 @@ export default async () => {
       website: 'https://github.com/Locietta/blog-lost-pieces',
       logo: '/favicon.ico',
       comment: true,
+      giscusConfig: {
+        repo: 'Locietta/blog-lost-pieces',
+        repoId: 'R_kgDOH-URKw',
+        category: 'Announcements',
+        categoryId: 'DIC_kwDOH-URK84CTZKy'
+      },
 
       nav: [
         { text: 'Home', link: '/' },

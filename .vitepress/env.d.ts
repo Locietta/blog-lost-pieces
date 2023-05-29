@@ -51,8 +51,14 @@ type LoiaThemeConfig = {
   pageSize: number
   website: string
   logo: string
-  comment: boolean
-  
+  comment?: boolean
+  giscusConfig: {
+    repo: string
+    repoId: string
+    category: string
+    categoryId: string
+  }
+
   nav: NavItem[]
   socialLinks: SocialLink[]
 }
