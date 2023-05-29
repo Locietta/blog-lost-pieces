@@ -20,6 +20,9 @@
   --tag-bg: #eff6ff;
   --tag-hover: var(--vp-c-brand);
 
+  --cmp-tag-bg: #eff6ff;
+  --cmp-tag-text: #2e3452;
+
   --shade-bg: var(--c-brand);
   --shade-text: var(--vp-c-bg-soft);
 
@@ -46,6 +49,9 @@
 
   --shade-bg: #dfdfdf;
   --shade-text: var(--vp-c-bg-soft);
+
+  --cmp-tag-bg: #2e3452;
+  --cmp-tag-text: #eff6ff;
 
   /* --vp-code-block-bg: #292d3e; */
   --vp-custom-block-details-code-bg: #1f1f2f;

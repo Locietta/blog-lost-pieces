@@ -1,6 +1,6 @@
 ---
 date: 2022-09-11
-update: 2023-05-02
+update: 2023-05-29
 title: 测试显示效果
 tags:
   - vitepress
@@ -190,6 +190,24 @@ $$
 ::: details
 verbose content, collapsed on default
 :::
+
+### 图片比较
+
+点击或者拖动来对比两张图片
+
+<Compare
+      before="https://marcincichocki.github.io/vue-image-compare/img/after.jpg"
+      after="https://marcincichocki.github.io/vue-image-compare/img/before.jpg"
+      title="看看猫猫" tag
+/>
+
+<Compare
+  before="https://s2.loli.net/2023/05/29/yfjD8pLnuGWMIth.png"
+  after="https://s2.loli.net/2023/05/29/aBLdwSuFf5tGTIA.png"
+  title="SDF Soft Shadow vs Raytraced Soft Shadow"
+  tag beforeTag="SDF" afterTag="Raytraced
+  (512spp)"
+/>
 
 ### Embeded Tweet
 

@@ -8,6 +8,7 @@ import Tags from './components/Tags.vue'
 import Page from './components/Page.vue'
 import Tweet from './components/Tweet.vue'
 import Shade from './components/Shade.vue'
+import Compare from './components/Compare.vue'
 
 import './custom.css'
 import 'katex/dist/katex.min.css'
@@ -22,5 +23,6 @@ export default {
     app.component('Page', Page)
     app.component('Tweet', Tweet)
     app.component('Shade', Shade)
+    app.component('Compare', Compare)
   }
 }
