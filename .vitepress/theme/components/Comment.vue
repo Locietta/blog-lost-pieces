@@ -29,10 +29,10 @@
 import { useData, useRoute } from 'vitepress'
 import { ref, watch, computed } from 'vue'
 
-const { isDark, frontmatter } = useData()
+const { isDark, frontmatter, theme } = useData<LoiaThemeConfig>()
 const route = useRoute()
 
-const show = computed(() => !frontmatter.value.disableComment)
+const show = computed(() => frontmatter.value.comment ?? theme.value.comment)
 
 const refreshKey = ref(true)
 

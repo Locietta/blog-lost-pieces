@@ -3,6 +3,6 @@ lastUpdated: false
 title: Archive
 description: Archive
 sidebar: false
-disableComment: true
+comment: false
 ---
 <Archives/>

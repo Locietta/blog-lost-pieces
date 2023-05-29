@@ -10,7 +10,7 @@ type Post = {
     title: string
     tags?: string[]
     description?: string
-    disableComment?: boolean
+    comment?: boolean
   }
   regularPath: string
 }
@@ -51,7 +51,8 @@ type LoiaThemeConfig = {
   pageSize: number
   website: string
   logo: string
-
+  comment: boolean
+  
   nav: NavItem[]
   socialLinks: SocialLink[]
 }

@@ -43,6 +43,7 @@ export default async () => {
       pageSize: pageSize,
       website: 'https://github.com/Locietta/blog-lost-pieces',
       logo: '/favicon.ico',
+      comment: true,
 
       nav: [
         { text: 'Home', link: '/' },

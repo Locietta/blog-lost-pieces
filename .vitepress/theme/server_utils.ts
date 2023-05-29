@@ -45,7 +45,7 @@ export async function generatePaginationPages(pageSize: number) {
 lastUpdated: false
 title: ${i === 1 ? 'home' : 'page_' + i}
 sidebar: false
-disableComment: true
+comment: false
 ---
 <script setup>
 import Page from "./.vitepress/theme/components/Page.vue";

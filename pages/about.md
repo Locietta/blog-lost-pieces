@@ -2,7 +2,7 @@
 title: About
 description: About me test
 sidebar: false
-disableComment: true
+comment: false
 ---
 # about me
 coming soon...
