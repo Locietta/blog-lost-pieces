@@ -82,12 +82,14 @@ const props = withDefaults(
   outline: none;
 }
 
-.animated-handle {
-  transition: transform 0.2s;
-}
-
-.img-compare:hover .animated-handle {
-  transform: scale(1.2);
+/* disable hover animation for mobile devices */
+@media screen and (min-width: 720px) {
+  .animated-handle {
+    transition: transform 0.2s;
+  }
+  .img-compare:hover .animated-handle {
+    transform: scale(1.2);
+  }
 }
 
 .before,

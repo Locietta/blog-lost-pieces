@@ -116,8 +116,8 @@ a[rel~='noopener']:visited {
 /* pc + mobile end */
 
 /* Logo */
-div.Layout > header > div > div > div.VPNavBarTitle > a > img {
-  height: 66%;
+.VPNavBarTitle a > img {
+  height: 32px !important;
 }
 
 /*tags and archives page style*/
