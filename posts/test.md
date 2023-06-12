@@ -1,6 +1,6 @@
 ---
 date: 2022-09-11
-update: 2023-05-29
+update: 2023-06-12
 title: 测试显示效果
 tags:
   - vitepress
@@ -26,7 +26,7 @@ _斜体文字_ _italic_
 
 **_加粗斜体_** **_bold italic_**
 
-> 中文字体似乎没有对应的斜体版本...
+> 中文字体似乎没有对应的粗斜体版本...
 
 超链接：https://blog.locietta.xyz/
 
@@ -40,7 +40,7 @@ _斜体文字_ _italic_
 
 ![](https://s2.loli.net/2023/05/02/X3uMSOJPlYFe1CE.png)
 
-> 测试：没有标题的图
+> 测试：没有标题的图，透明背景PNG
 
 ### 三级标题
 
@@ -212,8 +212,12 @@ verbose content, collapsed on default
 ### Embeded Tweet
 
 ::: details Click Me To View Kita-Chan~
-<Tweet tweet-id="1614087229701488641" />
+<Tweet id="1614087229701488641"/>
 :::
+
+Also test Tweet outside of blocks👇
+
+<Tweet url="https://twitter.com/jendrikillner/status/1668265685087076356"/>
 
 ### 代码块扩展
 
