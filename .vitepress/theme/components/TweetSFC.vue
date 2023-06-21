@@ -1,21 +1,12 @@
 <!-- fork from https://github.com/DannyFeliz/vue-tweet -->
 <template>
-  <slot
-    v-if="isLoading"
-    name="loading"
-  ></slot>
-  <slot
-    v-else-if="hasError"
-    name="error"
-  ></slot>
-  <div
-    ref="tweetContainerRef"
-    v-bind="$attrs"
-  ></div>
+  <slot v-if="isLoading" name="loading"></slot>
+  <slot v-else-if="hasError" name="error"></slot>
+  <div ref="tweetContainerRef" v-bind="$attrs"></div>
 </template>
 
 <script lang="ts" setup>
-import { nextTick, onMounted, ref, useAttrs, watch } from 'vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
 
 const langs = [
   'ar',
@@ -53,25 +44,21 @@ const langs = [
   'zh-cn',
   'zh-tw'
 ] as const
+
 const TWEET_URL_REGEX = /^(https?:\/\/)?(www\.)?twitter\.com\/.*\/status(?:es)?\/(?<tweetId>[^\/\?]\d+)$/i
 const TWEET_ID_REGEX = /^\d+$/
 
 type TweetProps = {
   /**
-    The numerical ID of the desired Tweet.
-    
-    @example
-      <Tweet id="20" />
+   * The numerical ID of the desired Tweet, or the full URL of the Tweet.
+   * You should provide a Tweet ID or URL, but not both.
+   *
+   * @example
+   *   <Tweet id="20" />
+   *   <Tweet url="https://twitter.com/jack/status/20" />
    */
-  id: string
-
-  /**
-    The Tweet URL.
-
-    @example
-      <Tweet url="https://twitter.com/jack/status/20" />
-   */
-  url: string
+  id?: string
+  url?: string
 
   /**
    * When set to none, only the cited Tweet will be displayed even if it is in reply to another Tweet.
@@ -95,7 +82,7 @@ type TweetProps = {
    * Float the Tweet left, right, or center relative to its container. Typically set to allow text or other content to wrap around the Tweet.
    * @default undefined
    */
-  align: 'left' | 'right' | 'center' | undefined
+  align: 'left' | 'right' | 'center'
 
   /**
    * When set to dark, displays Tweet with light text over a dark background.
@@ -120,7 +107,7 @@ const props = withDefaults(defineProps<TweetProps>(), {
   conversation: 'all',
   cards: 'visible',
   width: 'auto',
-  align: undefined,
+  align: 'center',
   theme: 'light',
   lang: 'en',
   dnt: true
