@@ -11,12 +11,12 @@ on:
 jobs:
   Vitepress_build:
     runs-on: ubuntu-latest
-    container: locietta/loia-dev-base:latest
+    container: locietta/loia-dev-base:node
     name: Vitepress Deploy
     steps:
     - uses: actions/checkout@main
     - name: Setup and build
-      shell: bash
+      shell: sh
       run: |
         pnpm i
         pnpm build
