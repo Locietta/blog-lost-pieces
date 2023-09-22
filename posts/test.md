@@ -30,7 +30,7 @@ _斜体文字_ _italic_
 
 超链接：https://blog.locietta.xyz/
 
-超链接文字：[原地 TP](https://blog.locietta.xyz/posts/test.html)
+超链接文字：[原地 TP](/posts/test.html)
 
 图片（SMMS 图床）：
 
