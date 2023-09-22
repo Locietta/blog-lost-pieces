@@ -34,7 +34,7 @@
       :key="i"
       class="link"
       :class="{ active: pageCurrent === i }"
-      :href="withBase(i === 1 ? '' : `/page_${i}`)"
+      :href="withBase(i === 1 ? 'index' : `/page_${i}`)"
       >{{ i }}</a
     >
   </div>
