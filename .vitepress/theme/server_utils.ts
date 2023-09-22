@@ -78,3 +78,41 @@ async function getPostMDFilePaths() {
   })
   return paths.filter((item) => item.includes('posts/'))
 }
+
+async function getWeeklyMDFilePaths() {
+  let paths = await globby(['weekly/**.md'], {
+    ignore: ['node_modules', 'README.md']
+  })
+  return paths.filter((item) => item.includes('weekly/'))
+}
+
+async function getWeeklyNames() {
+  let paths = await getWeeklyMDFilePaths()
+  let weekly: string[] = paths.map((item) => {
+    return path.basename(item).replace('.md', '')
+  })
+  return weekly
+}
+
+export async function generateWeeklyArchivePage() {
+  let page = `
+---
+lastUpdated: false
+title: Weekly
+description: Weekly Review of Life
+sidebar: false
+comment: false
+---
+
+## 每周更新的废话
+`.trim()
+  page += '\n\n'
+
+  const weeklyPosts = await getWeeklyNames()
+  weeklyPosts.forEach((item) => {
+    page += `* [${item}](/weekly/${item})\n`
+  })
+
+  const paths = path.resolve('.') + '/weekly.md'
+  await fs.writeFile(paths, page)
+}

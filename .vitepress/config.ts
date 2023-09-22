@@ -1,12 +1,13 @@
 import { defineConfigWithTheme } from 'vitepress'
 import mk from './theme/markdown-it-katex'
 import img_fig from './theme/markdown-it-img-figure'
-import { getPosts, generatePaginationPages } from './theme/server_utils'
+import { getPosts, generatePaginationPages, generateWeeklyArchivePage } from './theme/server_utils'
 import custom_components from './theme/custom_component'
 
 export default async () => {
   const pageSize = 6
   await generatePaginationPages(pageSize)
+  await generateWeeklyArchivePage()
 
   return defineConfigWithTheme<LoiaThemeConfig>({
     title: "Lost Pieces - Locietta's Blog",
