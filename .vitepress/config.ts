@@ -54,9 +54,9 @@ export default async () => {
 
       nav: [
         { text: 'Home', link: '/' },
-        { text: 'Archives', link: '/pages/archives' },
-        { text: 'Tags', link: '/pages/tags' },
-        { text: 'About', link: '/pages/about' },
+        { text: 'Archives', link: '/archives' },
+        { text: 'Tags', link: '/tags' },
+        { text: 'About', link: '/about' },
         {
           text: 'External',
           items: [
