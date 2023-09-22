@@ -79,19 +79,16 @@ async function getPostMDFilePaths() {
   return paths.filter((item) => item.includes('posts/'))
 }
 
-async function getWeeklyMDFilePaths() {
+async function getWeeklyNames() {
   let paths = await globby(['weekly/**.md'], {
     ignore: ['node_modules', 'README.md']
   })
-  return paths.filter((item) => item.includes('weekly/'))
-}
 
-async function getWeeklyNames() {
-  let paths = await getWeeklyMDFilePaths()
-  let weekly: string[] = paths.map((item) => {
-    return path.basename(item).replace('.md', '')
-  })
-  return weekly
+  return paths
+    .filter((item) => item.includes('weekly/'))
+    .map((item) => {
+      return path.basename(item).replace('.md', '')
+    })
 }
 
 export async function generateWeeklyArchivePage() {
