@@ -8,21 +8,45 @@ on:
   workflow_dispatch:
     # manual trigger
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
-  Vitepress_build:
+  Build:
     runs-on: ubuntu-latest
     container: locietta/loia-dev-base:node
-    name: Vitepress Deploy
+    name: build
     steps:
-    - uses: actions/checkout@main
-    - name: Setup and build
-      shell: sh
-      run: |
-        pnpm i
-        pnpm build
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Checkout 
+      uses: actions/checkout@main
       with:
-        github_token: ${{secrets.GITHUB_TOKEN}}
-        publish_dir: .vitepress/dist
-        cname: ${{ secrets.CUSTOM_DOMAIN }}
+        fetch-depth: 0
+    - name: Setup
+      uses: actions/configure-pages@v3
+    - name: Install Deps
+      run: pnpm i
+    - name: Build
+      run: |
+        pnpm build
+        touch .vitepress/dist/.nojekyll
+    - name: Upload Page Artifact
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: .vitepress/dist
+
+  Deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: deploy
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v2
