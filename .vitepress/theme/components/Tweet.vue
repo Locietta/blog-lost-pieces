@@ -9,43 +9,6 @@
 import { applyPureReactInVue } from 'veaury'
 import { Tweet as ReactTweet } from 'react-tweet'
 
-const langs = [
-  'ar',
-  'bn',
-  'cs',
-  'da',
-  'de',
-  'el',
-  'en',
-  'es',
-  'fa',
-  'fi',
-  'fil',
-  'fr',
-  'he',
-  'hi',
-  'hu',
-  'id',
-  'it',
-  'ja',
-  'ko',
-  'msa',
-  'nl',
-  'no',
-  'pl',
-  'pt',
-  'ro',
-  'ru',
-  'sv',
-  'th',
-  'tr',
-  'uk',
-  'ur',
-  'vi',
-  'zh-cn',
-  'zh-tw'
-] as const
-
 type TweetProps = {
   /**
    * The numerical ID of the desired Tweet, or the full URL of the Tweet.
