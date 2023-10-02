@@ -1,30 +1,90 @@
-<!-- Wrapper around TweetSFC.vue -->
 <template>
-  <TweetSFC
-    v-if="refreshKey"
-    :theme="isDark ? 'dark' : 'light'"
-    v-bind="$props"
-  >
-    <template #loading>
-      <span> [[Tweet is loading...]] </span>
+  <WarppedTweet :id="id">
+    <template v-slot:node:fallback>
+      <div style="font-weight: bold">[[Error Occurred When Loading Tweet!]]</div>
     </template>
-    <template #error>
-      <span> [[Tweet failed to load!]] </span>
-    </template>
-  </TweetSFC>
+  </WarppedTweet>
 </template>
 <script lang="ts" setup>
-import TweetSFC from './TweetSFC.vue'
-import { ref, watch } from 'vue'
-import { useData } from 'vitepress'
-const { isDark } = useData()
-const refreshKey = ref(true)
-const refreshComment = () => {
-  refreshKey.value = false
-  setTimeout(() => {
-    refreshKey.value = true
-  }, 100)
+import { applyPureReactInVue } from 'veaury'
+import { Tweet as ReactTweet } from 'react-tweet'
+
+const langs = [
+  'ar',
+  'bn',
+  'cs',
+  'da',
+  'de',
+  'el',
+  'en',
+  'es',
+  'fa',
+  'fi',
+  'fil',
+  'fr',
+  'he',
+  'hi',
+  'hu',
+  'id',
+  'it',
+  'ja',
+  'ko',
+  'msa',
+  'nl',
+  'no',
+  'pl',
+  'pt',
+  'ro',
+  'ru',
+  'sv',
+  'th',
+  'tr',
+  'uk',
+  'ur',
+  'vi',
+  'zh-cn',
+  'zh-tw'
+] as const
+
+type TweetProps = {
+  /**
+   * The numerical ID of the desired Tweet, or the full URL of the Tweet.
+   * You should provide a Tweet ID or URL, but not both.
+   *
+   * @example
+   *   <Tweet id="20" />
+   *   <Tweet url="https://twitter.com/jack/status/20" />
+   */
+  id?: string
+  url?: string
 }
 
-watch(isDark, refreshComment)
+const TWEET_URL_REGEX = /^(https?:\/\/)?(www\.)?twitter\.com\/.*\/status(?:es)?\/(?<tweetId>[^\/\?]\d+)$/i
+const TWEET_ID_REGEX = /^\d+$/
+
+const props = defineProps<TweetProps>()
+let { id, url } = props
+if (id && url) {
+  throw new Error('Cannot provide both tweet id and tweet url.')
+} else if (id) {
+  if (!TWEET_ID_REGEX.test(id)) {
+    throw new Error('Invalid tweet id, please provide a valid numerical id.')
+  }
+} else if (url) {
+  const match = url.trim().match(TWEET_URL_REGEX)
+  if (match && match.groups?.tweetId) {
+    id = match.groups?.tweetId
+  } else {
+    throw new Error('Invalid tweet url.')
+  }
+} else {
+  throw new Error('Must provide either tweet-id or tweet-url.')
+}
+
+const WarppedTweet = applyPureReactInVue(ReactTweet)
 </script>
+<style scoped>
+.react-tweet-theme {
+  margin: auto !important
+}
+</style>
