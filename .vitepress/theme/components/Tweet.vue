@@ -83,7 +83,7 @@ if (id && url) {
 
 const WarppedTweet = applyPureReactInVue(ReactTweet)
 </script>
-<style scoped>
+<style>
 .react-tweet-theme {
   margin: auto !important
 }
