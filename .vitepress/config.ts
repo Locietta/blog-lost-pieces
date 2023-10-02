@@ -75,6 +75,27 @@ export default async () => {
           isCustomElement: (tag) => custom_components.includes(tag)
         }
       }
+    },
+    vite: {
+      build: {
+        rollupOptions: {
+          onwarn: (warning, warn) => {
+            // Module level directives cause errors when bundled, "use client" was ignored
+            // https://stackoverflow.com/a/76694634/21554202
+            if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
+              return
+            }
+            warn(warning)
+          }
+        }
+      },
+      ssr: {
+        // workaround for:
+        // * react-tweet: TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".css"
+        // * veaury: SyntaxError: Named export 'applyPureReactInVue' not found.
+        // https://github.com/antfu/vite-ssg/issues/156#issuecomment-1208009117
+        noExternal: ['react-tweet', 'veaury']
+      }
     }
   })
 }
