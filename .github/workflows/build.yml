@@ -28,7 +28,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: Setup
-      uses: actions/configure-pages@v3
+      uses: actions/configure-pages@main
     - name: Install Deps
       run: pnpm i
     - name: Build
@@ -36,7 +36,7 @@ jobs:
         pnpm build
         touch .vitepress/dist/.nojekyll
     - name: Upload Page Artifact
-      uses: actions/upload-pages-artifact@v2
+      uses: actions/upload-pages-artifact@main
       with:
         path: .vitepress/dist
 
@@ -49,4 +49,4 @@ jobs:
     name: deploy
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@main
