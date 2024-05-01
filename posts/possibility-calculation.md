@@ -615,13 +615,9 @@ $\{M_n\}$是关于$\{X_n\}$的**鞅**，$T$是$\{M_n\}$的一个**停时**，那
 2. $E(T)<\infin$，并且$E(|M_{n+1}-M_n|)\leq c < \infin$
 3. $P(T\leq \infin)=1$，并且$M_{T\wedge n} \leq K < \infin$
 
-:::info NOTE
-
-OST的成立条件其实就是在问$M_T$是否**一致可积**，也就是能否**交换积分和极限的顺序**。如果答案是肯定的，那么显然就有
-
-$$
-E(M_{0}) = \lim_{n\to\infin}E(M_{T\wedge n})=E\left(\lim_{n\to\infin}M_{T\wedge n}\right)=E(M_T)
-$$
+> [!note]
+> OST的成立条件其实就是在问$M_{T\wedge n}$是否**一致可积**，也就是能否**交换积分和极限的顺序**。如果答案是肯定的，那么显然就有
+> $$E(M_{0}) = \lim_{n\to\infin}E(M_{T\wedge n})=E\left(\lim_{n\to\infin}M_{T\wedge n}\right)=E(M_T)$$
 
 :::
 
