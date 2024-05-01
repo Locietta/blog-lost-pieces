@@ -46,7 +46,7 @@ $$
 E(m)=\dfrac{1-p^n}{p^n(1-p)}
 $$
 
-抛了$m$次硬币，$n$次正面的概率是
+抛了$m$次硬币，有连续$n$次正面的概率是
 
 $$
 P(Z_m \geq n) = \sum_{j=1}^{\lfloor \frac{m}{n} \rfloor } \binom{m-nj}{j-1}(p-1)^{j-1}p^{nj}\left[p+\dfrac{(1+m-nj)(1-p)}{j}\right]
