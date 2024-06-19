@@ -1,6 +1,6 @@
 ---
 date: 2024-04-03
-update: 2024-05-08
+update: 2024-06-19
 title: 游戏王MD中的概率问题
 tags:
   - math
@@ -135,35 +135,14 @@ f(n)=\begin{dcases}
 \end{dcases}
 $$
 
-而升降段发生所需的期望局数由线性方程$(\mathbf{A}-\mathcal{M}_p)\mathbf{E}=\mathbf{c}$给出。其中，
+而升降段发生所需的期望局数$E$由以下线性方程组给出：
 
 $$
-\begin{gather*}
-  \mathbf{A}=\begin{pmatrix}
-  2& &\\
-  & \mathbf{I}_{N+M-1} &\\
-  & & 2
-\end{pmatrix},\mathbf{c}=\begin{pmatrix}
-  0\\
-  \mathbf{1}_{N+M-1}\\
-  0
-\end{pmatrix},\\
-\mathcal{M}_p=\begin{bmatrix}
-    1   &     &        &     &     &        &     &        &   &   \\
-    q &     &        &     &     & p      &     &        &   &   \\
-        & q &        &     &     & p      &     &        &   &   \\
-        &     & \ddots &     &     & \vdots &     &        &   &   \\
-        &     &        & q &     & p      &     &        &   &   \\
-        &     &        &     & q &        & p   &        &   &   \\
-        &     &        &     &     & \ddots &     & \ddots &   &   \\
-        &     &        &     &     &        & q &        & p &   \\
-        &     &        &     &     &        &     & q    &   & p \\
-        &     &        &     &     &        &     &        &   & 1
-\end{bmatrix},\ q=1-p 
-\end{gather*}
+\begin{dcases}
+  E_1=\dfrac{N-1}{2p-1}+\left(E_0-\dfrac{N}{2p-1}\right)\dfrac{p^N(1-p)-p(1-p)^N}{p^{N+1}-p(1-p)^N}\\
+  E=\left(E_1+\dfrac{1}{p}\right)\left[1-(1-p)^M\right]
+\end{dcases}
 $$
-
-解得的列向量$\mathbf{E}$中的每一个元素代表从某个胜负场状态开始到达升段/降段的期望局数。
 
 ## 抛多少次硬币会出现连续n次正面？
 
@@ -856,7 +835,26 @@ $$
 
 总结一下计算结果，如果某小段需要累计$N$胜升段，0胜场$M$连败掉段，卡组单局胜率为$p$。
 
-那么升降段发生所需的期望局数由线性方程$(\mathbf{A}-\mathcal{M}_p)\mathbf{E}=\mathbf{c}$给出。其中，
+#### 升段率
+
+由于段位机制没有变化，因此对应的鞅$\{f(X_n)\}$也不变：
+
+$$
+f(X_n)=\begin{dcases}
+  \dfrac{p}{2p-1}\left[1-\left(\dfrac{1-p}{p}\right)^{X_n}\right] &,X_n\geq 0\\
+  1-(1-p)^{X_n} &,X_n<0
+\end{dcases}
+$$
+
+于是能成功升段的概率就是：
+
+$$
+p^+=\dfrac{-f(-M)}{f(N)-f(-M)}
+$$
+
+#### 期望
+
+升降段发生所需的期望局数由线性方程$(\mathbf{A}-\mathcal{M}_p)\mathbf{E}=\mathbf{c}$给出。其中，
 
 $$
 \begin{gather*}
@@ -886,18 +884,65 @@ $$
 
 解得的列向量$\mathbf{E}$中的每一个元素代表从某个胜负场状态开始到达升段/降段的期望局数。
 
-段位机制对应的鞅$\{f(X_n)\}$：
+当然，也可以把上述矩阵形式的线性方程组写成大家更熟悉的形式：
 
 $$
-f(X_n)=\begin{dcases}
-  \dfrac{p}{2p-1}\left[1-\left(\dfrac{1-p}{p}\right)^{X_n}\right] &,X_n\geq 0\\
-  1-(1-p)^{X_n} &,X_n<0
+\begin{dcases}
+  E_i=(1-p)E_{i-1}+pE_{i+1}+1 &,i\in \{0,1,\cdots,N-1\}\\
+  E_i=(1-p)E_{i-1}+pE_1+1 &,i \in \{-1, \cdots, -M+1\}\\
+  E_N=E_{-M}=0
 \end{dcases}
 $$
 
-而能成功升段的概率是：
+如果我们只关心$E_0$，那么和上一节类似，可以直接化简上面的线性方程组：
 
 $$
-p^+=\dfrac{-f(-M)}{f(N)-f(-M)}
+\begin{dcases}
+  E_1=\dfrac{N-1}{2p-1}+\left(E_0-\dfrac{N}{2p-1}\right)\dfrac{p^N(1-p)-p(1-p)^N}{p^{N+1}-p(1-p)^N}\\
+  E_0=\left(E_1+\dfrac{1}{p}\right)\left[1-(1-p)^M\right]
+\end{dcases}
 $$
 
+:::tip 那么是咋化简的呢
+
+实际上就是将前两行当作数列的递推方程来处理，转化为求数列通项的问题。
+
+不过这里这个比上一节里的更难些，上一节中两个递推方程都是一阶线性递推，只需凑成等比数列就行。这里第一个方程是二阶线性递推，会稍麻烦些。这里还是写写详细过程吧。
+
+首先来处理比较简单的第二行，利用待定系数法消去常数1，凑成$E_i+\lambda = (1-p)[E_{i-1}+\lambda]$的形式：
+
+$$
+E_i-\left(E_1+\dfrac{1}{p}\right)=(1-p)\left[E_{i-1}-\left(E_1+\dfrac{1}{p}\right)\right],\quad i\in\{0, -1, \cdots, -M+1\}
+$$
+
+这就是等比数列的递推关系，考虑$E_{-M}=0$，我们就得到
+
+$$
+E_0=\left(E_1+\dfrac{1}{p}\right)\left[1-(1-p)^M\right]
+$$
+
+再来处理第一行。首先还是要消去常数项，但是因为$E_i$前系数刚好相互抵消的关系，直接用$E_i+\lambda$来凑行不通，换用$E_i+\lambda i$，于是：
+
+$$
+E_i+\dfrac{i}{2p-1}=(1-p)\left[E_{i-1}+\dfrac{i-1}{2p-1}\right]+p\left[E_{i+1}+\dfrac{i+1}{2p-1}\right],\quad i\in{0, 1, \cdots, N-1}
+$$
+
+设$A_i = E_i+\dfrac{i}{2p-1}$，我们有$A_i = (1-p)A_{i-1}+pA_{i+1}$。这是个齐线性二阶递推，其特征方程是$px^2-x+1-p=0$，两个特征根分别为$x_1=1$和$x_2=\dfrac{1-p}{p}$，于是：
+
+$$
+A_i = \lambda_1\left(\dfrac{1-p}{p}\right)^i+\lambda_2
+$$
+
+考虑$A_{N}=E_{N}+\dfrac{N}{2p-1}=\dfrac{N}{2p-1}$以及$A_0 = E_0$，有
+
+$$
+A_i = \dfrac{E_0-\dfrac{N}{2p-1}}{p^N-(1-p)^N}\cdot\dfrac{p^N(1-p)^i-p^i(1-p)^N}{p^i}+\dfrac{N}{2p-1}
+$$
+
+代入$i=1$即得
+
+$$
+E_1=\dfrac{E_0-\dfrac{N}{2p-1}}{p^N-(1-p)^N}\cdot\dfrac{p^N(1-p)-p(1-p)^N}{p}+\dfrac{N-1}{2p-1}
+$$
+
+:::
