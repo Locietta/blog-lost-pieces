@@ -2,8 +2,7 @@
 import type MarkdownIt from 'markdown-it'
 
 /// markdown-it parser types
-import type Token from 'markdown-it/lib/token'
-import StateCore from 'markdown-it/lib/rules_core/state_core'
+import type { Token, StateCore } from 'markdown-it'
 
 export type FigureOption = {
   dataType: boolean
