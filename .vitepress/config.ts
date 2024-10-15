@@ -65,6 +65,10 @@ export default async () => {
           ]
         }
       ],
+      outline: {
+        level: [2, 3],
+        label: '目录'
+      },
 
       socialLinks: [{ icon: 'github', link: 'https://github.com/Locietta/blog-lost-pieces' }]
     },
