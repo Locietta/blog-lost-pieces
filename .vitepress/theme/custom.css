@@ -83,6 +83,10 @@ figcaption {
   color: var(--c-brand-light)
 }
 
+mjx-container {
+  overflow-y: clip;
+}
+
 /*theme reset*/
 a:link {
   text-decoration: none;
@@ -236,3 +240,4 @@ a[rel~='noopener']:visited {
     display: none;
   }
 }
+

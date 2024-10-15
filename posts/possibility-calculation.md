@@ -164,8 +164,8 @@ $$
 
 $$
 \begin{aligned}
-G_n(x) &= \sum_{i=0}^{\infin} P_{i, n} x^{i}\\
-&=\sum_{i=1}^{\infin} P_{i, n} x^{i}\quad (\text{for } n\geq 1) \\
+G_n(x) &= \sum_{i=0}^{\infty} P_{i, n} x^{i}\\
+&=\sum_{i=1}^{\infty} P_{i, n} x^{i}\quad (\text{for } n\geq 1) \\
 \end{aligned}\tag{2}
 $$
 
@@ -235,10 +235,10 @@ $$
 
 :::tip 定义1. （系数算子） $[x^n]f(x)$
 
-对幂级数$\displaystyle \sum_{i=0}^{\infin} a_ix^i$以及$n\in \mathbb{Z}$ 定义
+对幂级数$\displaystyle \sum_{i=0}^{\infty} a_ix^i$以及$n\in \mathbb{Z}$ 定义
 
 $$
-[x^n]\displaystyle \sum_{i=0}^{\infin} a_ix^i = \begin{dcases}
+[x^n]\displaystyle \sum_{i=0}^{\infty} a_ix^i = \begin{dcases}
   a_n &,if\ n\geq 0,  \\
   0 &,if\ n<0.
 \end{dcases}
@@ -255,10 +255,10 @@ $$
 $$
 \begin{align*}
 P(Z_m\geq n) &= [x^m]F_n(x) = [x^m] \left(\dfrac{1}{1-x} + \dfrac{p^nx^n-1}{1-x+(1-p)p^{n}x^{n+1}}\right)\\
-&= [x^m] \left(\sum_{i=0}^{\infin}x^i+(p^nx^n-1)\sum_{i=0}^{\infin}\left[x-(1-p)p^nx^{n+1}\right]^i\right)\\
-&= 1 + [x^m](p^nx^n-1)\sum_{i=0}^{\infin}\left[x-(1-p)p^nx^{n+1}\right]^i\\
-&=1+\left(p^n[x^{m-n}] - [x^m]\right)\sum_{i=0}^{\infin}x^i\left[1-(1-p)p^nx^{n}\right]^i\\
-&=1+\left(p^n[x^{m-n}] - [x^m]\right)\sum_{i=0}^{\infin}x^i\sum_{j=0}^i \binom{i}{j}  (-1)^j (1-p)^j (px)^{nj}\\
+&= [x^m] \left(\sum_{i=0}^{\infty}x^i+(p^nx^n-1)\sum_{i=0}^{\infty}\left[x-(1-p)p^nx^{n+1}\right]^i\right)\\
+&= 1 + [x^m](p^nx^n-1)\sum_{i=0}^{\infty}\left[x-(1-p)p^nx^{n+1}\right]^i\\
+&=1+\left(p^n[x^{m-n}] - [x^m]\right)\sum_{i=0}^{\infty}x^i\left[1-(1-p)p^nx^{n}\right]^i\\
+&=1+\left(p^n[x^{m-n}] - [x^m]\right)\sum_{i=0}^{\infty}x^i\sum_{j=0}^i \binom{i}{j}  (-1)^j (1-p)^j (px)^{nj}\\
 &=1+\sum_{i=0}^{m}\left(p^n[x^{m-n-i}] - [x^{m-i}]\right)\sum_{j=0}^i \binom{i}{j}  (-1)^j (1-p)^j (px)^{nj}\\
 &=1+p^n\sum_{j=0}^{\lfloor \frac{m}{n} \rfloor - 1 } \binom{m-n(j+1)}{j}(p-1)^jp^{nj} - \sum_{j=0}^{\lfloor \frac{m}{n} \rfloor } \binom{m-nj}{j}(p-1)^jp^{nj}\\
 &=1+\sum_{j=0}^{\lfloor \frac{m}{n} \rfloor - 1 } \binom{m-n(j+1)}{j}(p-1)^jp^{n(j+1)} - 1 - \sum_{j=1}^{\lfloor \frac{m}{n} \rfloor } \binom{m-nj}{j}(p-1)^jp^{nj}\\
@@ -304,8 +304,8 @@ $$
 $$
 \begin{align*}
 [x^n]pp(f;z_0) &= [x^n]\sum_{j=1}^r \dfrac{a_{-j}}{(z-z_0)^j} = [x^n]\sum_{j=1}^r \dfrac{(-1)^ja_{-j}}{z_0^j(1-\dfrac{z}{z_0})^j} \\
-&=[x^n]\sum_{j=1}^r \dfrac{(-1)^ja_{-j}}{z_0^j}\sum_{k = 0}^{\infin} \binom{k+j-1}{k}\left(\dfrac{z}{z_0}\right)^k\\
-&=[x^n]\sum_{k = 0}^{\infin}z^k\left(\sum_{j=1}^r \dfrac{(-1)^ja_{-j}}{z_0^{k+j}}\binom{k+j-1}{j-1}\right)\\
+&=[x^n]\sum_{j=1}^r \dfrac{(-1)^ja_{-j}}{z_0^j}\sum_{k = 0}^{\infty} \binom{k+j-1}{k}\left(\dfrac{z}{z_0}\right)^k\\
+&=[x^n]\sum_{k = 0}^{\infty}z^k\left(\sum_{j=1}^r \dfrac{(-1)^ja_{-j}}{z_0^{k+j}}\binom{k+j-1}{j-1}\right)\\
 &=\sum_{j=1}^r \dfrac{(-1)^ja_{-j}}{z_0^{n+j}}\binom{n+j-1}{j-1}
 \end{align*}
 $$
@@ -323,7 +323,7 @@ Q_n(x) = \dfrac{1-p^nx^n}{1-x+(1-p)p^{n}x^{n+1}}
 $$
 
 :::info NOTE
-$Q_n(x) = \dfrac{1}{1-x}-F_n(x) = \displaystyle \sum_{i=0}^\infin \left[1-P(Z_m \geq n)\right]x^i=\sum_{i=0}^\infin P(Z_m < n) x^i$，因此$Q_n(x)$就是$P(Z_m < n)$的生成函数，
+$Q_n(x) = \dfrac{1}{1-x}-F_n(x) = \displaystyle \sum_{i=0}^\infty \left[1-P(Z_m \geq n)\right]x^i=\sum_{i=0}^\infty P(Z_m < n) x^i$，因此$Q_n(x)$就是$P(Z_m < n)$的生成函数，
 :::
 
 为了得到$Q_n(x)$的极点，我们考虑方程
@@ -355,7 +355,7 @@ $$
 
 最后采用了均值不等式来放缩，当且仅当$p = \dfrac{n}{n+1}$时取等，此时$x_m=1+\dfrac{1}{n}$.
 
-借助均值不等式，不难发现$1 + \dfrac{1}{n} \leq x_m$以及$\varphi(1+(1-p)p^n)>0$，$\varphi(1+\dfrac{1}{n})\leq 0$，因此方程$\varphi(x) = 0$在$(1, +\infin)$上有两个根， 它们分布在$1+1/n$的两侧， 其中一个是$1/p$。
+借助均值不等式，不难发现$1 + \dfrac{1}{n} \leq x_m$以及$\varphi(1+(1-p)p^n)>0$，$\varphi(1+\dfrac{1}{n})\leq 0$，因此方程$\varphi(x) = 0$在$(1, +\infty)$上有两个根， 它们分布在$1+1/n$的两侧， 其中一个是$1/p$。
 
 :::details $\varphi(x)=0$的最小模根是实根
 ~~证明留作习题~~ 不是重点，不想啰嗦
@@ -380,8 +380,8 @@ $$
 \begin{aligned}
 P(Z_m < n) &= [x^m]Q_n(x)\\
 &\sim \dfrac{1-p^nx_0^n}{1-(n+1)(1-p)p^nx_0^n} \left(\dfrac{1}{x_0}\right)^{m+1}\\
-&= \dfrac{1-px_0}{(1-p)(n+1-nx_0)} \left(\dfrac{1}{x_0}\right)^{m+1}\tag{10a}
-\end{aligned}
+&= \dfrac{1-px_0}{(1-p)(n+1-nx_0)} \left(\dfrac{1}{x_0}\right)^{m+1}
+\end{aligned} \tag{10a}
 $$
 
 ##### (II) $p=\dfrac{n}{n+1}$ 时
@@ -398,8 +398,8 @@ $$
 
 $$
 \begin{aligned}
-P(Z_m < n) &= [x^m]Q_n(x) \sim 2 \left(\dfrac{1}{x_0}\right)^{m+1} \tag{10b}
-\end{aligned}
+P(Z_m < n) &= [x^m]Q_n(x) \sim 2 \left(\dfrac{1}{x_0}\right)^{m+1} 
+\end{aligned} \tag{10b}
 $$
 
 #### 估计极点$x_0$
@@ -410,15 +410,15 @@ $$
 x_0=1+\Theta\left((1-p)p^n\right)
 $$
 
-进一步，记$K=\displaystyle \lim_{n\to \infin} \dfrac{x_0-1}{(1-p)p^n} \in [1, e]$，则
+进一步，记$K=\displaystyle \lim_{n\to \infty} \dfrac{x_0-1}{(1-p)p^n} \in [1, e]$，则
 
 $$
 \begin{align*}
 
-K&=\lim_{n\to \infin} \dfrac{x_0-1}{(1-p)p^n} =\lim_{n\to \infin}x_0^{n+1} \\
-&\leq \lim_{n\to \infin} \left[1+e(1-p)p^n\right]^{n+1}\\
-&= \exp\left(\lim_{n\to \infin} \ln(1+e(1-p)p^n)(n+1)\right)\\
-&\leq \exp\left(\lim_{n\to \infin} e(1-p)p^n(n+1)\right)\\
+K&=\lim_{n\to \infty} \dfrac{x_0-1}{(1-p)p^n} =\lim_{n\to \infty}x_0^{n+1} \\
+&\leq \lim_{n\to \infty} \left[1+e(1-p)p^n\right]^{n+1}\\
+&= \exp\left(\lim_{n\to \infty} \ln(1+e(1-p)p^n)(n+1)\right)\\
+&\leq \exp\left(\lim_{n\to \infty} e(1-p)p^n(n+1)\right)\\
 &=\exp(0) = 1
 \end{align*}
 $$
@@ -426,7 +426,7 @@ $$
 因此，$K=1$，也就是说
 
 $$
-x_0 \sim 1+(1-p)p^n \quad (n\to \infin)
+x_0 \sim 1+(1-p)p^n \quad (n\to \infty)
 $$
 
 将以上近似回代到$(10a)$中，有
@@ -591,13 +591,13 @@ $$
 
 $\{M_n\}$是关于$\{X_n\}$的**鞅**，$T$是$\{M_n\}$的一个**停时**，那么以下均为$E(M_T) = E(M_0)$的充分条件：
 
-1. 存在$K<\infin$，使得$P(T\leq K)=1$
-2. $E(T)<\infin$，并且$E(|M_{n+1}-M_n|)\leq c < \infin$
-3. $P(T\leq \infin)=1$，并且$M_{T\wedge n} \leq K < \infin$
+1. 存在$K<\infty$，使得$P(T\leq K)=1$
+2. $E(T)<\infty$，并且$E(|M_{n+1}-M_n|)\leq c < \infty$
+3. $P(T\leq \infty)=1$，并且$M_{T\wedge n} \leq K < \infty$
 
 > [!note]
 > OST的成立条件其实就是在问$M_{T\wedge n}$是否**一致可积**，也就是能否**交换积分和极限的顺序**。如果答案是肯定的，那么显然就有
-> $$E(M_{0}) = \lim_{n\to\infin}E(M_{T\wedge n})=E\left(\lim_{n\to\infin}M_{T\wedge n}\right)=E(M_T)$$
+> $$E(M_{0}) = \lim_{n\to\infty}E(M_{T\wedge n})=E\left(\lim_{n\to\infty}M_{T\wedge n}\right)=E(M_T)$$
 
 :::
 

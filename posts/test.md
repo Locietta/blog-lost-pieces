@@ -93,13 +93,13 @@ void serialize(std::ostream &os, const T &val) {
 }
 ```
 
-### 数学公式（KaTeX）
+### 数学公式（MathJax3）
 
 $$
+\begin{gather*}
 \mathbf{a} = (x_1, y_1, z_1)\\
 \mathbf{b} = (x_2, y_2, z_2)\\
 \mathbf{c} = (x_3, y_3, z_3)\\
-
 \begin{aligned}
 
 (\mathbf{a}, \mathbf{b}, \mathbf{c}) &= (\mathbf{a} \times \mathbf{b}) \cdot \mathbf{c}\\
@@ -110,6 +110,8 @@ $$
  x_3 & y_3 & z_3
 \end{vmatrix}
 \end{aligned}
+\end{gather*}
+
 $$
 
 $$\int_a^b f(x)\mathrm{d}x \sim F_n(X) = \dfrac{1}{n}\sum^n_{k=1}\dfrac{f(X_k)}{\color{red} PDF(X_k)}$$
