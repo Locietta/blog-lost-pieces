@@ -13,12 +13,7 @@ export default async () => {
     description: 'Life Record & Tech Share',
     markdown: {
       theme: { light: 'light-plus', dark: 'dark-plus' },
-      math: {
-        tex: {
-          loader: { load: ['[tex]/color'] },
-          tex: { packages: { '[+]': ['color'] } }
-        }
-      },
+      math: true,
       config: (md) => {
         md.use(img_fig, {
           figcaption: true,
