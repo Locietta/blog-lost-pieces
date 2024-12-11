@@ -49,6 +49,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     needs: build
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' }} # Skip deploy if triggered by PR
     name: deploy
     steps:
       - id: deployment
