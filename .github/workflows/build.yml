@@ -36,6 +36,7 @@ jobs:
       run: pnpm i
     - name: Build
       run: |
+        git config --global --add safe.directory '*'
         pnpm build
         touch .vitepress/dist/.nojekyll
     - name: Upload Page Artifact
