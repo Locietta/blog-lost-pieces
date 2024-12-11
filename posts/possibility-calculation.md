@@ -1,6 +1,5 @@
 ---
 date: 2024-04-03
-update: 2024-10-29
 title: 游戏王MD中的概率问题（一）：n连后手问题
 tags:
   - math

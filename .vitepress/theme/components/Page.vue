@@ -13,12 +13,6 @@
       </time>
     </div>
     <p class="describe">{{ article.frontMatter.description }}</p>
-    <time
-      v-if="article.frontMatter.update"
-      class="update-date"
-    >
-      Updated at {{ article.frontMatter.update }}
-    </time>
     <div class="post-tag">
       <span
         v-for="item in article.frontMatter.tags"

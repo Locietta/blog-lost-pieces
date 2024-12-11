@@ -11,9 +11,6 @@ export async function getPosts() {
       const data = matter(content).data as Post['frontMatter']
 
       data.date = _convertDate(data.date)
-      if (data.update) {
-        data.update = _convertDate(data.update)
-      }
 
       if (!data.title) {
         data.title = '无标题'

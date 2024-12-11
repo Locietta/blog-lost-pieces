@@ -1,6 +1,5 @@
 ---
 date: 2024-04-04
-update: 2024-10-29
 title: 游戏王MD中的概率问题（二）：Bo2与升降段
 tags:
   - math

@@ -1,6 +1,5 @@
 ---
 date: 2021-08-18
-update: 2023-01-03
 title: 给萌新的C/C++环境搭建攻略（VSCode和MSYS2）
 tags:
   - vscode

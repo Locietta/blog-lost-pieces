@@ -5,7 +5,6 @@ declare interface Window {
 type Post = {
   frontMatter: {
     date: string
-    update?: string
     lastUpdated?: boolean
     title: string
     tags?: string[]

@@ -1,6 +1,5 @@
 ---
 date: 2022-09-11
-update: 2023-06-12
 title: 测试显示效果
 tags:
   - vitepress

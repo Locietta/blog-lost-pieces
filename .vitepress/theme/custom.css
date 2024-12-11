@@ -157,11 +157,6 @@ a[rel~='noopener']:visited {
   font-family: var(--date-font-family);
 }
 
-.update-date {
-  color: var(--date-color);
-  font-size: small;
-}
-
 /*mobile*/
 @media screen and (max-width: 768px) {
   .VPDoc {
