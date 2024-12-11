@@ -5,6 +5,9 @@ on:
       - main
     tags-ignore:
       - '**'
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
     # manual trigger
 
