@@ -1,4 +1,5 @@
 import { defineConfigWithTheme } from 'vitepress'
+import mk from './theme/markdown-it-katex'
 import img_fig from './theme/markdown-it-img-figure'
 import { getPosts, generatePaginationPages, generateWeeklyArchivePage } from './theme/server_utils'
 import custom_components from './theme/custom_component'
@@ -13,12 +14,20 @@ export default async () => {
     description: 'Life Record & Tech Share',
     markdown: {
       theme: { light: 'light-plus', dark: 'dark-plus' },
-      math: true,
+      // math: true,
       config: (md) => {
         md.use(img_fig, {
           figcaption: true,
           lazy: true,
           async: true
+        }).use(mk, {
+          strict: (errorCode: string) => {
+            if (errorCode == 'newLineInDisplayMode') {
+              return 'ignore'
+            } else {
+              return 'warn'
+            }
+          }
         })
       }
     },

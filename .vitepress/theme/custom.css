@@ -83,8 +83,9 @@ figcaption {
   color: var(--c-brand-light)
 }
 
-mjx-container {
-  overflow-y: clip;
+/* This allows inline formula to auto change line */
+.katex-html > .base {
+  white-space: normal;
 }
 
 /*theme reset*/

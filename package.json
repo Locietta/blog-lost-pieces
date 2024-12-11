@@ -6,7 +6,6 @@
   "author": "Locietta <locietta@qq.com>",
   "license": "MIT",
   "devDependencies": {
-    "@algolia/client-search": "^5.13.0",
     "@types/fs-extra": "^11.0.4",
     "@types/katex": "^0.16.7",
     "@types/markdown-it": "^14.1.2",
@@ -24,7 +23,7 @@
     "globby": "^14.0.2",
     "gray-matter": "^4.0.3",
     "img-comparison-slider": "^8.0.6",
-    "markdown-it-mathjax3": "^4.3.2",
+    "katex": "^0.16.11",
     "prettier": "^3.3.3",
     "prettier-eslint": "^16.3.0",
     "react-tweet": "^3.2.1",
@@ -43,7 +42,5 @@
     "serve": "vitepress serve",
     "preview": "vitepress preview"
   },
-  "dependencies": {
-    "katex": "^0.16.11"
-  }
+  "dependencies": {}
 }

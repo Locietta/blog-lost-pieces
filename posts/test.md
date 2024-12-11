@@ -92,7 +92,7 @@ void serialize(std::ostream &os, const T &val) {
 }
 ```
 
-### 数学公式（MathJax3）
+### 数学公式（KaTeX）
 
 $$
 \begin{gather*}
