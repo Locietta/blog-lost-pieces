@@ -24,6 +24,7 @@
     "gray-matter": "^4.0.3",
     "img-comparison-slider": "^8.0.6",
     "katex": "^0.16.11",
+    "markdown-it-wordless": "^1.1.1",
     "prettier": "^3.3.3",
     "prettier-eslint": "^16.3.0",
     "react-tweet": "^3.2.1",

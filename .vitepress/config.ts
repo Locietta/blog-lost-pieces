@@ -1,6 +1,7 @@
 import { defineConfigWithTheme } from 'vitepress'
 import mk from './theme/markdown-it-katex'
 import img_fig from './theme/markdown-it-img-figure'
+import { wordless, chineseAndJapanese, Options } from 'markdown-it-wordless'
 import { getPosts, generatePaginationPages, generateWeeklyArchivePage } from './theme/server_utils'
 import custom_components from './theme/custom_component'
 
@@ -20,15 +21,17 @@ export default async () => {
           figcaption: true,
           lazy: true,
           async: true
-        }).use(mk, {
-          strict: (errorCode: string) => {
-            if (errorCode == 'newLineInDisplayMode') {
-              return 'ignore'
-            } else {
-              return 'warn'
-            }
-          }
         })
+          .use(mk, {
+            strict: (errorCode: string) => {
+              if (errorCode == 'newLineInDisplayMode') {
+                return 'ignore'
+              } else {
+                return 'warn'
+              }
+            }
+          })
+          .use<Options>(wordless, { supportWordless: [chineseAndJapanese] })
       }
     },
     cleanUrls: true,
