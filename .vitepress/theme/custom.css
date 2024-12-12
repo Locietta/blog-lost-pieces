@@ -88,6 +88,10 @@ figcaption {
   white-space: normal;
 }
 
+.katex-display {
+  overflow: auto hidden;
+}
+
 /*theme reset*/
 a:link {
   text-decoration: none;
