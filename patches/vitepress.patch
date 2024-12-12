@@ -1,0 +1,19 @@
+diff --git a/dist/client/theme-default/composables/outline.js b/dist/client/theme-default/composables/outline.js
+index 480ca3b7a9c8d19380a23beaedc93bde0ed7eede..edb0484a7efedf2b8985ba42ed0b7ba4a55846fe 100644
+--- a/dist/client/theme-default/composables/outline.js
++++ b/dist/client/theme-default/composables/outline.js
+@@ -36,6 +36,14 @@ function serializeHeader(h) {
+                 node.classList.contains('ignore-header')) {
+                 continue;
+             }
++
++            // Handle katex spans
++            if (node.classList.contains('katex')) {
++                const katex_html = node.querySelector('.katex-html');
++                if (katex_html) { ret += katex_html.textContent; }
++                continue;
++            }
++
+             ret += node.textContent;
+         }
+         else if (node.nodeType === 3) {
