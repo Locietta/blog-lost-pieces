@@ -42,5 +42,9 @@
     "serve": "vitepress serve",
     "preview": "vitepress preview"
   },
-  "dependencies": {}
+  "pnpm": {
+    "patchedDependencies": {
+      "vitepress": "patches/vitepress.patch"
+    }
+  }
 }
