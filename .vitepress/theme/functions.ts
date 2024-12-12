@@ -1,3 +1,5 @@
+import type { Post } from '.vitepress/env'
+
 export function initTags(post: Post[]) {
   const data: Record<string, Post[]> = {}
   for (let index = 0; index < post.length; index++) {

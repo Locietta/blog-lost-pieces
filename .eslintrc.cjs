@@ -6,7 +6,7 @@ module.exports = {
   },
   globals: {
     Post: 'readonly',
-    LoiaThemeConfig: 'readonly'
+    LoiaTheme: 'readonly'
   },
   extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', 'plugin:prettier/recommended'],
   parser: 'vue-eslint-parser',

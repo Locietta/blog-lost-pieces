@@ -10,7 +10,7 @@ export default async () => {
   await generatePaginationPages(pageSize)
   await generateWeeklyArchivePage()
 
-  return defineConfigWithTheme<LoiaThemeConfig>({
+  return defineConfigWithTheme<LoiaTheme.Config>({
     title: "Lost Pieces - Locietta's Blog",
     description: 'Life Record & Tech Share',
     markdown: {

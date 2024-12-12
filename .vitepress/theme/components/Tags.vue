@@ -28,7 +28,7 @@ import { computed, ref } from 'vue'
 import { useData, withBase } from 'vitepress'
 import { initTags } from '../functions'
 
-const { theme } = useData<LoiaThemeConfig>()
+const { theme } = useData<LoiaTheme.Config>()
 const data = computed(() => initTags(theme.value.posts))
 const url = location.href.split('?')[1]
 const params = new URLSearchParams(url)

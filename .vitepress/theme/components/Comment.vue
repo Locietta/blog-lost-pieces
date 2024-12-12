@@ -29,7 +29,7 @@
 import { useData, useRoute } from 'vitepress'
 import { ref, watch, computed } from 'vue'
 
-const { isDark, frontmatter, theme } = useData<LoiaThemeConfig>()
+const { isDark, frontmatter, theme } = useData<LoiaTheme.Config>()
 const route = useRoute()
 
 const show = computed(() => frontmatter.value.comment ?? theme.value.comment)

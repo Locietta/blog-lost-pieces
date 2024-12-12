@@ -18,7 +18,7 @@
 <script lang="ts" setup>
 import { useData } from 'vitepress'
 
-const { site, theme } = useData<LoiaThemeConfig>()
+const { site, theme } = useData<LoiaTheme.Config>()
 const website = theme.value.website
 const webTitle = site.value.title
 </script>

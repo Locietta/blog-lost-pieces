@@ -26,14 +26,14 @@ import { useData, withBase } from 'vitepress'
 import { computed } from 'vue'
 import { useYearSort } from '../functions'
 
-const { theme } = useData<LoiaThemeConfig>()
+const { theme } = useData<LoiaTheme.Config>()
 const data = computed(() => useYearSort(theme.value.posts))
 </script>
 
 <style scoped>
 .year {
   padding: 16px 0 8px 0;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 600;
 }
 
