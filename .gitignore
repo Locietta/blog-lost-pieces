@@ -5,6 +5,3 @@ dist
 
 # vitepress cache
 .vitepress/cache
-
-# pnpm lock
-pnpm-lock.yaml
