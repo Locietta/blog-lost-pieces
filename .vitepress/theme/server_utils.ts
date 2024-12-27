@@ -19,7 +19,7 @@ export async function getPosts() {
 
       return {
         frontMatter: data,
-        regularPath: `/${item.replace('.md', '')}`
+        regularPath: `/${item.replace('.md', '').replace('pages/', '')}`
       }
     })
   )
@@ -35,18 +35,17 @@ export async function generatePaginationPages(pageSize: number) {
   let pagesNum = allPagesLength % pageSize === 0 ? allPagesLength / pageSize : allPagesLength / pageSize + 1
   pagesNum = parseInt(pagesNum.toString())
 
-  const paths = path.resolve('.')
+  const paths = path.resolve('./pages')
   if (allPagesLength > 0) {
     for (let i = 1; i < pagesNum + 1; i++) {
       const page = `
 ---
 lastUpdated: false
-title: ${i === 1 ? 'home' : 'page_' + i}
 sidebar: false
 comment: false
 ---
 <script setup>
-import Page from "./.vitepress/theme/components/Page.vue";
+import Page from "../.vitepress/theme/components/Page.vue";
 import { useData } from "vitepress";
 const { theme } = useData();
 const posts = theme.value.posts.slice(${pageSize * (i - 1)},${pageSize * i})
@@ -71,14 +70,14 @@ function _compareDate(obj1: Post, obj2: Post) {
 }
 
 async function getPostMDFilePaths() {
-  let paths = await globby(['posts/**.md'], {
+  let paths = await globby(['pages/posts/**.md'], {
     ignore: ['node_modules', 'README.md']
   })
   return paths.filter((item) => item.includes('posts/'))
 }
 
 async function getWeeklyNames() {
-  let paths = await globby(['weekly/**.md'], {
+  let paths = await globby(['pages/weekly/**.md'], {
     ignore: ['node_modules', 'README.md']
   })
 
@@ -108,6 +107,6 @@ comment: false
     page += `* [${item}](/weekly/${item})\n`
   })
 
-  const paths = path.resolve('.') + '/weekly.md'
+  const paths = path.resolve('./pages') + '/weekly.md'
   await fs.writeFile(paths, page)
 }

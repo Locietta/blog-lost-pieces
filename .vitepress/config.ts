@@ -76,7 +76,8 @@ export default async () => {
 
       socialLinks: [{ icon: 'github', link: 'https://github.com/Locietta/blog-lost-pieces' }]
     },
-    srcExclude: ['README.md'],
+    srcDir: 'pages',
+    srcExclude: ['**/README.md'],
     vue: {
       template: {
         compilerOptions: {
