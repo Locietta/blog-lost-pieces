@@ -7,8 +7,6 @@ tags:
 description: 常用的命令和相关备忘之类的
 ---
 
-# {{ $frontmatter.title }}
-
 维护[自己的 WSL 内核](https://github.com/Locietta/xanmod-kernel-WSL2)也快一年了，前几天也拿到了第 16 个 star<Shade>其中有一个是我自己</Shade>，把一些积累的经验整理一下放到这里罢。
 
 ![在桌面一直放个txt还是有点蠢...](https://s2.loli.net/2023/03/05/kyQW1zrMLchVs4U.png)

@@ -92,8 +92,6 @@ export async function generateWeeklyArchivePage() {
   let page = `
 ---
 lastUpdated: false
-title: Weekly
-description: Weekly Review of Life
 sidebar: false
 comment: false
 ---

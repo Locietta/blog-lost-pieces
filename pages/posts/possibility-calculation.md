@@ -7,8 +7,6 @@ tags:
 description: 怎么玩MD老是后手...我要成为游戏王（划掉）概率论糕手！
 ---
 
-# {{ $frontmatter.title }}
-
 ## 前言
 
 :::info 游戏王的先后手差距

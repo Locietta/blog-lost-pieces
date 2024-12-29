@@ -7,8 +7,6 @@ tags:
 description: 马尔科夫链！停时定理！亏我还能想起他们...
 ---
 
-# {{ $frontmatter.title }}
-
 ## 前言
 
 ![不能输的理由](https://s2.loli.net/2024/10/31/g9LxhpvuNBTos2V.png)

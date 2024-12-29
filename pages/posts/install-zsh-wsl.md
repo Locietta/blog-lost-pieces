@@ -8,8 +8,6 @@ tags:
 description: 一篇旧文，用于测试显示效果
 ---
 
-# 在 WSL 上安装并配置 zsh
-
 ## 1 安装 zsh
 
 ```

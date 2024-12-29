@@ -10,6 +10,7 @@ declare namespace LoiaTheme {
       date: string
       lastUpdated?: boolean
       title: string
+      not_append_title?: boolean
       tags?: string[]
       description?: string
       comment?: boolean
@@ -17,17 +18,19 @@ declare namespace LoiaTheme {
     regularPath: string
   }
 
+  type GiscusConfig = {
+    repo: string
+    repoId: string
+    category: string
+    categoryId: string
+  }
+
   type Config = DefaultTheme.Config & {
     website: string
     posts: Post[]
     pageSize: number
     comment?: boolean
-    giscusConfig: {
-      repo: string
-      repoId: string
-      category: string
-      categoryId: string
-    }
+    giscusConfig: GiscusConfig
   }
 
 }

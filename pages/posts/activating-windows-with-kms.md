@@ -6,8 +6,6 @@ tags:
 description: 使用KMS服务器免费激活Windows和Office 365.
 ---
 
-# {{ $frontmatter.title }}
-
 ## 前言
 
 最近各种姿势重装系统，每次装完 windows 镜像，右下角就出来一个激活正版 windows 的水印，总之很不爽。那我们就来手动激活它！<del>顺便把 Office 365 也激活了吧</del>

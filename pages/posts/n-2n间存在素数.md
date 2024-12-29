@@ -6,8 +6,6 @@ tags:
 description: 初中的时候瞎琢磨过的问题，现在捡起来看还是很有趣
 ---
 
-# {{ $frontmatter.title }}
-
 初中的时候有道比较简单的数论问题是这样的：
 
 :::tip 命题1

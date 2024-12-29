@@ -7,8 +7,6 @@ tags:
 description: 测试显示效果
 ---
 
-# {{ $frontmatter.title }}
-
 ## Vanilla Markdown Syntax
 
 > 二级标题会出现在右侧标题导航中

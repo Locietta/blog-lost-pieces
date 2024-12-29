@@ -6,8 +6,6 @@ tags:
 description: 变长数组容器，结合我现在对C++的一些理解来写写看。
 ---
 
-# {{ $frontmatter.title }}
-
 :::tip 关于代码
 用到的示例代码在[Locietta/loia_vector](https://github.com/Locietta/loia_vector)中可以找到。
 :::

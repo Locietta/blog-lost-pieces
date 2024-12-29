@@ -1,5 +1,4 @@
 ---
-title: About
 description: About me test
 sidebar: false
 comment: false
