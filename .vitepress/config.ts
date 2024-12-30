@@ -45,6 +45,36 @@ export default async () => {
             }
           }
         }
+      },
+      miniSearch: {
+        // Ref: https://github.com/lucaong/minisearch/issues/201
+        //      The solution there doesn't quite make sense though, I tweaked it a bit.
+        options: {
+          tokenize: (text) => {
+            text = text.toLowerCase()
+            // TODO: better CJK tokenizer
+            // NOTE: How to inject dependency (n-gram etc.) into here? `tokenize` will ignore top-level import somehow, 
+            // and it can't be made async which means we can't dynamic import.
+            const segmenter = Intl.Segmenter && new Intl.Segmenter('zh', { granularity: 'word' })
+            if (!segmenter) return [text] // firefox?
+            return Array.from(segmenter.segment(text), ({ segment }) => segment)
+          }
+        },
+        searchOptions: {
+          combineWith: 'AND',
+          // don't split search word, user searching "泛函" shouldn't get "广泛" or "函数"
+          // XXX: This is a hack, we should probably use a better CJK tokenizer
+          tokenize: (text) => [text.toLowerCase()],
+          fuzzy(term) {
+            // disable fuzzy search if the term contains a CJK character
+            // so searching "函数式" will not contain results only matching "函数"
+            const CJK_RANGE =
+              '\u2e80-\u2eff\u2f00-\u2fdf\u3040-\u309f\u30a0-\u30fa\u30fc-\u30ff\u3100-\u312f\u3200-\u32ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff'
+            const CJK_WORD = new RegExp(`[${CJK_RANGE}]`)
+            if (CJK_WORD.test(term)) return false
+            return true
+          }
+        }
       }
     }
   }
@@ -83,6 +113,7 @@ export default async () => {
     base: '/',
     srcDir: 'pages',
     srcExclude: ['**/README.md'],
+    lang: 'zh-CN',
     cleanUrls: true,
     lastUpdated: true,
     head: [
