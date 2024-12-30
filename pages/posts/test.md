@@ -70,12 +70,12 @@ _斜体文字_ _italic_
 代码块
 
 ```ts
-import { defineConfig } from "vitepress";
+import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: "Hello VitePress",
-  description: "Just playing around.",
-});
+  title: 'Hello VitePress',
+  description: 'Just playing around.',
+})
 ```
 
 ```cpp
@@ -91,6 +91,8 @@ void serialize(std::ostream &os, const T &val) {
 ```
 
 ### 数学公式（KaTeX）
+
+公式支持是在Vitepress官方支持之前做的，所以没用MathJax3，而是用的KaTeX。其实有一段时间是切到官方的MathJax3的，但是发现MathJax3占的内存比KaTeX要大，本地`pnpm dev`的时候在类似[“n到2n之间必然存在素数”的初等证明](./n-2n间存在素数.md)的巨量LaTeX编辑的场景会直接把HMR干到OOM，所以最后又切回KaTeX了。反正KaTeX渲染速度更快，包体更小，而且我更喜欢KaTeX的字体，何乐而不为呢。
 
 $$
 \begin{gather*}
