@@ -5,7 +5,9 @@ import type MarkdownIt from 'markdown-it'
 import katex from 'katex'
 
 /// markdown-it parser types
-import type { Token, StateInline, StateBlock } from 'markdown-it'
+import type Token from 'markdown-it/lib/token.mts'
+import type StateInline from 'markdown-it/lib/rules_inline/state_inline.mjs'
+import type StateBlock from 'markdown-it/lib/rules_block/state_block.mjs'
 
 // Test if potential opening or closing delimiter
 // Assumes that there is a "$" at state.src[pos]

@@ -1,8 +1,8 @@
-import { DefaultTheme, defineConfigWithTheme } from 'vitepress'
+import { type DefaultTheme, defineConfigWithTheme } from 'vitepress'
 import mk from './theme/markdown-it-katex'
 import img_fig from './theme/markdown-it-img-figure'
 import append_title from './theme/markdown-it-append-title'
-import { wordless, chineseAndJapanese, Options } from 'markdown-it-wordless'
+import { wordless, chineseAndJapanese, type Options } from 'markdown-it-wordless'
 import { getPosts, generatePaginationPages, generateWeeklyArchivePage } from './theme/server_utils'
 import custom_components from './theme/custom_component'
 
