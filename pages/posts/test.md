@@ -70,12 +70,12 @@ _斜体文字_ _italic_
 代码块
 
 ```ts
-import { defineConfig } from 'vitepress'
+import { defineConfig } from "vitepress";
 
 export default defineConfig({
-  title: 'Hello VitePress',
-  description: 'Just playing around.'
-})
+  title: "Hello VitePress",
+  description: "Just playing around.",
+});
 ```
 
 ```cpp
@@ -108,6 +108,7 @@ $$
 \end{vmatrix}
 \end{aligned}
 \end{gather*}
+
 
 $$
 

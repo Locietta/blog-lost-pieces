@@ -31,8 +31,8 @@ description: 怎么玩MD老是后手...我要成为游戏王（划掉）概率�
 
 由于篇幅问题，以及大量的公式，本文已被拆分以改善加载速度。系列文章如下：
 
-* [（一）](./possibility-calculation.md)：本文，计算了硬币出现$n$连反面的投掷次数期望和概率
-* [（二）](./possibility-calculation-2.md)：计算了MD天梯升降小段的期望局数和升段概率，与Bo2及衍生赛制Bo∞的期望局数和双方胜率
+- [（一）](./possibility-calculation.md)：本文，计算了硬币出现$n$连反面的投掷次数期望和概率
+- [（二）](./possibility-calculation-2.md)：计算了MD天梯升降小段的期望局数和升段概率，与Bo2及衍生赛制Bo∞的期望局数和双方胜率
 
 ## TL;DR
 
@@ -312,7 +312,7 @@ $$
 
 $$
 \begin{aligned}
-P(Z_m < n) &= [x^m]Q_n(x) \sim 2 \left(\dfrac{1}{x_0}\right)^{m+1} 
+P(Z_m < n) &= [x^m]Q_n(x) \sim 2 \left(\dfrac{1}{x_0}\right)^{m+1}
 \end{aligned} \tag{10b}
 $$
 

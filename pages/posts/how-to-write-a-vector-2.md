@@ -10,14 +10,12 @@ description: 变长数组容器，结合我现在对C++的一些理解来写写�
 用到的示例代码在[Locietta/loia_vector](https://github.com/Locietta/loia_vector)中可以找到。
 :::
 
-
 :::danger WIP
 还在施工中，猴年马月能写好吧（大概）
 
 这部分在我本地已经放了很久了，一直都是这种半成品的样子，主要是大改博客结构之后把改过的part1给上传了，结果dead link不能通过CI，所以干脆把part2也放上来先。
 
 :::
-
 
 ## 前情提要
 
@@ -92,6 +90,7 @@ int main(int argc, const char *argv[]) {
     vector_destroy(v); // dtor
 }
 ```
+
 :::
 
 而现在，我们终于要踏入C++的世界了！
@@ -107,6 +106,7 @@ int main(int argc, const char *argv[]) {
 如果只按照C语言的经验来写C++会遇到不少类似这样的问题，还是要多注意，尽量按照C++的方式来写C++代码。
 
 :::details 琐碎的修改
+
 ```cpp
 #include <assert.h> // [!code --]
 #include <stdio.h>  // [!code --]
@@ -131,11 +131,12 @@ struct vector {              // [!code ++]
 #define vector_init() (vector{.size = 0, .capacity = 0, .arr = nullptr})   // [!code ++]
 ...
 ```
-* 使用`cstdio`而不是`stdio.h`没有什么明显的好处，只是为了和其他C++标准库的命名一致，属于编码风格喜好问题
-* 在C++中结构体定义会自动将结构的名字也当作类型，不用多写`typedef`了
-* `vector{.size=...}`这样的按成员名初始化的语法在C++20才被支持
-* 关于`nullptr`：由于C++不允许`void*`隐式转换为其他指针，`NULL`只能被定义为`0`（而不是C中的`((void *)0)`），然后再在语法上开洞允许用字面量`0`给指针赋值。但这么搞参数为`NULL`的函数重载就又不对了，最后在C++11给空指针单独弄了个类型来解决这毛病。现在C++代码里尽量只写`nullptr`就好。
-:::
+
+- 使用`cstdio`而不是`stdio.h`没有什么明显的好处，只是为了和其他C++标准库的命名一致，属于编码风格喜好问题
+- 在C++中结构体定义会自动将结构的名字也当作类型，不用多写`typedef`了
+- `vector{.size=...}`这样的按成员名初始化的语法在C++20才被支持
+- 关于`nullptr`：由于C++不允许`void*`隐式转换为其他指针，`NULL`只能被定义为`0`（而不是C中的`((void *)0)`），然后再在语法上开洞允许用字面量`0`给指针赋值。但这么搞参数为`NULL`的函数重载就又不对了，最后在C++11给空指针单独弄了个类型来解决这毛病。现在C++代码里尽量只写`nullptr`就好。
+  :::
 
 ## 生命周期与RAII
 
@@ -171,10 +172,11 @@ void bar() {
 ```
 
 以上是掉坑的若干种姿势：
-* 堆上的`vector`在`free`掉之前必须先调清理代码
-* 代码块有多个出口时，每个出口处都要调清理代码
+
+- 堆上的`vector`在`free`掉之前必须先调清理代码
+- 代码块有多个出口时，每个出口处都要调清理代码
   > 注意不一定是函数`return`，也包括循环`break`/`continue`，以及`goto`等
-* 在内层的函数调用出现`longjmp`或者`exit`一类的可以直接中断当前函数的调用
+- 在内层的函数调用出现`longjmp`或者`exit`一类的可以直接中断当前函数的调用
   > 这种情况下没法写清理代码
 
 总而言之，我们总是希望变量产生时立即被初始化，否则我们没法使用；而在变量被消灭时立即进行清理，否则会造成资源的泄露。而变量的产生与消灭我们就称为这个变量的**生命周期**。
@@ -201,7 +203,7 @@ int main() {
     // ...
     // v.~vector(); // manually calling dtor
     // ...
-    
+
     // dtor inserted by compiler
 }
 ```
@@ -241,7 +243,7 @@ Foo foo;
 Bar bar = Bar{.x = 1, .y = 2};
 Bar baz = make_my_complex_bar(123, handle);
 ```
+
 :::
 
 ## 异常！
-

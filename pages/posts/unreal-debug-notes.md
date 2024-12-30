@@ -25,13 +25,15 @@ Unreal引擎免费提供其源代码，你需要首先注册个Epic账号，然�
 
 我这里提一些小的注意事项：
 
-* 如果不想用VS打开编译（UE用VS打开太吃内存了，UE编译流程会根据可用内存大小限制编译核心数的）可以直接使用命令行来编译↓
+- 如果不想用VS打开编译（UE用VS打开太吃内存了，UE编译流程会根据可用内存大小限制编译核心数的）可以直接使用命令行来编译↓
+
 ```powershell
 Engine\Build\BatchFiles\Build.bat -Target="UnrealEditor Win64 Development" -Target="ShaderCompileWorker Win64 Development -Quiet" -WaitMutex -FromMsBuild
 Engine\Build\BatchFiles\Build.bat -Target="UnrealEditor Win64 Debug" -Target="ShaderCompileWorker Win64 Development -Quiet" -WaitMutex -FromMsBuild # 如果你想逐行调试
 ```
-* 另外要检查下VS有没有安装incredibuild，如果安装了那么要么禁用要么卸载。因为会限制编译用的核心数，并且莫名增大IO开销，使本就不迅速的UE编译雪上加霜。（如果你确实有集群可用那就当我没说）
-> 实际上可以手动修改生成的VS工程里面和XGE有关的设置关掉分布式编译，但相对比较麻烦
+
+- 另外要检查下VS有没有安装incredibuild，如果安装了那么要么禁用要么卸载。因为会限制编译用的核心数，并且莫名增大IO开销，使本就不迅速的UE编译雪上加霜。（如果你确实有集群可用那就当我没说）
+  > 实际上可以手动修改生成的VS工程里面和XGE有关的设置关掉分布式编译，但相对比较麻烦
 
 UE的编译相当缓慢，初次全量编译在我的12700K+64G机器上花了4个小时左右，请做好准备，留出一段空余时间。
 
@@ -78,7 +80,6 @@ CPU代码的调试没啥可说的，直接打开VS用调试模式启动就好。
 这里我们想要跟踪Pass性能，因此需要勾选GPU通道。录制完Trace数据后，可以选择“Unreal Insights（会话浏览器）”选择录制好的快照打开分析窗口，然后就可以在分析窗口的右侧看到各个事件的耗时、调用次数等数据。
 
 ![性能分析窗口界面](https://s2.loli.net/2023/07/16/FROngkubPDSAjGs.png)
-
 
 但是，我们怎么知道这里的各个事件名称对应的是源代码的那一部分呢？这里就简单说明下CPU和GPU事件的名字对应的源代码标记。
 

@@ -205,7 +205,7 @@ $$
 
 {2n \choose n} &= \dfrac{(2n)!}{n!n!} = \dfrac{(2n)!}{(2n)!!(2n)!!} \cdot 4^n\\
 &=\dfrac{(2n-1)!!}{(2n)!!}\cdot 4^n \\
-&=\dfrac{2^{2n+1}}{\pi} I_{2n} 
+&=\dfrac{2^{2n+1}}{\pi} I_{2n}
 
 \end{aligned} \tag{3}
 $$
@@ -304,6 +304,7 @@ $$
 :::info 引理4的证明
 对于$n=3, 4$，有$P(3)=P(4)=2\times 3=6 < 2^3$.
 归纳假设对满足$3\leq n\leq 2k-2\ (k\geq 3)$的$n$，命题也成立，那么
+
 $$
 \begin{aligned}
 P(2k-1)&=P(k)\cdot \dfrac{P(2k-1)}{P(k)}\\
@@ -311,6 +312,7 @@ P(2k-1)&=P(k)\cdot \dfrac{P(2k-1)}{P(k)}\\
 &= 2^{2(2k-1)-3}
 \end{aligned}
 $$
+
 也就是$n=2k-1$的情形成立。考虑$n=2k$的情形，$2k$显然不是素数，因此
 
 $$
@@ -346,7 +348,7 @@ $$
 
 $$
 \begin{aligned}
-  
+
 \omega(n)&>\left[\dfrac{2n\ln 2}{3}+\dfrac{11}{2}\ln 2-\dfrac{\ln \pi}{2}\right]\dfrac{1}{\ln 2n}-\dfrac{\sqrt{2n}}{3}-\dfrac{\ln(2n+1)}{2\ln 2n}-2\\
 &>\left[\dfrac{2n\ln 2}{3}+\dfrac{11}{2}\ln 2-\dfrac{\ln \pi}{2}\right]\dfrac{1}{\ln 2n}-\dfrac{\sqrt{2n}}{3}-\dfrac{\ln(4n)}{2\ln 2n}-2\\
 &=\dfrac{2n\ln2}{3\ln 2n}-\dfrac{\sqrt{2n}}{3}+\left[5\ln 2-\dfrac{\ln \pi}{2}\right]\dfrac{1}{\ln 2n}-\dfrac{5}{2}
