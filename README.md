@@ -4,9 +4,9 @@
 
 My blog powered by [Vitepress](https://vitepress.vuejs.org/), for notes and life records ...
 
-拿Vitepress搭的个人博客，很久以前拿[airene的主题](https://github.com/airene/vitepress-blog-pure)和默认主题混了混魔改的。前端不是很懂，所以很多东西都是能用就行。C++写多了，有点类型强迫症，所以基本上能标都标了，尽量追求`.vue`和`.ts`文件里每个变量都能正确给出基于类型的语法提示。
+拿Vitepress搭的个人博客，很久以前拿[airene的主题](https://github.com/airene/vitepress-blog-pure)和默认主题混了混魔改的。C++写多了，有点类型强迫症，所以基本上能标都标了，尽量追求`.vue`和`.ts`文件里每个变量都能正确给出基于类型的语法提示。
 
-目前支持的所有feature可参考[测试显示效果](https://blog.locietta.xyz/posts/test)。作为个人博客的话反正也不需要太多花里胡哨的功能，这样就挺好。
+目前支持的所有feature可参考👉[测试显示效果](https://blog.locietta.xyz/posts/test)。作为个人博客的话反正也不需要太多花里胡哨的功能，这样就挺好。
 
 ### 目录结构
 
