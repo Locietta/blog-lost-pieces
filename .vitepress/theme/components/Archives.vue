@@ -40,5 +40,4 @@ const data = computed(() => useYearSort(theme.value.posts))
 .vp-doc a:hover {
   text-decoration: none;
 }
-
 </style>

@@ -34,7 +34,7 @@ const url = location.href.split('?')[1]
 const params = new URLSearchParams(url)
 const tagName = params.get('tag')
 
-let selectedTag = ref(tagName ? tagName : '')
+const selectedTag = ref(tagName ? tagName : '')
 
 const toggleTag = (tag: string) => {
   selectedTag.value = tag

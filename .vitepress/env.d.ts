@@ -2,7 +2,7 @@ declare interface Window {
   twttr: any
 }
 
-import { DefaultTheme } from "vitepress"
+import { DefaultTheme } from 'vitepress'
 
 declare namespace LoiaTheme {
   type Post = {
@@ -32,7 +32,6 @@ declare namespace LoiaTheme {
     comment?: boolean
     giscusConfig: GiscusConfig
   }
-
 }
 
 export = LoiaTheme

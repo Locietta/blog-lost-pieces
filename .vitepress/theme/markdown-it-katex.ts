@@ -39,7 +39,7 @@ function math_inline(state: StateInline, silent: boolean) {
     return true
   }
 
-  let start = pos + 1
+  const start = pos + 1
   let match = start
 
   // Find the next potential closing delimiter
@@ -104,7 +104,7 @@ function math_block(state: StateBlock, start: number, end: number, silent: boole
   }
 
   // Move past "$$"
-  let pos = startPos + 2
+  const pos = startPos + 2
   let firstLine = state.src.slice(pos, maxPos).trim()
 
   // If in silent mode, return early
@@ -153,21 +153,21 @@ export default function math_plugin(md: MarkdownIt, options: KatexOptions = {}) 
   options = { throwOnError: false, ...options }
 
   // set KaTeX as the renderer for markdown-it-simplemath
-  var katexInline = function (latex: string) {
+  const katexInline = function (latex: string) {
     options.displayMode = false
     return katex.renderToString(latex, options)
   }
 
-  var inlineRenderer = function (tokens: Token[], idx: number) {
+  const inlineRenderer = function (tokens: Token[], idx: number) {
     return katexInline(tokens[idx].content)
   }
 
-  var katexBlock = function (latex: string) {
+  const katexBlock = function (latex: string) {
     options.displayMode = true
     return '<p>' + katex.renderToString(latex, options) + '</p>'
   }
 
-  var blockRenderer = function (tokens: Token[], idx: number) {
+  const blockRenderer = function (tokens: Token[], idx: number) {
     return katexBlock(tokens[idx].content) + '\n'
   }
 

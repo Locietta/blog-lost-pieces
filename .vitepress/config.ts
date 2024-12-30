@@ -1,4 +1,4 @@
-import { DefaultTheme, defineConfigWithTheme, MarkdownOptions } from 'vitepress'
+import { DefaultTheme, defineConfigWithTheme } from 'vitepress'
 import mk from './theme/markdown-it-katex'
 import img_fig from './theme/markdown-it-img-figure'
 import append_title from './theme/markdown-it-append-title'
@@ -53,7 +53,7 @@ export default async () => {
           tokenize: (text) => {
             text = text.toLowerCase()
             // TODO: better CJK tokenizer
-            // NOTE: How to inject dependency (n-gram etc.) into here? `tokenize` will ignore top-level import somehow, 
+            // NOTE: How to inject dependency (n-gram etc.) into here? `tokenize` will ignore top-level import somehow,
             // and it can't be made async which means we can't dynamic import.
             const segmenter = Intl.Segmenter && new Intl.Segmenter('zh', { granularity: 'word' })
             if (!segmenter) return [text] // firefox?
@@ -171,7 +171,6 @@ export default async () => {
         // https://github.com/antfu/vite-ssg/issues/156#issuecomment-1208009117
         noExternal: ['react-tweet', 'veaury']
       }
-    },
-    transformPageData(pageData, ctx) {}
+    }
   })
 }

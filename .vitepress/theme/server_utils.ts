@@ -5,8 +5,8 @@ import path from 'path'
 import type { Post } from '.vitepress/env'
 
 export async function getPosts() {
-  let paths = await getPostMDFilePaths()
-  let posts: Post[] = await Promise.all(
+  const paths = await getPostMDFilePaths()
+  const posts: Post[] = await Promise.all(
     paths.map(async (item) => {
       const content = await fs.readFile(item, 'utf-8')
       const data = matter(content).data as Post['frontMatter']
@@ -29,7 +29,7 @@ export async function getPosts() {
 
 export async function generatePaginationPages(pageSize: number) {
   // getPostMDFilePath return type is object not array
-  let allPagesLength = [...(await getPostMDFilePaths())].length
+  const allPagesLength = [...(await getPostMDFilePaths())].length
 
   //  pagesNum
   let pagesNum = allPagesLength % pageSize === 0 ? allPagesLength / pageSize : allPagesLength / pageSize + 1
@@ -70,14 +70,14 @@ function _compareDate(obj1: Post, obj2: Post) {
 }
 
 async function getPostMDFilePaths() {
-  let paths = await globby(['pages/posts/**.md'], {
+  const paths = await globby(['pages/posts/**.md'], {
     ignore: ['node_modules', 'README.md']
   })
   return paths.filter((item) => item.includes('posts/'))
 }
 
 async function getWeeklyNames() {
-  let paths = await globby(['pages/weekly/**.md'], {
+  const paths = await globby(['pages/weekly/**.md'], {
     ignore: ['node_modules', 'README.md']
   })
 

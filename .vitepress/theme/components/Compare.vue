@@ -1,40 +1,39 @@
 <template>
   <ImgCompare class="img-compare rendered">
-    <figure
-      slot="first"
-      class="before"
-    >
-      <img
-        title="Before Image"
-        :src="before"
-      />
-      <figcaption v-if="tag">{{ beforeTag }}</figcaption>
-    </figure>
-    <figure
-      slot="second"
-      class="after"
-    >
-      <img
-        title="After Image"
-        :src="after"
-      />
-      <figcaption v-if="tag">{{ afterTag }}</figcaption>
-    </figure>
-    <svg
-      slot="handle"
-      class="animated-handle"
-      xmlns="http://www.w3.org/2000/svg"
-      width="100"
-      viewBox="-8 -3 16 6"
-    >
-      <path
-        stroke="#fff"
-        d="M -4 -2 L -6 0 L -4 2 M -4 -2 L -4 2 M 4 -2 L 6 0 L 4 2 M 4 -2 L 4 2"
-        stroke-width="1"
-        fill="rgba(1.0, 1.0, 1.0, 0.3)"
-        vector-effect="non-scaling-stroke"
-      ></path>
-    </svg>
+    <template #first>
+      <figure class="before">
+        <img
+          title="Before Image"
+          :src="before"
+        />
+        <figcaption v-if="tag">{{ beforeTag }}</figcaption>
+      </figure>
+    </template>
+    <template #second>
+      <figure class="after">
+        <img
+          title="After Image"
+          :src="after"
+        />
+        <figcaption v-if="tag">{{ afterTag }}</figcaption>
+      </figure>
+    </template>
+    <template #handle>
+      <svg
+        class="animated-handle"
+        xmlns="http://www.w3.org/2000/svg"
+        width="100"
+        viewBox="-8 -3 16 6"
+      >
+        <path
+          stroke="#fff"
+          d="M -4 -2 L -6 0 L -4 2 M -4 -2 L -4 2 M 4 -2 L 6 0 L 4 2 M 4 -2 L 4 2"
+          stroke-width="1"
+          fill="rgba(1.0, 1.0, 1.0, 0.3)"
+          vector-effect="non-scaling-stroke"
+        ></path>
+      </svg>
+    </template>
   </ImgCompare>
   <figcaption
     v-if="title"
@@ -57,7 +56,7 @@ const ImgCompare = defineComponent({
   }
 })
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     before: string
     after: string
@@ -69,7 +68,8 @@ const props = withDefaults(
   {
     tag: false,
     beforeTag: 'Before',
-    afterTag: 'After'
+    afterTag: 'After',
+    title: ''
   }
 )
 </script>

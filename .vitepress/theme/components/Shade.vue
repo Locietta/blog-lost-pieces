@@ -30,5 +30,4 @@ a .shade {
 .shade:active .shade {
   color: var(--shade-text);
 }
-
 </style>
