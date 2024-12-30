@@ -5,6 +5,11 @@ on:
       - main
     tags-ignore:
       - '**'
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - '.vscode/**'
+      - '**/.gitignore'
   pull_request:
     branches:
       - main

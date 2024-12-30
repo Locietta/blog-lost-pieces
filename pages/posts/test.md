@@ -195,7 +195,9 @@ verbose content, collapsed on default
 
 ### 图片比较
 
-点击或者拖动来对比两张图片
+图形学/图像处理中经常需要比较两张图片的差异，这里提供了一个图片比较的组件。
+
+点击或者拖动来对比两张图片👇
 
 <Compare
       before="https://marcincichocki.github.io/vue-image-compare/img/after.jpg"
@@ -212,6 +214,8 @@ verbose content, collapsed on default
 />
 
 ### Embeded Tweet
+
+忘了为啥要支持这个了，~~但总之是支持了~~。
 
 ::: details Click Me To View Kita-Chan~
 <Tweet id="1614087229701488641"/>
