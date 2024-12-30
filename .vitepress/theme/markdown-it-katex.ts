@@ -144,7 +144,10 @@ function math_block(state: StateBlock, start: number, end: number, silent: boole
   // Create the token for the math block
   const token = state.push('math_block', 'math', 0)
   token.block = true
-  token.content = (firstLine && firstLine + '\n') + state.getLines(start + 1, next, state.tShift[start], true) + lastLine
+  token.content =
+    (firstLine && firstLine + '\n') +
+    state.getLines(start + 1, next, state.tShift[start], true) +
+    lastLine
   token.map = [start, state.line]
   token.markup = '$$'
 
@@ -175,7 +178,7 @@ export default function math_plugin(md: MarkdownIt, options: KatexOptions = {}) 
 
   md.inline.ruler.after('escape', 'math_inline', math_inline)
   md.block.ruler.after('blockquote', 'math_block', math_block, {
-    alt: ['paragraph', 'reference', 'blockquote', 'list']
+    alt: ['paragraph', 'reference', 'blockquote', 'list'],
   })
   md.renderer.rules.math_inline = inlineRenderer
   md.renderer.rules.math_block = blockRenderer

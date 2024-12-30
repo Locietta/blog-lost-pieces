@@ -22,7 +22,8 @@ type TweetProps = {
   url?: string
 }
 
-const TWEET_URL_REGEX = /^(https?:\/\/)?(www\.)?twitter\.com\/.*\/status(?:es)?\/(?<tweetId>[^/?]\d+)$/i
+const TWEET_URL_REGEX =
+  /^(https?:\/\/)?(www\.)?twitter\.com\/.*\/status(?:es)?\/(?<tweetId>[^/?]\d+)$/i
 const TWEET_ID_REGEX = /^\d+$/
 
 const props = defineProps<TweetProps>()

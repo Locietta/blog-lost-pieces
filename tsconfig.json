@@ -8,6 +8,11 @@
     "types": ["vite/client"],
     "baseUrl": "./"
   },
-  "include": [".vitepress/**/*.ts", ".vitepress/**/*.d.ts", ".vitepress/**/*.tsx", ".vitepress/**/*.vue"],
+  "include": [
+    ".vitepress/**/*.ts",
+    ".vitepress/**/*.d.ts",
+    ".vitepress/**/*.tsx",
+    ".vitepress/**/*.vue"
+  ],
   "exclude": ["**/dist/**", "**/node_modules/**"]
 }

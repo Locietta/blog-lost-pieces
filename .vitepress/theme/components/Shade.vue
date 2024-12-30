@@ -12,8 +12,8 @@ withDefaults(
     hover?: string
   }>(),
   {
-    hover: '你知道的太多了'
-  }
+    hover: '你知道的太多了',
+  },
 )
 </script>
 <style scoped>

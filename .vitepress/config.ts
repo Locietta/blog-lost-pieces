@@ -15,7 +15,7 @@ export default async () => {
     repo: 'Locietta/blog-lost-pieces',
     repoId: 'R_kgDOH-URKw',
     category: 'Announcements',
-    categoryId: 'DIC_kwDOH-URK84CTZKy'
+    categoryId: 'DIC_kwDOH-URK84CTZKy',
   }
 
   const searchConfig: DefaultTheme.Config['search'] = {
@@ -26,7 +26,7 @@ export default async () => {
           translations: {
             button: {
               buttonText: '搜索',
-              buttonAriaLabel: '搜索'
+              buttonAriaLabel: '搜索',
             },
             modal: {
               displayDetails: '显示详细列表',
@@ -40,11 +40,11 @@ export default async () => {
                 navigateUpKeyAriaLabel: '上箭头',
                 navigateDownKeyAriaLabel: '下箭头',
                 closeText: '关闭',
-                closeKeyAriaLabel: 'esc'
-              }
-            }
-          }
-        }
+                closeKeyAriaLabel: 'esc',
+              },
+            },
+          },
+        },
       },
       miniSearch: {
         // Ref: https://github.com/lucaong/minisearch/issues/201
@@ -58,7 +58,7 @@ export default async () => {
             const segmenter = Intl.Segmenter && new Intl.Segmenter('zh', { granularity: 'word' })
             if (!segmenter) return [text] // firefox?
             return Array.from(segmenter.segment(text), ({ segment }) => segment)
-          }
+          },
         },
         searchOptions: {
           combineWith: 'AND',
@@ -73,10 +73,10 @@ export default async () => {
             const CJK_WORD = new RegExp(`[${CJK_RANGE}]`)
             if (CJK_WORD.test(term)) return false
             return true
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   }
 
   const themeConfig: LoiaTheme.Config = {
@@ -96,15 +96,15 @@ export default async () => {
         text: 'External',
         items: [
           { text: 'Github', link: 'https://github.com/Locietta' },
-          { text: 'Zhihu', link: 'https://www.zhihu.com/people/wang-ling-xin-94' }
-        ]
-      }
+          { text: 'Zhihu', link: 'https://www.zhihu.com/people/wang-ling-xin-94' },
+        ],
+      },
     ],
     outline: {
       level: [2, 3],
-      label: '目录'
+      label: '目录',
     },
-    socialLinks: [{ icon: 'github', link: 'https://github.com/Locietta/blog-lost-pieces' }]
+    socialLinks: [{ icon: 'github', link: 'https://github.com/Locietta/blog-lost-pieces' }],
   }
 
   return defineConfigWithTheme<LoiaTheme.Config>({
@@ -120,7 +120,7 @@ export default async () => {
       ['meta', { name: 'keywords', content: "Locietta's Blog" }],
       ['meta', { name: 'author', content: 'Locietta' }],
       ['meta', { name: 'robots', content: 'all' }],
-      ['link', { rel: 'icon', href: '/L_32x32.ico' }]
+      ['link', { rel: 'icon', href: '/L_32x32.ico' }],
     ],
     themeConfig: themeConfig,
     markdown: {
@@ -129,7 +129,7 @@ export default async () => {
         md.use(img_fig, {
           figcaption: true,
           lazy: true,
-          async: true
+          async: true,
         })
           .use(mk, {
             strict: (errorCode: string) => {
@@ -138,18 +138,18 @@ export default async () => {
               } else {
                 return 'warn'
               }
-            }
+            },
           })
           .use<Options>(wordless, { supportWordless: [chineseAndJapanese] })
           .use(append_title)
-      }
+      },
     },
     vue: {
       template: {
         compilerOptions: {
-          isCustomElement: (tag) => custom_components.includes(tag)
-        }
-      }
+          isCustomElement: (tag) => custom_components.includes(tag),
+        },
+      },
     },
     vite: {
       build: {
@@ -161,16 +161,16 @@ export default async () => {
               return
             }
             warn(warning)
-          }
-        }
+          },
+        },
       },
       ssr: {
         // workaround for:
         // * react-tweet: TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".css"
         // * veaury: SyntaxError: Named export 'applyPureReactInVue' not found.
         // https://github.com/antfu/vite-ssg/issues/156#issuecomment-1208009117
-        noExternal: ['react-tweet', 'veaury']
-      }
-    }
+        noExternal: ['react-tweet', 'veaury'],
+      },
+    },
   })
 }

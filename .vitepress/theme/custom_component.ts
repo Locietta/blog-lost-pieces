@@ -85,7 +85,7 @@ const custom_components = [
   'maction',
   'semantics',
   'annotation',
-  'annotation-xml'
+  'annotation-xml',
 ]
 
 export default custom_components

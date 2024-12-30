@@ -53,7 +53,7 @@ const ImgCompare = defineComponent({
   name: 'ImgCompare',
   setup(_, { slots }) {
     return () => h('img-comparison-slider', slots.default?.())
-  }
+  },
 })
 
 withDefaults(
@@ -69,8 +69,8 @@ withDefaults(
     tag: false,
     beforeTag: 'Before',
     afterTag: 'After',
-    title: ''
-  }
+    title: '',
+  },
 )
 </script>
 <style scoped>

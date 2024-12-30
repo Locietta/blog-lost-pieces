@@ -19,9 +19,9 @@ export async function getPosts() {
 
       return {
         frontMatter: data,
-        regularPath: `/${item.replace('.md', '').replace('pages/', '')}`
+        regularPath: `/${item.replace('.md', '').replace('pages/', '')}`,
       }
-    })
+    }),
   )
   posts.sort(_compareDate)
   return posts
@@ -32,7 +32,8 @@ export async function generatePaginationPages(pageSize: number) {
   const allPagesLength = [...(await getPostMDFilePaths())].length
 
   //  pagesNum
-  let pagesNum = allPagesLength % pageSize === 0 ? allPagesLength / pageSize : allPagesLength / pageSize + 1
+  let pagesNum =
+    allPagesLength % pageSize === 0 ? allPagesLength / pageSize : allPagesLength / pageSize + 1
   pagesNum = parseInt(pagesNum.toString())
 
   const paths = path.resolve('./pages')
@@ -71,14 +72,14 @@ function _compareDate(obj1: Post, obj2: Post) {
 
 async function getPostMDFilePaths() {
   const paths = await globby(['pages/posts/**.md'], {
-    ignore: ['node_modules', 'README.md']
+    ignore: ['node_modules', 'README.md'],
   })
   return paths.filter((item) => item.includes('posts/'))
 }
 
 async function getWeeklyNames() {
   const paths = await globby(['pages/weekly/**.md'], {
-    ignore: ['node_modules', 'README.md']
+    ignore: ['node_modules', 'README.md'],
   })
 
   return paths

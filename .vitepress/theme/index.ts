@@ -24,5 +24,5 @@ export default {
     app.component('Tweet', Tweet)
     app.component('Shade', Shade)
     app.component('Compare', Compare)
-  }
+  },
 }

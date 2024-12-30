@@ -76,8 +76,9 @@ export default function imageFiguresPlugin(md: MarkdownIt, options: FigureOption
       }
       // three children, should be image enclosed in link
       if (token.children.length === 3) {
-        const [childrenA, childrenB, childrenC] = token.children
-        const isEnclosed = childrenA.type !== 'link_open' || childrenB.type !== 'image' || childrenC.type !== 'link_close'
+        const [childA, childB, childC] = token.children
+        const isEnclosed =
+          childA.type !== 'link_open' || childB.type !== 'image' || childC.type !== 'link_close'
 
         if (isEnclosed) {
           continue
