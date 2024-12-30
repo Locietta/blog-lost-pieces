@@ -1,7 +1,3 @@
-declare interface Window {
-  twttr: any
-}
-
 import { DefaultTheme } from 'vitepress'
 
 declare namespace LoiaTheme {
