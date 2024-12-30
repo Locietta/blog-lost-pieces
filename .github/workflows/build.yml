@@ -30,13 +30,14 @@ jobs:
       uses: actions/checkout@main
       with:
         fetch-depth: 0
-    - name: Setup
+    - name: Setup Pages
       uses: actions/configure-pages@main
     - name: Install Deps
-      run: pnpm i
-    - name: Build
       run: |
         git config --global --add safe.directory '*'
+        pnpm i
+    - name: Build
+      run: |
         pnpm build
         touch .vitepress/dist/.nojekyll
     - name: Upload Page Artifact
