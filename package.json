@@ -18,8 +18,10 @@
     "globals": "^15.14.0",
     "globby": "^14.0.2",
     "gray-matter": "^4.0.3",
+    "husky": "^9.1.7",
     "img-comparison-slider": "^8.0.6",
     "katex": "^0.16.18",
+    "lint-staged": "^15.3.0",
     "markdown-it-wordless": "^1.1.1",
     "prettier": "^3.4.2",
     "react-tweet": "^3.2.1",
@@ -37,11 +39,19 @@
     "lint": "eslint .vitepress/**/*.{ts,vue}",
     "lint-fix": "eslint --fix .vitepress/**/*.{ts,vue}",
     "serve": "vitepress serve",
-    "preview": "vitepress preview"
+    "preview": "vitepress preview",
+    "prepare": "husky"
   },
   "pnpm": {
     "patchedDependencies": {
       "vitepress": "patches/vitepress.patch"
     }
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ],
+    "*.{css,md}": "prettier --write"
   }
 }
