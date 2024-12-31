@@ -167,9 +167,10 @@ export default async () => {
       ssr: {
         // workaround for:
         // * react-tweet: TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".css"
+        // * vuetify: TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".css"
         // * veaury: SyntaxError: Named export 'applyPureReactInVue' not found.
         // https://github.com/antfu/vite-ssg/issues/156#issuecomment-1208009117
-        noExternal: ['react-tweet', 'veaury'],
+        noExternal: ['react-tweet', 'veaury', 'vuetify'],
       },
     },
   })
