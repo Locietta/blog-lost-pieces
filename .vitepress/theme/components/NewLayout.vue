@@ -3,6 +3,9 @@
     <template #doc-after>
       <Comment />
     </template>
+    <template #aside-top>
+      <RollBack />
+    </template>
   </Layout>
 
   <Copyright />
@@ -11,5 +14,6 @@
 import DefaultTheme from 'vitepress/theme'
 import Comment from './Comment.vue'
 import Copyright from './Copyright.vue'
+import RollBack from './RollBack.vue'
 const { Layout } = DefaultTheme
 </script>
