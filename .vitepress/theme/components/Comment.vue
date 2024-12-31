@@ -3,48 +3,46 @@
     v-if="show"
     class="comments"
   >
-    <component
-      :is="'script'"
+    <Giscus
       v-if="refreshKey"
-      src="https://giscus.app/client.js"
-      :data-repo="theme.giscusConfig.repo"
-      :data-repo-id="theme.giscusConfig.repoId"
-      :data-category="theme.giscusConfig.category"
-      :data-category-id="theme.giscusConfig.categoryId"
-      :data-mapping="'pathname'"
-      data-reactions-enabled="1"
-      data-emit-metadata="0"
-      :data-input-position="'top'"
-      :data-theme="isDark ? 'dark' : 'light'"
-      :data-lang="'en'"
+      :repo="theme.giscusConfig.repo"
+      :repo-id="theme.giscusConfig.repoId"
+      :category="theme.giscusConfig.category"
+      :category-id="theme.giscusConfig.categoryId"
+      mapping="pathname"
+      reactions-enabled="1"
+      emit-metadata="0"
+      input-position="top"
+      :theme="giscusTheme"
+      lang="en"
+      loading="lazy"
       crossorigin="anonymous"
-      :data-loading="'lazy'"
-      async
     >
-    </component>
+    </Giscus>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useData, useRoute } from 'vitepress'
-import { ref, watch, computed } from 'vue'
+import { ref, watch, computed, nextTick } from 'vue'
+import Giscus from '@giscus/vue'
 
 const { isDark, frontmatter, theme } = useData<LoiaTheme.Config>()
 const route = useRoute()
 
 const show = computed(() => frontmatter.value.comment ?? theme.value.comment)
+const giscusTheme = computed(() => (isDark.value ? 'dark' : 'light'))
 
 const refreshKey = ref(true)
 
 const refreshComment = () => {
   refreshKey.value = false
-  setTimeout(() => {
+  nextTick(() => {
     refreshKey.value = true
-  }, 150)
+  })
 }
 
-watch(() => route.path, refreshComment)
-watch(isDark, refreshComment)
+watch(() => route.path, refreshComment, { immediate: true })
 </script>
 <style scoped>
 .comments {

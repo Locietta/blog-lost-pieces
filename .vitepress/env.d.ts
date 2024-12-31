@@ -1,4 +1,4 @@
-import { DefaultTheme } from 'vitepress'
+import { type DefaultTheme } from 'vitepress'
 
 declare namespace LoiaTheme {
   type Post = {
@@ -15,7 +15,7 @@ declare namespace LoiaTheme {
   }
 
   type GiscusConfig = {
-    repo: string
+    repo: `${string}/${string}`
     repoId: string
     category: string
     categoryId: string
