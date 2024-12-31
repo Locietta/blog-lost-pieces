@@ -3,7 +3,7 @@ import mk from './theme/markdown-it-katex'
 import img_fig from './theme/markdown-it-img-figure'
 import append_title from './theme/markdown-it-append-title'
 import { wordless, chineseAndJapanese, type Options } from 'markdown-it-wordless'
-import { getPosts, generatePaginationPages, generateWeeklyArchivePage } from './theme/server_utils'
+import { generatePaginationPages, generateWeeklyArchivePage } from './theme/server_utils'
 import custom_components from './theme/custom_component'
 
 export default async () => {
@@ -80,7 +80,6 @@ export default async () => {
   }
 
   const themeConfig: LoiaTheme.Config = {
-    posts: await getPosts(),
     pageSize: pageSize,
     website: 'https://github.com/Locietta/blog-lost-pieces',
     logo: '/favicon.ico',

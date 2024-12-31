@@ -22,12 +22,12 @@
 </template>
 
 <script lang="ts" setup>
-import { useData, withBase } from 'vitepress'
+import { withBase } from 'vitepress'
 import { computed } from 'vue'
 import { useYearSort } from '../functions'
+import { data as posts } from '../posts.data'
 
-const { theme } = useData<LoiaTheme.Config>()
-const data = computed(() => useYearSort(theme.value.posts))
+const data = computed(() => useYearSort(posts))
 </script>
 
 <style scoped>

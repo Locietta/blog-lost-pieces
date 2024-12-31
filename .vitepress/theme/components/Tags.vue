@@ -25,11 +25,11 @@
 </template>
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import { useData, withBase } from 'vitepress'
+import { withBase } from 'vitepress'
 import { initTags } from '../functions'
+import { data as posts } from '../posts.data'
 
-const { theme } = useData<LoiaTheme.Config>()
-const data = computed(() => initTags(theme.value.posts))
+const data = computed(() => initTags(posts))
 const url = location.href.split('?')[1]
 const params = new URLSearchParams(url)
 const tagName = params.get('tag')
