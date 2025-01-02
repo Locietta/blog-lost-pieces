@@ -3,12 +3,10 @@ import mk from './theme/markdown-it-katex'
 import img_fig from './theme/markdown-it-img-figure'
 import append_title from './theme/markdown-it-append-title'
 import { wordless, chineseAndJapanese, type Options } from 'markdown-it-wordless'
-import { generatePaginationPages, generateWeeklyArchivePage } from './theme/server_utils'
+import { generateWeeklyArchivePage } from './theme/server_utils'
 import custom_components from './theme/custom_component'
 
 export default async () => {
-  const pageSize = 6
-  await generatePaginationPages(pageSize)
   await generateWeeklyArchivePage()
 
   const giscusConfig: LoiaTheme.GiscusConfig = {
@@ -80,7 +78,7 @@ export default async () => {
   }
 
   const themeConfig: LoiaTheme.Config = {
-    pageSize: pageSize,
+    pageSize: 6,
     website: 'https://github.com/Locietta/blog-lost-pieces',
     logo: '/favicon.ico',
     comment: true,
@@ -162,6 +160,7 @@ export default async () => {
             warn(warning)
           },
         },
+        cssMinify: 'lightningcss',
       },
       ssr: {
         // workaround for:

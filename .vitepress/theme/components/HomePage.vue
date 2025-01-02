@@ -1,6 +1,6 @@
 <template>
   <div
-    v-for="(article, index) in posts"
+    v-for="(article, index) in pagePosts"
     :key="index"
     class="post-list"
   >
@@ -22,27 +22,35 @@
     </div>
   </div>
 
-  <div class="pagination">
-    <a
-      v-for="i in pagesNum"
-      :key="i"
-      class="link"
-      :class="{ active: pageCurrent === i }"
-      :href="withBase(i === 1 ? 'index' : `/page_${i}`)"
-      >{{ i }}</a
-    >
+  <div class="pagination-container">
+    <NPagination
+      v-model:page="pageCurrent"
+      :page-count="pagesNum"
+      :page-slot="7"
+    ></NPagination>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { withBase } from 'vitepress'
+import { ref, computed } from 'vue'
 import type { Post } from '.vitepress/env'
+import { NPagination } from 'naive-ui'
 
-defineProps<{
+const props = defineProps<{
   posts: Array<Post>
-  pageCurrent: number
-  pagesNum: number
+  pageSize: number
 }>()
+
+const pagesNum = Math.ceil(props.posts.length / props.pageSize)
+
+const pagePosts = computed(() => {
+  const start = (pageCurrent.value - 1) * props.pageSize
+  const end = start + props.pageSize
+  return props.posts.slice(start, end)
+})
+
+const pageCurrent = ref(1)
 </script>
 
 <style scoped>
@@ -95,12 +103,6 @@ defineProps<{
   line-height: 1.5rem;
 }
 
-.pagination {
-  margin-top: 16px;
-  display: flex;
-  justify-content: center;
-}
-
 .link {
   display: inline-block;
   width: 28px;
@@ -126,6 +128,12 @@ defineProps<{
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px;
   border-right: 1px var(--c-divider-light) solid;
+}
+
+.pagination-container {
+  margin-top: 0.75rem;
+  display: flex;
+  justify-content: center;
 }
 
 @media screen and (max-width: 720px) {

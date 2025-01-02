@@ -5,7 +5,6 @@ import DefaultTheme from 'vitepress/theme'
 import LoiaLayout from './components/LoiaLayout.vue'
 import Archives from './components/Archives.vue'
 import Tags from './components/Tags.vue'
-import Page from './components/Page.vue'
 import Tweet from './components/Tweet.vue'
 import Shade from './components/Shade.vue'
 import Compare from './components/Compare.vue'
@@ -28,7 +27,6 @@ export default {
     // register global compoment
     app.component('Tags', Tags)
     app.component('Archives', Archives)
-    app.component('Page', Page)
     app.component('Tweet', Tweet)
     app.component('Shade', Shade)
     app.component('Compare', Compare)
