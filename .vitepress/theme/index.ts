@@ -2,8 +2,6 @@ import type { EnhanceAppContext } from 'vitepress'
 
 import DefaultTheme from 'vitepress/theme'
 
-import Archives from './components/Archives.vue'
-import Tags from './components/Tags.vue'
 import Tweet from './components/Tweet.vue'
 import Shade from './components/Shade.vue'
 import Compare from './components/Compare.vue'
@@ -19,8 +17,6 @@ export default {
   Layout: NaiveUIProvider,
   enhanceApp({ app }: EnhanceAppContext) {
     // register global compoment
-    app.component('Tags', Tags)
-    app.component('Archives', Archives)
     app.component('Tweet', Tweet)
     app.component('Shade', Shade)
     app.component('Compare', Compare)

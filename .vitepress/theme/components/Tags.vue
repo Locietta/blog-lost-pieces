@@ -26,10 +26,21 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 import { withBase } from 'vitepress'
-import { initTags } from '../functions'
 import { data as posts } from '../data/posts.data'
+import type { Post } from '.vitepress/env'
 
-const data = computed(() => initTags(posts))
+const data = computed(() => {
+  /// build tag -> posts map
+  const data: Record<string, Post[]> = {}
+
+  posts.forEach((post) => {
+    post.frontMatter.tags?.forEach((tag) => {
+      data[tag] ??= []
+      data[tag].push(post)
+    })
+  })
+  return data
+})
 const url = location.href.split('?')[1]
 const params = new URLSearchParams(url)
 const tagName = params.get('tag')

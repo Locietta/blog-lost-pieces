@@ -24,10 +24,27 @@
 <script lang="ts" setup>
 import { withBase } from 'vitepress'
 import { computed } from 'vue'
-import { useYearSort } from '../functions'
 import { data as posts } from '../data/posts.data'
+import type { Post } from '.vitepress/env'
 
-const data = computed(() => useYearSort(posts))
+function groupByYear(posts: Post[]) {
+  const data: Array<Post[]> = []
+  let currentYear: string | null = null
+
+  posts.forEach((post) => {
+    if (post.frontMatter.date) {
+      const year = post.frontMatter.date.split('-')[0]
+      if (year !== currentYear) {
+        currentYear = year
+        data.push([]) // Start a new group for the new year
+      }
+      data[data.length - 1].push(post) // Add the post to the current year's group
+    }
+  })
+
+  return data
+}
+const data = computed(() => groupByYear(posts))
 </script>
 
 <style scoped>
