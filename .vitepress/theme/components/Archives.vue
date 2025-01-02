@@ -25,7 +25,7 @@
 import { withBase } from 'vitepress'
 import { computed } from 'vue'
 import { useYearSort } from '../functions'
-import { data as posts } from '../posts.data'
+import { data as posts } from '../data/posts.data'
 
 const data = computed(() => useYearSort(posts))
 </script>

@@ -3,14 +3,11 @@ import mk from './theme/markdown-it-katex'
 import img_fig from './theme/markdown-it-img-figure'
 import append_title from './theme/markdown-it-append-title'
 import { wordless, chineseAndJapanese, type Options } from 'markdown-it-wordless'
-import { generateWeeklyArchivePage } from './theme/server_utils'
 import custom_components from './theme/custom_component'
 
 const fileAndStyles: Record<string, string> = {}
 
-export default async () => {
-  await generateWeeklyArchivePage()
-
+export default () => {
   const giscusConfig: LoiaTheme.GiscusConfig = {
     repo: 'Locietta/blog-lost-pieces',
     repoId: 'R_kgDOH-URKw',

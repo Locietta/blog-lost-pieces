@@ -23,7 +23,7 @@ declare namespace LoiaTheme {
 
   type Config = DefaultTheme.Config & {
     website: string
-    pageSize: number
+    pageSize?: number
     comment?: boolean
     giscusConfig: GiscusConfig
   }

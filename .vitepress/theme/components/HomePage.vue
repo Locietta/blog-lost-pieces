@@ -37,10 +37,15 @@ import { ref, computed } from 'vue'
 import type { Post } from '.vitepress/env'
 import { NPagination } from 'naive-ui'
 
-const props = defineProps<{
-  posts: Array<Post>
-  pageSize: number
-}>()
+const props = withDefaults(
+  defineProps<{
+    posts: Array<Post>
+    pageSize?: number
+  }>(),
+  {
+    pageSize: 10,
+  },
+)
 
 const pagesNum = Math.ceil(props.posts.length / props.pageSize)
 

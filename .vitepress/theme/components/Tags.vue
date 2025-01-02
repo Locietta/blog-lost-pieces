@@ -27,7 +27,7 @@
 import { computed, ref } from 'vue'
 import { withBase } from 'vitepress'
 import { initTags } from '../functions'
-import { data as posts } from '../posts.data'
+import { data as posts } from '../data/posts.data'
 
 const data = computed(() => initTags(posts))
 const url = location.href.split('?')[1]
