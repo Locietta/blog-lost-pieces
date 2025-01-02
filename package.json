@@ -41,7 +41,6 @@
     "build": "vitepress build",
     "lint": "eslint .vitepress/**/*.{ts,vue}",
     "lint-fix": "eslint --fix .vitepress/**/*.{ts,vue}",
-    "serve": "vitepress serve",
     "preview": "vitepress preview",
     "prepare": "husky"
   },
