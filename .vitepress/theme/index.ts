@@ -2,7 +2,7 @@ import type { EnhanceAppContext } from 'vitepress'
 
 import DefaultTheme from 'vitepress/theme'
 
-import NewLayout from './components/NewLayout.vue'
+import LoiaLayout from './components/LoiaLayout.vue'
 import Archives from './components/Archives.vue'
 import Tags from './components/Tags.vue'
 import Page from './components/Page.vue'
@@ -22,7 +22,7 @@ import 'katex/dist/katex.min.css'
 
 export default {
   ...DefaultTheme,
-  Layout: NewLayout,
+  Layout: LoiaLayout,
   enhanceApp({ app }: EnhanceAppContext) {
     app.use(vuetify)
     // register global compoment
