@@ -8,9 +8,11 @@ My blog powered by [Vitepress](https://vitepress.vuejs.org/), for notes and life
 
 目前支持的所有feature可参考👉[测试显示效果](https://blog.locietta.xyz/posts/test)。作为个人博客的话反正也不需要太多花里胡哨的功能，这样就挺好。
 
+> 前端搞不懂啦，凑合用就行QwQ
+
 ### 目录结构
 
-和airene的差不多，就是把posts之类的都移到了`pages`下，方便统一管理。
+和airene的差不多，就是把posts之类的都移到了`pages`下，方便统一管理。另外，基于文件的页面路由以`pages`为根目录，比如`pages/xx/yyy.md`会被路由到`<site>/xx/yyy`。
 
 ```
 ├── .vitepress
@@ -19,6 +21,7 @@ My blog powered by [Vitepress](https://vitepress.vuejs.org/), for notes and life
 │
 │
 └── pages
+    ├── index.md      // 主页
     ├── about.md
     ├── archives.md
     ├── tags.md
@@ -28,12 +31,16 @@ My blog powered by [Vitepress](https://vitepress.vuejs.org/), for notes and life
        └── favicon.ico
 ```
 
-### Post格式参考
+### 文章格式参考
+
+文章推荐放在`pages/posts`下，其他路径下的markdown文件默认不会显示在主页中，如果有索引其他路径下文章的需求可以修改`.vitepress/theme/data/posts.data.ts`中的glob。
+
+文章开头需要写frontmatter，格式如下：
 
 ```yaml
 ---
-date: 文章发布日期，格式为YYYY-MM-DD
 title: 文章标题
+date: 文章发布日期，格式为YYYY-MM-DD
 tags: # 文章标签
   - math
   - 概率
@@ -58,5 +65,3 @@ sidebar: 是否显示右侧的目录（默认true）
 用法上，在`.vitepress/config.ts`里指定`themeConfig: { comment: true }`就可以开启所有页面的评论，也可以在各个文章的frontmatter里手动设置`comment: false`覆盖全局设置（[about.md](./about.md)是个例子）。
 
 需要在`.vitepress/config.ts`中的主题设置里的`giscusConfig`条目中填入必要的配置并启用相关仓库的discussion后才能使用评论相关功能，具体可参考https://giscus.app/zh-CN
-
-切换夜间模式的时候会自动刷新评论组件。
