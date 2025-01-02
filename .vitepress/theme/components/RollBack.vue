@@ -1,19 +1,20 @@
 <template>
-  <v-btn
+  <NButton
     v-if="isPosts"
-    theme="default"
-    variant="outlined"
+    type="default"
     class="rollback-btn"
+    dashed
     @click="rollBack"
   >
-    <template #prepend><HiMiniArrowUturnLeft /></template>
+    <template #icon><HiMiniArrowUturnLeft /></template>
     {{ '回到上一页' }}
-  </v-btn>
+  </NButton>
 </template>
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vitepress'
 import { HiMiniArrowUturnLeft } from 'vue-icons-plus/hi2'
+import { NButton } from 'naive-ui'
 
 const route = useRoute()
 const isPosts = computed(() => route.path.startsWith('/posts'))
@@ -39,11 +40,11 @@ onUnmounted(() => {
 })
 </script>
 <style scoped>
-.rollback-btn {
+/* .rollback-btn {
   border-style: dashed;
-}
+} */
 /* change color when hover on the button */
-.rollback-btn:hover {
+/* .rollback-btn:hover {
   color: var(--vp-c-brand);
-}
+} */
 </style>
