@@ -10,7 +10,7 @@
   --tag-count: var(--vp-c-default-3);
 }
 
-.tag {
+.post-tag {
   display: inline-block;
   background-color: var(--tag-bg);
   color: var(--vp-c-text-1);
@@ -28,6 +28,6 @@
   }
 }
 
-.tag:hover {
+.post-tag:hover {
   color: var(--tag-hover);
 }

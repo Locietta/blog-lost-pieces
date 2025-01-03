@@ -3,7 +3,7 @@
     <span
       v-for="(item, key) in data"
       :key="key"
-      class="tag"
+      class="post-tag"
       @click="toggleTag(key.toString())"
     >
       {{ key }} <strong>{{ data[key].length }}</strong>
@@ -62,7 +62,7 @@ const toggleTag = (tag: string) => {
   flex-wrap: wrap;
 }
 
-.tag {
+.post-tag {
   padding: 4px 16px;
   margin: 6px 8px;
   font-size: 0.875rem;
@@ -70,7 +70,7 @@ const toggleTag = (tag: string) => {
   line-height: 25px;
 }
 
-.tag strong {
+.post-tag strong {
   padding-left: 0.125rem;
   font-size: 0.875rem;
   font-weight: 700;

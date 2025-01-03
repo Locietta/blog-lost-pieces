@@ -13,11 +13,11 @@
       </time>
     </div>
     <p class="describe">{{ article.frontMatter.description }}</p>
-    <div class="post-tag">
+    <div>
       <span
         v-for="item in article.frontMatter.tags"
         :key="item"
-        class="tag"
+        class="post-tag"
         ><a :href="withBase(`/tags?tag=${encodeURIComponent(item)}`)"> {{ item }}</a></span
       >
     </div>
@@ -72,7 +72,7 @@ const pageCurrent = ref(1)
   justify-content: space-between;
 }
 
-.tag {
+.post-tag {
   padding: 0rem 0.75rem;
   margin: 0.25rem 0.5rem 0.75rem 0;
   a {
