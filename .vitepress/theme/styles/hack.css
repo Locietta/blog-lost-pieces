@@ -5,10 +5,6 @@
   right: 24px;
 }
 
-.container {
-  max-width: 55rem !important;
-}
-
 .VPContent .container {
   max-width: 55rem !important;
   display: block !important;
