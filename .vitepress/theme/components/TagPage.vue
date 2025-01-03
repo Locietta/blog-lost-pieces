@@ -31,15 +31,19 @@ import type { Post } from '.vitepress/env'
 
 const data = computed(() => {
   /// build tag -> posts map
-  const data: Record<string, Post[]> = {}
+  const collectedTagPost: Record<string, Post[]> = {}
 
   posts.forEach((post) => {
     post.frontMatter.tags?.forEach((tag) => {
-      data[tag] ??= []
-      data[tag].push(post)
+      collectedTagPost[tag] ??= []
+      collectedTagPost[tag].push(post)
     })
   })
-  return data
+
+  // Sort by the number of posts in descending order and convert back to an object
+  return Object.fromEntries(
+    Object.entries(collectedTagPost).sort((a, b) => b[1].length - a[1].length),
+  )
 })
 const url = location.href.split('?')[1]
 const params = new URLSearchParams(url)
