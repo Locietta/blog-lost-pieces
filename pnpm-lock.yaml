@@ -19,6 +19,9 @@ importers:
       '@giscus/vue':
         specifier: ^3.0.0
         version: 3.1.1(vue@3.5.13(typescript@5.7.2))
+      '@img-comparison-slider/vue':
+        specifier: ^8.0.0
+        version: 8.0.0
       '@types/fs-extra':
         specifier: ^11.0.4
         version: 11.0.4
@@ -58,9 +61,6 @@ importers:
       husky:
         specifier: ^9.1.7
         version: 9.1.7
-      img-comparison-slider:
-        specifier: ^8.0.6
-        version: 8.0.6
       katex:
         specifier: ^0.16.18
         version: 0.16.19
@@ -586,6 +586,9 @@ packages:
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
+
+  '@img-comparison-slider/vue@8.0.0':
+    resolution: {integrity: sha512-1gir2JlS8ZQLK2lzk4gIp6fuNvOR8UFXaPiHnBrF6fEwIXdMiI5veobi479FV6Tekj8CIhK+pLUPs+NvcOHd5g==}
 
   '@jridgewell/sourcemap-codec@1.5.0':
     resolution: {integrity: sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==}
@@ -2521,6 +2524,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify/types@2.0.0': {}
+
+  '@img-comparison-slider/vue@8.0.0':
+    dependencies:
+      img-comparison-slider: 8.0.6
 
   '@jridgewell/sourcemap-codec@1.5.0': {}
 

@@ -1,40 +1,43 @@
 <template>
-  <ImgCompare class="img-compare rendered">
-    <template #first>
-      <figure class="before">
-        <img
-          title="Before Image"
-          :src="before"
-        />
-        <figcaption v-if="tag">{{ beforeTag }}</figcaption>
-      </figure>
-    </template>
-    <template #second>
-      <figure class="after">
-        <img
-          title="After Image"
-          :src="after"
-        />
-        <figcaption v-if="tag">{{ afterTag }}</figcaption>
-      </figure>
-    </template>
-    <template #handle>
-      <svg
-        class="animated-handle"
-        xmlns="http://www.w3.org/2000/svg"
-        width="100"
-        viewBox="-8 -3 16 6"
-      >
-        <path
-          stroke="#fff"
-          d="M -4 -2 L -6 0 L -4 2 M -4 -2 L -4 2 M 4 -2 L 6 0 L 4 2 M 4 -2 L 4 2"
-          stroke-width="1"
-          fill="rgba(1.0, 1.0, 1.0, 0.3)"
-          vector-effect="non-scaling-stroke"
-        ></path>
-      </svg>
-    </template>
-  </ImgCompare>
+  <ImgComparisonSlider class="img-compare">
+    <!-- eslint-disable vue/no-deprecated-slot-attribute -->
+    <figure
+      slot="first"
+      class="before"
+    >
+      <img
+        title="Before Image"
+        :src="before"
+      />
+      <figcaption v-if="tag">{{ beforeTag }}</figcaption>
+    </figure>
+    <figure
+      slot="second"
+      class="after"
+    >
+      <img
+        title="After Image"
+        :src="after"
+      />
+      <figcaption v-if="tag">{{ afterTag }}</figcaption>
+    </figure>
+    <svg
+      slot="handle"
+      class="animated-handle"
+      xmlns="http://www.w3.org/2000/svg"
+      width="100"
+      viewBox="-8 -3 16 6"
+    >
+      <path
+        stroke="#fff"
+        d="M -4 -2 L -6 0 L -4 2 M -4 -2 L -4 2 M 4 -2 L 6 0 L 4 2 M 4 -2 L 4 2"
+        stroke-width="1"
+        fill="rgba(1.0, 1.0, 1.0, 0.3)"
+        vector-effect="non-scaling-stroke"
+      ></path>
+    </svg>
+    <!-- eslint-enable vue/no-deprecated-slot-attribute -->
+  </ImgComparisonSlider>
   <figcaption
     v-if="title"
     class="img-compare-title"
@@ -43,18 +46,7 @@
   </figcaption>
 </template>
 <script setup lang="ts">
-import { defineComponent, h } from 'vue'
-
-if (!import.meta.env.SSR) {
-  import('img-comparison-slider')
-}
-
-const ImgCompare = defineComponent({
-  name: 'ImgCompare',
-  setup(_, { slots }) {
-    return () => h('img-comparison-slider', slots.default?.())
-  },
-})
+import { ImgComparisonSlider } from '@img-comparison-slider/vue'
 
 withDefaults(
   defineProps<{
@@ -73,6 +65,17 @@ withDefaults(
   },
 )
 </script>
+<style>
+:root {
+  --cmp-tag-bg: #eff6ff;
+  --cmp-tag-text: #2e3452;
+}
+
+.dark {
+  --cmp-tag-bg: #2e3452;
+  --cmp-tag-text: #eff6ff;
+}
+</style>
 <style scoped>
 .img-compare-title {
   margin: 0 0 0.5rem 0;
@@ -92,17 +95,18 @@ withDefaults(
   }
 }
 
-.before,
+.before {
+  margin: 0;
+  figcaption {
+    left: 2%;
+  }
+}
+
 .after {
   margin: 0;
-}
-
-.before figcaption {
-  left: 2%;
-}
-
-.after figcaption {
-  right: 2%;
+  figcaption {
+    right: 2%;
+  }
 }
 
 .before figcaption,
@@ -123,6 +127,6 @@ figcaption {
   font-size: small;
   display: block;
   text-align: center;
-  color: var(--c-brand-light);
+  color: var(--vp-c-brand-light);
 }
 </style>

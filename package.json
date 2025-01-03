@@ -8,6 +8,7 @@
   "devDependencies": {
     "@css-render/vue3-ssr": "^0.15.14",
     "@giscus/vue": "^3.0.0",
+    "@img-comparison-slider/vue": "^8.0.0",
     "@types/fs-extra": "^11.0.4",
     "@types/katex": "^0.16.7",
     "@types/markdown-it": "^14.1.2",
@@ -21,7 +22,6 @@
     "globby": "^14.0.2",
     "gray-matter": "^4.0.3",
     "husky": "^9.1.7",
-    "img-comparison-slider": "^8.0.6",
     "katex": "^0.16.18",
     "lightningcss": "^1.28.2",
     "lint-staged": "^15.3.0",
