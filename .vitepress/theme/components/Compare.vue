@@ -122,11 +122,4 @@ withDefaults(
   top: 5%;
   line-height: 100%;
 }
-
-figcaption {
-  font-size: small;
-  display: block;
-  text-align: center;
-  color: var(--vp-c-brand-light);
-}
 </style>

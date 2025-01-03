@@ -34,7 +34,7 @@ figcaption {
   font-size: small;
   display: block;
   text-align: center;
-  color: var(--c-brand-light);
+  color: var(--vp-c-text-3);
 }
 
 /* This allows inline formula to auto change line */
