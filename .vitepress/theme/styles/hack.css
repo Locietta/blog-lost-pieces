@@ -1,0 +1,44 @@
+/* Hack for wider page */
+
+.aside {
+  position: fixed !important;
+  right: 24px;
+}
+
+.container {
+  max-width: 55rem !important;
+}
+
+.VPContent .container {
+  max-width: 55rem !important;
+  display: block !important;
+  position: relative;
+}
+/* content maxWidth*/
+.VPDoc.has-aside .content-container {
+  max-width: 55rem !important;
+}
+
+@media (min-width: 960px) {
+  .VPDoc:not(.has-sidebar) .content {
+    max-width: inherit !important;
+  }
+  .VPDocAsideOutline .content {
+    padding-left: 14px !important;
+  }
+  .content {
+    padding: 0 !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .VPDoc .aside {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1380px) {
+  .VPDoc .aside {
+    display: block !important;
+  }
+}

@@ -1,6 +1,7 @@
 /* Ref: https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css */
 
 @import './tag.css';
+@import './hack.css';
 
 :root {
   --vp-c-brand-light: #5e5e5e;
