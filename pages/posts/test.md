@@ -23,8 +23,6 @@ _斜体文字_ _italic_
 
 **_加粗斜体_** **_bold italic_**
 
-> 中文字体似乎没有对应的粗斜体版本...
-
 超链接：https://blog.locietta.xyz/
 
 超链接文字：[原地 TP](/posts/test.html)

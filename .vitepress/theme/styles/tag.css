@@ -1,0 +1,33 @@
+:root {
+  --tag-bg: #eff6ff;
+  --tag-hover: var(--vp-c-brand-1);
+  --tag-count: var(--vp-c-brand-1);
+}
+
+.dark {
+  --tag-bg: #318f5d;
+  --tag-hover: var(--vp-c-purple-3);
+  --tag-count: var(--vp-c-default-3);
+}
+
+.tag {
+  display: inline-block;
+  background-color: var(--tag-bg);
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+  border-radius: 0.4rem;
+  /* outline: 1px solid var(--vp-c-text-3); */
+  a {
+    color: var(--vp-c-text-1);
+  }
+  a:hover {
+    color: var(--tag-hover);
+    text-decoration: none;
+  }
+}
+
+.tag:hover {
+  color: var(--tag-hover);
+}

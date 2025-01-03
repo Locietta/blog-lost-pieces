@@ -5,9 +5,9 @@ comment: false
 ---
 
 <script lang="ts" setup>
-import Tags from '../.vitepress/theme/components/Tags.vue'
+import TagPage from '../.vitepress/theme/components/TagPage.vue'
 </script>
 
 <ClientOnly>
-<Tags/>
+<TagPage/>
 </ClientOnly>

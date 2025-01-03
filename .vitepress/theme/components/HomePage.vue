@@ -17,6 +17,7 @@
       <span
         v-for="item in article.frontMatter.tags"
         :key="item"
+        class="tag"
         ><a :href="withBase(`/tags?tag=${encodeURIComponent(item)}`)"> {{ item }}</a></span
       >
     </div>
@@ -26,7 +27,8 @@
     <NPagination
       v-model:page="pageCurrent"
       :page-count="pagesNum"
-      :page-slot="7"
+      :page-slot="5"
+      size="large"
     ></NPagination>
   </div>
 </template>
@@ -43,7 +45,7 @@ const props = withDefaults(
     pageSize?: number
   }>(),
   {
-    pageSize: 10,
+    pageSize: 6,
   },
 )
 
@@ -60,37 +62,25 @@ const pageCurrent = ref(1)
 
 <style scoped>
 .post-list {
-  border-bottom: 1px solid var(--c-divider);
+  border-bottom: 1px solid var(--vp-c-divider);
   padding: 1rem 0 0.25rem 0;
 }
 
 .post-header {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
 }
 
-.post-tag span {
-  display: inline-block;
-  padding: 0px 7px;
-  background-color: var(--tag-bg);
+.tag {
+  padding: 0rem 0.75rem;
   margin: 0.25rem 0.5rem 0.75rem 0;
-  transition: 0.4s;
-  border-radius: 4px;
-  cursor: pointer;
+  a {
+    font-size: x-small;
+  }
 }
 
-.post-tag span a {
-  color: var(--vp-c-text-1);
-  font-size: x-small;
-}
-
-.post-tag span a:hover {
-  color: var(--tag-hover);
-  text-decoration: none;
-}
-
-.vp-doc .post-title a {
+.post-title a {
   font-size: 1.0625rem;
   font-weight: 600;
   margin: 0.1rem 0;
@@ -98,12 +88,8 @@ const pageCurrent = ref(1)
 
 .describe {
   font-size: 0.9375rem;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
   overflow: hidden;
-  color: #71717a;
+  color: var(--vp-c-text-3);
   margin: 0.625rem 0 0.375rem;
   line-height: 1.5rem;
 }
@@ -114,25 +100,8 @@ const pageCurrent = ref(1)
   height: 28px;
   text-align: center;
   line-height: 28px;
-  border: 1px var(--c-divider-light) solid;
+  border: 1px var(--vp-c-divider-light) solid;
   border-right: none;
-}
-
-.link.active {
-  background: var(--c-brand);
-  color: #fff;
-  border: 1px solid var(--c-brand) !important;
-}
-
-.link:first-child {
-  border-bottom-left-radius: 3px;
-  border-top-left-radius: 3px;
-}
-
-.link:last-child {
-  border-bottom-right-radius: 3px;
-  border-top-right-radius: 3px;
-  border-right: 1px var(--c-divider-light) solid;
 }
 
 .pagination-container {
@@ -146,18 +115,9 @@ const pageCurrent = ref(1)
     padding: 1rem 0 0 0;
   }
 
-  .post-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
   .post-title {
     font-size: 1.125rem;
     font-weight: 400;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
     line-clamp: 2;
     overflow: hidden;
     width: 17rem;
@@ -165,12 +125,8 @@ const pageCurrent = ref(1)
 
   .describe {
     font-size: 0.9375rem;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
     line-clamp: 3;
     overflow: hidden;
-    margin: 0.5rem 0 1rem;
   }
 
   .date {

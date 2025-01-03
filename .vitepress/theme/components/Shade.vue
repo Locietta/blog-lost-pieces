@@ -16,6 +16,17 @@ withDefaults(
   },
 )
 </script>
+<style>
+:root {
+  --shade-bg: var(--vp-c-text-1);
+  --shade-text: var(--vp-c-bg-soft);
+}
+
+.dark {
+  --shade-bg: #dfdfdf; /* Bug: var(--vp-c-text-1) is not working in dark mode */
+  --shade-text: var(--vp-c-bg-soft);
+}
+</style>
 <style scoped>
 .shade,
 .shade a,

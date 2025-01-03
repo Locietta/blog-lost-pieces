@@ -9,7 +9,7 @@ import Compare from './components/Compare.vue'
 import { setup } from '@css-render/vue3-ssr'
 import { NaiveUIProvider } from './naive-ui-vp-wrapper'
 
-import './custom.css'
+import './styles/app.css'
 import 'katex/dist/katex.min.css'
 
 export default {
