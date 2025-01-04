@@ -1,7 +1,9 @@
 ---
 lastUpdated: false
 sidebar: false
+aside: false
 comment: false
+not_append_title: true
 ---
 
 ## 每周（？）更新的废话

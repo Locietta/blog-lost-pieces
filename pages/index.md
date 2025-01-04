@@ -1,7 +1,9 @@
 ---
 lastUpdated: false
 sidebar: false
+aside: false
 comment: false
+not_append_title: true
 ---
 
 <script setup lang="ts">
