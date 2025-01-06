@@ -1,13 +1,16 @@
 /* Hack for wider page */
 
+/* Pages w/o aside */
 .VPDoc .content {
   max-width: 60rem !important;
 }
 
+/* Pages w/ aside */
 .VPDoc.has-aside .content-container {
   max-width: 60rem !important;
 }
 
+/* Overall width for content+aside */
 .VPContent .container {
   max-width: 72rem !important;
 }
