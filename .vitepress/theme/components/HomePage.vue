@@ -36,7 +36,7 @@
 
 <script lang="ts" setup>
 import { withBase } from 'vitepress'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import type { Post } from '.vitepress/env'
 import { NPagination } from 'naive-ui'
 
@@ -58,8 +58,12 @@ const pagePosts = computed(() => {
   return props.posts.slice(start, end)
 })
 
-const params = new URLSearchParams(location.search)
-const pageCurrent = ref(+(params.get('page') || 1))
+const pageCurrent = ref(1)
+
+onMounted(() => {
+  const params = new URLSearchParams(location.search)
+  pageCurrent.value = +(params.get('page') || 1)
+})
 
 const onPageChange = (page: number) => {
   const url = new URL(location.href)

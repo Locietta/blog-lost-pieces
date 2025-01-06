@@ -19,15 +19,13 @@ import { NButton } from 'naive-ui'
 const route = useRoute()
 const isPosts = computed(() => route.path.startsWith('/posts'))
 
-function rollBack() {
-  const isSiteUrl = (url: string) => url.startsWith(window.location.origin)
-
-  if (window.history.length <= 1 || !isSiteUrl(document.referrer)) {
+const rollBack = () => {
+  if (history.length <= 1 || !document.referrer.startsWith(location.origin)) {
     // If no history or the referrer is not from the site, go to '/'
     location.href = '/'
   } else {
     // Otherwise, roll back within the site
-    window.history.go(hashChangeCount.value)
+    history.go(hashChangeCount.value)
     hashChangeCount.value = -1
   }
 }
