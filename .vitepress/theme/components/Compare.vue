@@ -1,5 +1,5 @@
 <template>
-  <ImgComparisonSlider class="img-compare">
+  <ImgComparisonSlider class="img-compare rendered">
     <!-- eslint-disable vue/no-deprecated-slot-attribute -->
     <figure
       slot="first"

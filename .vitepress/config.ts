@@ -5,8 +5,6 @@ import append_title from './theme/markdown-it-append-title'
 import { wordless, chineseAndJapanese, type Options } from 'markdown-it-wordless'
 import custom_components from './theme/custom_component'
 
-const fileAndStyles: Record<string, string> = {}
-
 export default () => {
   const giscusConfig: LoiaTheme.GiscusConfig = {
     repo: 'Locietta/blog-lost-pieces',
@@ -161,6 +159,10 @@ export default () => {
         },
         cssMinify: 'lightningcss',
       },
+      // define: {
+      //   // define this to show mismatch details
+      //   __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: true,
+      // },
       ssr: {
         // workaround for:
         // * react-tweet: TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".css"
@@ -169,26 +171,6 @@ export default () => {
         // https://github.com/antfu/vite-ssg/issues/156#issuecomment-1208009117
         noExternal: ['react-tweet', 'veaury', 'naive-ui', 'date-fns', 'vueuc'],
       },
-    },
-    // naive-ui
-    postRender(context) {
-      const styleRegex = /<css-render-style>((.|\s)+)<\/css-render-style>/
-      const vitepressPathRegex = /<vitepress-path>(.+)<\/vitepress-path>/
-      const style = styleRegex.exec(context.content)?.[1]
-      const vitepressPath = vitepressPathRegex.exec(context.content)?.[1]
-      if (vitepressPath && style) {
-        fileAndStyles[vitepressPath] = style
-      }
-      context.content = context.content.replace(styleRegex, '')
-      context.content = context.content.replace(vitepressPathRegex, '')
-    },
-    transformHtml(code, id) {
-      const html = id.split('/').pop()
-      if (!html) return
-      const style = fileAndStyles[`/${html}`]
-      if (style) {
-        return code.replace(/<\/head>/, `${style}</head>`)
-      }
     },
   })
 }

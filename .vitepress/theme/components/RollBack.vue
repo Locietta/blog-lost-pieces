@@ -1,14 +1,16 @@
 <template>
-  <NButton
-    v-if="isPosts"
-    type="default"
-    class="rollback-btn"
-    dashed
-    @click="rollBack"
-  >
-    <template #icon><HiMiniArrowUturnLeft /></template>
-    {{ '回到上一页' }}
-  </NButton>
+  <ClientOnly>
+    <NButton
+      v-if="isPosts"
+      type="default"
+      class="rollback-btn"
+      dashed
+      @click="rollBack"
+    >
+      <template #icon><HiMiniArrowUturnLeft /></template>
+      {{ '回到上一页' }}
+    </NButton>
+  </ClientOnly>
 </template>
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'

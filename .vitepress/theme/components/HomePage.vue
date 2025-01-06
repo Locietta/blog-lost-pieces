@@ -24,13 +24,15 @@
   </div>
 
   <div class="pagination-container">
-    <NPagination
-      v-model:page="pageCurrent"
-      :page-count="pagesNum"
-      :page-slot="5"
-      size="large"
-      @update:page="onPageChange"
-    ></NPagination>
+    <ClientOnly>
+      <NPagination
+        v-model:page="pageCurrent"
+        :page-count="pagesNum"
+        :page-slot="5"
+        size="large"
+        @update:page="onPageChange"
+      ></NPagination>
+    </ClientOnly>
   </div>
 </template>
 
