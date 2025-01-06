@@ -1,7 +1,7 @@
 /* eslint-disable vue/one-component-per-file */
 import { defineComponent, h, inject } from 'vue'
-import { useRoute } from 'vitepress'
-import { NConfigProvider } from 'naive-ui'
+import { useRoute, useData } from 'vitepress'
+import { NConfigProvider, darkTheme, lightTheme } from 'naive-ui'
 import LoiaLayout from './components/LoiaLayout.vue'
 
 const CssRenderStyle = defineComponent({
@@ -29,9 +29,11 @@ const VitepressPath = defineComponent({
 
 export const NaiveUIProvider = defineComponent({
   render() {
+    const isDark = useData().isDark
+
     return h(
       NConfigProvider,
-      { abstract: true, inlineThemeDisabled: true },
+      { abstract: true, inlineThemeDisabled: true, theme: isDark.value ? darkTheme : lightTheme },
       {
         default: () => [
           h(LoiaLayout, null, { default: this.$slots.default?.() }),
