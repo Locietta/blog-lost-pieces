@@ -29,6 +29,7 @@
       :page-count="pagesNum"
       :page-slot="5"
       size="large"
+      @update:page="onPageChange"
     ></NPagination>
   </div>
 </template>
@@ -57,7 +58,19 @@ const pagePosts = computed(() => {
   return props.posts.slice(start, end)
 })
 
-const pageCurrent = ref(1)
+const params = new URLSearchParams(location.search)
+const pageCurrent = ref(+(params.get('page') || 1))
+
+const onPageChange = (page: number) => {
+  const url = new URL(location.href)
+  url.searchParams.set('page', page.toString())
+  history.replaceState(null, '', url.toString()) // Update URL without adding to history
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  })
+}
 </script>
 
 <style scoped>
