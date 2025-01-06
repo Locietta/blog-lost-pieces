@@ -23,7 +23,7 @@ type TweetProps = {
 }
 
 const TWEET_URL_REGEX =
-  /^(https?:\/\/)?(www\.)?twitter\.com\/.*\/status(?:es)?\/(?<tweetId>[^/?]\d+)$/i
+  /^(https?:\/\/)?(www\.)?(twitter|x)\.com\/.*\/status(?:es)?\/(?<tweetId>[^/?]\d+)$/i
 const TWEET_ID_REGEX = /^\d+$/
 
 const props = defineProps<TweetProps>()
