@@ -5,7 +5,7 @@ import globals from 'globals'
 import typescriptEslint from 'typescript-eslint'
 
 export default typescriptEslint.config(
-  { ignores: ['*.d.ts', '**/coverage', '**/dist', '**/cache', 'node_modules/**/*'] },
+  { ignores: ['**/*.d.ts', '**/coverage', '**/dist', '**/cache', 'node_modules/**/*'] },
   {
     extends: [
       eslint.configs.recommended,
