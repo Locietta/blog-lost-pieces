@@ -216,12 +216,12 @@ verbose content, collapsed on default
 忘了为啥要支持这个了，~~但总之是支持了~~。
 
 ::: details Click Me To View Kita-Chan~
-<Tweet id="1614087229701488641"/>
+<Tweet src="1614087229701488641"/>
 :::
 
 Also test Tweet outside of blocks👇
 
-<Tweet url="https://twitter.com/jendrikillner/status/1668265685087076356"/>
+<Tweet src="https://twitter.com/jendrikillner/status/1668265685087076356"/>
 
 ### 代码块扩展
 

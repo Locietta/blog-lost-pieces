@@ -9,45 +9,31 @@
 import { applyPureReactInVue } from 'veaury'
 import { Tweet as ReactTweet } from 'react-tweet'
 
-type TweetProps = {
+const props = defineProps<{
   /**
    * The numerical ID of the desired Tweet, or the full URL of the Tweet.
-   * You should provide a Tweet ID or URL, but not both.
    *
    * @example
-   *   <Tweet id="20" />
-   *   <Tweet url="https://twitter.com/jack/status/20" />
+   *   <Tweet src="20" />
+   *   <Tweet src="https://twitter.com/jack/status/20" />
    */
-  id?: string
-  url?: string
-}
+  src: string
+}>()
 
-const TWEET_URL_REGEX =
-  /^(https?:\/\/)?(www\.)?(twitter|x)\.com\/.*\/status(?:es)?\/(?<tweetId>[^/?]\d+)$/i
-const TWEET_ID_REGEX = /^\d+$/
-
-const props = defineProps<TweetProps>()
-const { id, url } = props
-
-if (id && url) {
-  throw new Error('Cannot provide both tweet id and tweet url.')
-}
+const { src } = props
 
 const resolvedId = (() => {
-  if (id) {
-    if (!TWEET_ID_REGEX.test(id)) {
-      throw new Error('Invalid tweet id, please provide a valid numerical id.')
-    }
-    return id
+  if (/^\d+$/.test(src)) {
+    return src
   }
-  if (url) {
-    const match = url.trim().match(TWEET_URL_REGEX)
-    if (!match?.groups?.tweetId) {
-      throw new Error('Invalid tweet url.')
-    }
+  const TWEET_URL_REGEX =
+    /^(https?:\/\/)?(www\.)?(twitter|x)\.com\/.*\/status(?:es)?\/(?<tweetId>[^/?]\d+)$/i
+  const match = src.trim().match(TWEET_URL_REGEX)
+  if (match?.groups?.tweetId) {
     return match.groups.tweetId
   }
-  throw new Error('Must provide either tweet-id or tweet-url.')
+
+  throw new Error('Invalid tweet id or url.')
 })()
 
 const WarppedTweet = applyPureReactInVue(ReactTweet)
