@@ -39,7 +39,7 @@
 <script lang="ts" setup>
 import { withBase } from 'vitepress'
 import { ref, computed, onMounted } from 'vue'
-import type { Post } from '.vitepress/env'
+import type { Post } from '.vitepress/theme'
 import { NPagination } from 'naive-ui'
 
 const props = withDefaults(

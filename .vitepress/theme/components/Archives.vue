@@ -24,7 +24,7 @@
 import { withBase } from 'vitepress'
 import { computed } from 'vue'
 import { data as posts } from '../data/posts.data'
-import type { Post } from '.vitepress/env'
+import type { Post } from '.vitepress/theme'
 
 function groupByYear(posts: Post[]) {
   const data: Array<Post[]> = []
