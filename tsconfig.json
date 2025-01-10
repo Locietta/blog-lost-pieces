@@ -5,7 +5,6 @@
     "module": "esnext",
     "sourceMap": true,
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "types": ["vite/client"],
     "baseUrl": "./"
   },
   "include": [

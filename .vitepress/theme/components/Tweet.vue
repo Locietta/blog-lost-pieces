@@ -1,13 +1,15 @@
 <template>
-  <WarppedTweet :id="resolvedId">
-    <template #node:fallback>
-      <div style="font-weight: bold">[[Error Occurred When Loading Tweet!]]</div>
-    </template>
-  </WarppedTweet>
+  <div class="tweet-container">
+    <VueTweetPure :id="resolvedId">
+      <template #node:fallback>
+        <div style="font-weight: bold">[[Error Occurred When Loading Tweet!]]</div>
+      </template>
+    </VueTweetPure>
+  </div>
 </template>
 <script lang="ts" setup>
-import { applyPureReactInVue } from 'veaury'
-import { Tweet as ReactTweet } from 'react-tweet'
+import { Tweet as VueTweetPure } from 'vue-tweet-pure'
+import 'vue-tweet-pure/style.css'
 
 const props = defineProps<{
   /**
@@ -35,11 +37,10 @@ const resolvedId = (() => {
 
   throw new Error('Invalid tweet id or url.')
 })()
-
-const WarppedTweet = applyPureReactInVue(ReactTweet)
 </script>
-<style>
-.react-tweet-theme {
-  margin: auto !important;
+<style scoped>
+.tweet-container {
+  display: flex;
+  justify-content: center;
 }
 </style>
