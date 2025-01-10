@@ -58,5 +58,6 @@
       "type": "MIT",
       "url": "https://github.com/Locietta/blog-lost-pieces/blob/main/LICENSE"
     }
-  ]
+  ],
+  "packageManager": "pnpm@10.0.0"
 }
