@@ -1,4 +1,4 @@
-import type { EnhanceAppContext } from 'vitepress'
+import type { Theme } from 'vitepress'
 
 import DefaultTheme from 'vitepress/theme'
 
@@ -14,10 +14,10 @@ import 'katex/dist/katex.min.css'
 export default {
   ...DefaultTheme,
   Layout: LoiaLayout,
-  enhanceApp({ app }: EnhanceAppContext) {
+  enhanceApp({ app }) {
     // register global compoment
     app.component('Tweet', Tweet)
     app.component('Shade', Shade)
     app.component('Compare', Compare)
   },
-}
+} satisfies Theme

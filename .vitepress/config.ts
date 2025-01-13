@@ -1,4 +1,4 @@
-import { type DefaultTheme, defineConfigWithTheme } from 'vitepress'
+import { type DefaultTheme, defineConfigWithTheme, postcssIsolateStyles } from 'vitepress'
 import mk from './theme/markdown-it-katex'
 import img_fig from './theme/markdown-it-img-figure'
 import append_title from './theme/markdown-it-append-title'
@@ -158,6 +158,15 @@ export default () => {
           },
         },
         cssMinify: 'lightningcss',
+      },
+      css: {
+        postcss: {
+          plugins: [
+            postcssIsolateStyles({
+              includeFiles: [/vp-doc\.css/, /base\.css/],
+            }),
+          ],
+        },
       },
       // define: {
       //   // define this to show mismatch details
