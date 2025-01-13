@@ -1,10 +1,6 @@
 <template>
   <div class="tweet-container vp-raw">
-    <VueTweetPure :id="resolvedId">
-      <template #node:fallback>
-        <div style="font-weight: bold">[[Error Occurred When Loading Tweet!]]</div>
-      </template>
-    </VueTweetPure>
+    <VueTweetPure :id="resolvedId" />
   </div>
 </template>
 <script lang="ts" setup>
