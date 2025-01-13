@@ -2,6 +2,7 @@
 
 @import './tag.css';
 @import './hack.css';
+@import './katex.css';
 
 :root {
   --vp-c-brand-light: #5e5e5e;
@@ -35,15 +36,6 @@ figcaption {
   display: block;
   text-align: center;
   color: var(--vp-c-text-3);
-}
-
-/* This allows inline formula to auto change line */
-.katex-html > .base {
-  white-space: normal;
-}
-
-.katex-display {
-  overflow: auto hidden;
 }
 
 a:link {

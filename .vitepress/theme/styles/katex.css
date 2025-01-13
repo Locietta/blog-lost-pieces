@@ -1,0 +1,18 @@
+/* inline math auto warp */
+.katex-html > .base {
+  white-space: normal;
+}
+
+/* add <-> scrollbar to block math, clip vertical overflow */
+.katex-display {
+  overflow: auto hidden;
+}
+
+/** Part of solution to prevent tag overlapping when equation overflow and scrollbar appears
+ *  see https://github.com/KaTeX/KaTeX/issues/1983
+ */
+.katex-display.has-scroll > .katex > .katex-html > .tag {
+  display: inline-block;
+  position: relative !important;
+  padding-left: 0.5rem;
+}

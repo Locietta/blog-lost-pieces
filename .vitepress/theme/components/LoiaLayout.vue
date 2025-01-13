@@ -25,5 +25,27 @@ const { Layout } = DefaultTheme
 
 import { NConfigProvider, darkTheme, lightTheme } from 'naive-ui'
 import { useData } from 'vitepress'
+import { onMounted, onUnmounted } from 'vue'
 const { isDark } = useData()
+
+/// mark overflowing equations, part of solution to https://github.com/KaTeX/KaTeX/issues/1983
+
+const markOverflowingEquations = () => {
+  document.querySelectorAll('.katex-display').forEach((elem) => {
+    if (elem.scrollWidth > elem.clientWidth) {
+      elem.classList.add('has-scroll')
+    } else {
+      elem.classList.remove('has-scroll')
+    }
+  })
+}
+
+onMounted(() => {
+  markOverflowingEquations()
+  window.addEventListener('resize', markOverflowingEquations)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', markOverflowingEquations)
+})
 </script>
