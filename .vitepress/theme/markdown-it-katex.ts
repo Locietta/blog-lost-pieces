@@ -1,29 +1,33 @@
 'use strict'
 
-import type { KatexOptions } from 'katex'
 import type MarkdownIt from 'markdown-it'
-import katex from 'katex'
+import katex, { type KatexOptions } from 'katex'
 
 /// markdown-it parser types
 import type Token from 'markdown-it/lib/token.mts'
-import type StateInline from 'markdown-it/lib/rules_inline/state_inline.mjs'
-import type StateBlock from 'markdown-it/lib/rules_block/state_block.mjs'
+import type StateInline from 'markdown-it/lib/rules_inline/state_inline.mts'
+import type StateBlock from 'markdown-it/lib/rules_block/state_block.mts'
 
-// Test if potential opening or closing delimiter
 // Assumes that there is a "$" at state.src[pos]
-function isValidDelim(state: StateInline, pos: number) {
+function canOpenInlineMath(state: StateInline, pos: number): boolean {
+  const max = state.posMax
+  const nextChar = pos + 1 <= max ? state.src.charCodeAt(pos + 1) : -1
+
+  // The '$' can open if the next character is not whitespace
+  const isNextWhitespace = nextChar === 0x20 || nextChar === 0x09 // 0x20: space, 0x09: tab
+  return !isNextWhitespace
+}
+
+// Assumes that there is a "$" at state.src[pos]
+function canCloseInlineMath(state: StateInline, pos: number): boolean {
   const max = state.posMax
   const prevChar = pos > 0 ? state.src.charCodeAt(pos - 1) : -1
   const nextChar = pos + 1 <= max ? state.src.charCodeAt(pos + 1) : -1
 
-  const isPrevWhitespace = prevChar === 0x20 || prevChar === 0x09
-  const isNextWhitespace = nextChar === 0x20 || nextChar === 0x09
-  const isNextDigit = nextChar >= 0x30 && nextChar <= 0x39
-
-  const can_close = !isPrevWhitespace && !isNextDigit
-  const can_open = !isNextWhitespace
-
-  return { can_open, can_close }
+  // The '$' can close if the previous character is not whitespace and the next character is not a digit
+  const isPrevWhitespace = prevChar === 0x20 || prevChar === 0x09 // 0x20: space, 0x09: tab
+  const isNextDigit = nextChar >= 0x30 && nextChar <= 0x39 // 0x30: '0', 0x39: '9'
+  return !isPrevWhitespace && !isNextDigit
 }
 
 function math_inline(state: StateInline, silent: boolean) {
@@ -32,8 +36,7 @@ function math_inline(state: StateInline, silent: boolean) {
     return false
   }
 
-  const res = isValidDelim(state, pos)
-  if (!res.can_open) {
+  if (!canOpenInlineMath(state, pos)) {
     if (!silent) {
       state.pending += '$'
     }
@@ -77,8 +80,7 @@ function math_inline(state: StateInline, silent: boolean) {
   }
 
   // Check for valid closing delimiter
-  const closeRes = isValidDelim(state, match)
-  if (!closeRes.can_close) {
+  if (!canCloseInlineMath(state, match)) {
     if (!silent) {
       state.pending += '$'
     }
