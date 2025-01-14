@@ -13,9 +13,6 @@ importers:
 
   .:
     devDependencies:
-      '@css-render/vue3-ssr':
-        specifier: ^0.15.14
-        version: 0.15.14(vue@3.5.13(typescript@5.7.3))
       '@eslint/js':
         specifier: ^9.17.0
         version: 9.18.0
@@ -92,8 +89,8 @@ importers:
         specifier: ^0.1.8
         version: 0.1.8(vue@3.5.13(typescript@5.7.3))
       vue-tweet-pure:
-        specifier: ^0.2.0
-        version: 0.2.0(vue@3.5.13(typescript@5.7.3))
+        specifier: ^0.2.1
+        version: 0.2.1(vue@3.5.13(typescript@5.7.3))
 
 packages:
 
@@ -1823,8 +1820,8 @@ packages:
     peerDependencies:
       vue: '>=2.7.0'
 
-  vue-tweet-pure@0.2.0:
-    resolution: {integrity: sha512-bLvK48D527UBkIzvTQ1REI0i2j0vAQld3Io/nQfWW/+RTO9KQUnZORhwNbF5QwcNMcz+VASgfj2Jk3mJVun1mg==}
+  vue-tweet-pure@0.2.1:
+    resolution: {integrity: sha512-4BtOQzoX5ZjQqVmrZRveojSBCKQ4VyYQEbELlthKPvpcSHVXN2xDbVubKdNSHaAz0HiNAbEMnvnZZlxIWa0aLg==}
     peerDependencies:
       vue: '>= 3.3.0'
 
@@ -3611,7 +3608,7 @@ snapshots:
     dependencies:
       vue: 3.5.13(typescript@5.7.3)
 
-  vue-tweet-pure@0.2.0(vue@3.5.13(typescript@5.7.3)):
+  vue-tweet-pure@0.2.1(vue@3.5.13(typescript@5.7.3)):
     dependencies:
       vue: 3.5.13(typescript@5.7.3)
 

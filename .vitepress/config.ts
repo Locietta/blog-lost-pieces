@@ -110,6 +110,9 @@ export default () => {
     lang: 'zh-CN',
     cleanUrls: true,
     lastUpdated: true,
+    appearance: {
+      valueLight: 'light',
+    },
     head: [
       ['meta', { name: 'keywords', content: "Locietta's Blog" }],
       ['meta', { name: 'author', content: 'Locietta' }],
