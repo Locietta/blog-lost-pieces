@@ -8,10 +8,14 @@
     "baseUrl": "./"
   },
   "include": [
+    "pages/**/*.md",
     ".vitepress/**/*.ts",
     ".vitepress/**/*.d.ts",
     ".vitepress/**/*.tsx",
     ".vitepress/**/*.vue"
   ],
-  "exclude": ["**/dist/**", "**/node_modules/**"]
+  "exclude": ["**/dist/**", "**/node_modules/**"],
+  "vueCompilerOptions": {
+    "vitePressExtensions": [".md"]
+  }
 }
