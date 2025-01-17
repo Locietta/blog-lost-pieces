@@ -1,4 +1,5 @@
 ---
+title: Tags
 lastUpdated: false
 sidebar: false
 aside: false

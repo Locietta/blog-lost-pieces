@@ -1,4 +1,5 @@
 ---
+title: About me
 lastUpdated: false
 sidebar: false
 aside: false

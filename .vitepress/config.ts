@@ -1,4 +1,9 @@
-import { type DefaultTheme, defineConfigWithTheme, postcssIsolateStyles } from 'vitepress'
+import {
+  type DefaultTheme,
+  defineConfigWithTheme,
+  type HeadConfig,
+  postcssIsolateStyles,
+} from 'vitepress'
 import mk from './theme/markdown-it-katex'
 import img_fig from './theme/markdown-it-img-figure'
 import append_title from './theme/markdown-it-append-title'
@@ -140,6 +145,28 @@ export default () => {
           .use<Options>(wordless, { supportWordless: [chineseAndJapanese] })
           .use(append_title)
       },
+    },
+    transformPageData(pageData) {
+      const host = 'https://blog.locietta.xyz'
+      const { description, title, relativePath } = pageData
+
+      const metas: HeadConfig[] = [
+        [
+          'meta',
+          {
+            property: 'og:url',
+            content: `${host}/${relativePath}`.replace(/index\.md$/, '').replace(/\.md$/, ''),
+          },
+        ],
+        ['meta', { property: 'og:title', content: title }],
+        ['meta', { property: 'og:description', content: description }],
+        ['meta', { property: 'og:image', content: `${host}/favicon.ico` }],
+        ['meta', { name: 'twitter:card', content: 'summary' }],
+        ['meta', { name: 'twitter:image:src', content: `${host}/favicon.ico` }],
+        ['meta', { name: 'twitter:description', content: description }],
+      ]
+      pageData.frontmatter.head ??= []
+      pageData.frontmatter.head.push(...metas)
     },
     vue: {
       template: {

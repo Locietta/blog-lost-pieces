@@ -1,4 +1,5 @@
 ---
+title: 首页 | Home Page
 lastUpdated: false
 sidebar: false
 aside: false
