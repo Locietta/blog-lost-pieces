@@ -7,6 +7,10 @@ tags:
 description: 测试显示效果
 ---
 
+<script setup lang="ts">
+import Compare from '@components/Compare.vue'
+</script>
+
 ## Vanilla Markdown Syntax
 
 > 二级标题会出现在右侧标题导航中

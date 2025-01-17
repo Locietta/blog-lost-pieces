@@ -4,7 +4,6 @@ import DefaultTheme from 'vitepress/theme'
 
 import Tweet from '@components/Tweet.vue'
 import Shade from '@components/Shade.vue'
-import Compare from '@components/Compare.vue'
 
 import LoiaLayout from '@components/LoiaLayout.vue'
 
@@ -18,6 +17,5 @@ export default {
     // register global compoment
     app.component('Tweet', Tweet)
     app.component('Shade', Shade)
-    app.component('Compare', Compare)
   },
 } satisfies Theme
