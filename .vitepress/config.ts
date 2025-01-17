@@ -160,9 +160,9 @@ export default () => {
         ],
         ['meta', { property: 'og:title', content: title }],
         ['meta', { property: 'og:description', content: description }],
-        ['meta', { property: 'og:image', content: `${host}/favicon.ico` }],
+        ['meta', { property: 'og:image', content: `${host}/L_ico.png` }],
         ['meta', { name: 'twitter:card', content: 'summary' }],
-        ['meta', { name: 'twitter:image:src', content: `${host}/favicon.ico` }],
+        ['meta', { name: 'twitter:image:src', content: `${host}/L_ico.png` }],
         ['meta', { name: 'twitter:description', content: description }],
       ]
       pageData.frontmatter.head ??= []
