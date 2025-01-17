@@ -9,7 +9,7 @@ not_append_title: true
 ## 每周（？）更新的废话
 
 <script setup lang="ts">
-import { data as weekly } from '../.vitepress/theme/data/weekly.data.ts'
+import { data as weekly } from '@theme/data/weekly.data.ts'
 </script>
 
 <!-- use v-for to generate the weekly list -->

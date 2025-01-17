@@ -9,6 +9,7 @@ import img_fig from './theme/markdown-it-img-figure'
 import append_title from './theme/markdown-it-append-title'
 import { wordless, chineseAndJapanese, type Options } from 'markdown-it-wordless'
 import custom_components from './theme/custom_component'
+import path from 'path'
 
 export default () => {
   const giscusConfig: LoiaTheme.GiscusConfig = {
@@ -179,6 +180,13 @@ export default () => {
       },
     },
     vite: {
+      resolve: {
+        alias: {
+          '@': path.resolve(__dirname, '.'),
+          '@theme': path.resolve(__dirname, './theme'),
+          '@components': path.resolve(__dirname, './theme/components'),
+        },
+      },
       build: {
         rollupOptions: {
           onwarn: (warning, warn) => {

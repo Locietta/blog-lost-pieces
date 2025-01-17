@@ -2,13 +2,13 @@ import type { Theme } from 'vitepress'
 
 import DefaultTheme from 'vitepress/theme'
 
-import Tweet from './components/Tweet.vue'
-import Shade from './components/Shade.vue'
-import Compare from './components/Compare.vue'
+import Tweet from '@components/Tweet.vue'
+import Shade from '@components/Shade.vue'
+import Compare from '@components/Compare.vue'
 
-import LoiaLayout from './components/LoiaLayout.vue'
+import LoiaLayout from '@components/LoiaLayout.vue'
 
-import './styles/app.css'
+import '@theme/styles/app.css'
 import 'katex/dist/katex.min.css'
 
 export default {

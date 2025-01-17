@@ -26,8 +26,8 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 import { withBase } from 'vitepress'
-import { data as posts } from '../data/posts.data'
-import type { Post } from '.vitepress/theme'
+import { data as posts } from '@theme/data/posts.data'
+import type { Post } from '@/theme'
 
 const data = computed(() => {
   /// build tag -> posts map

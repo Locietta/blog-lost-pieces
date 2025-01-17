@@ -5,6 +5,11 @@
     "module": "esnext",
     "sourceMap": true,
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "paths": {
+      "@/*": [".vitepress/*"],
+      "@theme/*": [".vitepress/theme/*"],
+      "@components/*": [".vitepress/theme/components/*"]
+    },
     "baseUrl": "./"
   },
   "include": [

@@ -8,8 +8,8 @@ not_append_title: true
 ---
 
 <script setup lang="ts">
-import Page from '../.vitepress/theme/components/HomePage.vue'
-import { data as posts } from '../.vitepress/theme/data/posts.data.ts'
+import Page from '@components/HomePage.vue'
+import { data as posts } from '@theme/data/posts.data.ts'
 import { useData } from 'vitepress'
 const { theme } = useData()
 const pageSize = theme.value.pageSize

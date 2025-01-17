@@ -18,9 +18,9 @@
 </template>
 <script setup lang="ts">
 import DefaultTheme from 'vitepress/theme'
-import Comment from './Comment.vue'
-import Copyright from './Copyright.vue'
-import RollBack from './RollBack.vue'
+import Comment from '@components/Comment.vue'
+import Copyright from '@components/Copyright.vue'
+import RollBack from '@components/RollBack.vue'
 const { Layout } = DefaultTheme
 
 import { NConfigProvider, darkTheme, lightTheme } from 'naive-ui'
