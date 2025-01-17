@@ -204,7 +204,7 @@ export default () => {
         postcss: {
           plugins: [
             postcssIsolateStyles({
-              includeFiles: [/vp-doc\.css/, /base\.css/],
+              includeFiles: [/vp-doc\.css/, /base\.css/, /custom-block\.css/],
             }),
           ],
         },
