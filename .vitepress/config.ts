@@ -168,6 +168,9 @@ export default () => {
       pageData.frontmatter.head ??= []
       pageData.frontmatter.head.push(...metas)
     },
+    sitemap: {
+      hostname: 'https://blog.locietta.xyz',
+    },
     vue: {
       template: {
         compilerOptions: {
