@@ -10,6 +10,15 @@ import append_title from './theme/markdown-it-append-title'
 import { wordless, chineseAndJapanese, type Options } from 'markdown-it-wordless'
 import custom_components from './theme/custom_component'
 import path from 'path'
+import { type RSSOptions, RssPlugin } from 'vitepress-plugin-rss'
+
+const rssConfig: RSSOptions = {
+  title: "Lost Pieces - Locietta's Blog",
+  copyright: 'Copyright (c) 2022-present, Locietta',
+  description: 'Life Record & Tech Share',
+  baseUrl: 'https://blog.locietta.xyz',
+  language: 'zh-CN',
+}
 
 export default () => {
   const giscusConfig: LoiaTheme.GiscusConfig = {
@@ -180,6 +189,7 @@ export default () => {
       },
     },
     vite: {
+      plugins: [RssPlugin(rssConfig)],
       resolve: {
         alias: {
           '@': path.resolve(__dirname, '.'),
