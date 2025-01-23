@@ -18,6 +18,9 @@ const rssConfig: RSSOptions = {
   description: 'Life Record & Tech Share',
   baseUrl: 'https://blog.locietta.xyz',
   language: 'zh-CN',
+  filter(post) {
+    return post.url.startsWith('/posts/')
+  },
 }
 
 export default () => {
