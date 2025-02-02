@@ -8,35 +8,21 @@ import type Token from 'markdown-it/lib/token.mts'
 import type StateInline from 'markdown-it/lib/rules_inline/state_inline.mts'
 import type StateBlock from 'markdown-it/lib/rules_block/state_block.mts'
 
-// Assumes that there is a "$" at state.src[pos]
-function canOpenInlineMath(state: StateInline, pos: number): boolean {
-  const max = state.posMax
-  const nextChar = pos + 1 <= max ? state.src.charCodeAt(pos + 1) : -1
-
-  // The '$' can open if the next character is not whitespace
-  const isNextWhitespace = nextChar === 0x20 || nextChar === 0x09 // 0x20: space, 0x09: tab
-  return !isNextWhitespace
-}
-
-// Assumes that there is a "$" at state.src[pos]
-function canCloseInlineMath(state: StateInline, pos: number): boolean {
-  const max = state.posMax
-  const prevChar = pos > 0 ? state.src.charCodeAt(pos - 1) : -1
-  const nextChar = pos + 1 <= max ? state.src.charCodeAt(pos + 1) : -1
-
-  // The '$' can close if the previous character is not whitespace and the next character is not a digit
-  const isPrevWhitespace = prevChar === 0x20 || prevChar === 0x09 // 0x20: space, 0x09: tab
-  const isNextDigit = nextChar >= 0x30 && nextChar <= 0x39 // 0x30: '0', 0x39: '9'
-  return !isPrevWhitespace && !isNextDigit
-}
-
 function math_inline(state: StateInline, silent: boolean) {
+  const src = state.src
   const pos = state.pos
-  if (state.src[pos] !== '$') {
+
+  // Check for the opening '$'
+  if (src[pos] !== '$') {
     return false
   }
 
-  if (!canOpenInlineMath(state, pos)) {
+  // Check if the next character is not whitespace
+  const max = state.posMax
+  const nextChar = pos + 1 <= max ? src.charCodeAt(pos + 1) : -1
+  const isNextWhitespace = nextChar === 0x20 || nextChar === 0x09 // 0x20: space, 0x09: tab
+
+  if (isNextWhitespace) {
     if (!silent) {
       state.pending += '$'
     }
@@ -44,45 +30,53 @@ function math_inline(state: StateInline, silent: boolean) {
     return true
   }
 
-  const start = pos + 1
-  let match = start
+  const isNextBacktick = nextChar === 0x60 // 0x60: backtick (`)
+  const isGithubSyntax = isNextBacktick
+  const delimiterLength = isNextBacktick ? 2 : 1
+  const openDelimiter = isNextBacktick ? '$`' : '$'
 
-  // Find the next potential closing delimiter
-  while ((match = state.src.indexOf('$', match)) !== -1) {
-    let escapePos = match - 1
-    while (state.src[escapePos] === '\\') {
-      escapePos -= 1
-    }
+  const start = pos + delimiterLength
+  let endPos = start
+  let escapeCount = 0
 
-    // Even number of escapes, potential closing delimiter found
-    if ((match - escapePos) % 2 === 1) {
-      break
+  // Find the next closing '$' that is not escaped
+  while (endPos < src.length) {
+    if (src[endPos] === '\\') {
+      escapeCount++
+    } else if (escapeCount % 2 === 0) {
+      if (!isGithubSyntax && src[endPos] === '$') break
+      if (
+        isGithubSyntax &&
+        endPos + 1 < src.length &&
+        src[endPos] === '`' &&
+        src[endPos + 1] === '$'
+      ) {
+        endPos++
+        break
+      }
+    } else {
+      escapeCount = 0
     }
-    match += 1
+    endPos++
   }
 
-  // No closing delimter found.  Consume $ and continue.
-  if (match === -1) {
+  // No closing delimiter found
+  if (endPos >= src.length) {
     if (!silent) {
-      state.pending += '$'
+      state.pending += openDelimiter
     }
     state.pos = start
     return true
   }
 
-  // Check if we have empty content, ie: $$.  Do not parse.
-  if (match - start === 0) {
+  // Check if the previous character is not whitespace and the next character is not a digit
+  const prevChar = endPos > 0 ? src.charCodeAt(endPos - 1) : -1
+  const nextCharAfterEnd = endPos + 1 <= max ? src.charCodeAt(endPos + 1) : -1
+  const isPrevWhitespace = prevChar === 0x20 || prevChar === 0x09 // 0x20: space, 0x09: tab
+  const isNextDigit = nextCharAfterEnd >= 0x30 && nextCharAfterEnd <= 0x39 // 0x30: '0', 0x39: '9'
+  if (isPrevWhitespace || isNextDigit) {
     if (!silent) {
-      state.pending += '$$'
-    }
-    state.pos = start + 1
-    return true
-  }
-
-  // Check for valid closing delimiter
-  if (!canCloseInlineMath(state, match)) {
-    if (!silent) {
-      state.pending += '$'
+      state.pending += openDelimiter
     }
     state.pos = start
     return true
@@ -90,11 +84,11 @@ function math_inline(state: StateInline, silent: boolean) {
 
   if (!silent) {
     const token = state.push('math_inline', 'math', 0)
-    token.markup = '$'
-    token.content = state.src.slice(start, match)
+    token.markup = openDelimiter
+    token.content = src.slice(start, isGithubSyntax ? endPos - 1 : endPos)
   }
 
-  state.pos = match + 1
+  state.pos = endPos + 1
   return true
 }
 
