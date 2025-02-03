@@ -89,6 +89,7 @@ a:hover {
 }
 
 .article .date {
+  white-space: nowrap;
   width: 6rem;
 }
 

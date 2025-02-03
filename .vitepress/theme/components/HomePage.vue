@@ -129,6 +129,11 @@ const onPageChange = (page: number) => {
   justify-content: center;
 }
 
+.date {
+  white-space: nowrap;
+  font-size: 0.8125rem;
+}
+
 @media screen and (max-width: 720px) {
   .post-list {
     padding: 1rem 0 0 0;
@@ -146,10 +151,6 @@ const onPageChange = (page: number) => {
     font-size: 0.9375rem;
     line-clamp: 3;
     overflow: hidden;
-  }
-
-  .date {
-    font-size: 0.8125rem;
   }
 }
 </style>

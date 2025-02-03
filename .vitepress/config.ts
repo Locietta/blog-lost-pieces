@@ -119,7 +119,7 @@ const themeConfig: LoiaTheme.Config = {
 }
 
 export default defineConfigWithTheme<LoiaTheme.Config>({
-  title: "Lost Pieces - Locietta's Blog",
+  title: 'Lost Pieces',
   description: 'Life Record & Tech Share',
   base: '/',
   srcDir: 'pages',
