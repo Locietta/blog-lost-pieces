@@ -266,22 +266,18 @@ protected:
 };
 ```
 
-### 黑幕
+### 黑幕（Spoiler）
 
-<Shade>
-猜猜我是谁？
-</Shade>
+!!猜猜我是谁？!!
 
 <br/>
 
-<Shade hover="真拿你没办法">
+<Spoiler hover="真拿你没办法">
 真的要看吗？
-</Shade>
+</Spoiler>
 
 <br/>
 
 ::: details
-<Shade>
-在容器块里也有用的！
-</Shade>
+!!在容器块里也有用的！!!OvO
 :::
