@@ -8,6 +8,7 @@ import mk from './theme/markdown-it-katex'
 import img_fig from './theme/markdown-it-img-figure'
 import append_title from './theme/markdown-it-append-title'
 import spoiler from './theme/markdown-it-spoiler'
+import img_size from './theme/markdown-it-img-size'
 import { wordless, chineseAndJapanese, type Options } from 'markdown-it-wordless'
 import custom_components from './theme/custom_component'
 import path from 'path'
@@ -158,6 +159,7 @@ export default defineConfigWithTheme<LoiaTheme.Config>({
         .use<Options>(wordless, { supportWordless: [chineseAndJapanese] })
         .use(append_title)
         .use(spoiler)
+        .use(img_size)
     },
   },
   transformPageData(pageData) {
