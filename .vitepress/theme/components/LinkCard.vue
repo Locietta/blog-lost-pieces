@@ -20,19 +20,31 @@
       </div>
     </template>
     <div class="link-card-content">
-      <div
-        v-if="description"
-        class="link-card-description"
-      >
-        {{ description }}
+      <div class="link-card-main">
+        <div
+          v-if="description"
+          class="link-card-description"
+        >
+          {{ description }}
+        </div>
+        <n-tag
+          v-if="showUrl"
+          type="primary"
+          class="link-card-url"
+          round
+          >{{ displayUrl }}
+        </n-tag>
       </div>
-      <n-tag
-        v-if="showUrl"
-        type="primary"
-        class="link-card-url"
-        round
-        >{{ displayUrl }}
-      </n-tag>
+      <div
+        v-if="iconImage"
+        class="link-card-icon"
+      >
+        <img
+          :src="iconImage"
+          :alt="`${title} icon`"
+          loading="lazy"
+        />
+      </div>
     </div>
   </n-card>
 </template>
@@ -46,6 +58,7 @@ type Props = {
   url: string
   description?: string
   image?: string
+  iconImage?: string
   bordered?: boolean
   showUrl?: boolean
 }
@@ -53,6 +66,7 @@ type Props = {
 const props = withDefaults(defineProps<Props>(), {
   description: '',
   image: '',
+  iconImage: '',
   bordered: true,
   showUrl: true,
 })
@@ -104,8 +118,32 @@ const navigateToLink = () => {
 
 .link-card-content {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.link-card-main {
+  display: flex;
   flex-direction: column;
   gap: 8px;
+  flex: 1;
+}
+
+.link-card-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.link-card-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .link-card-description {
