@@ -13,7 +13,9 @@ description: 好好的CUDA不用，要写compute shader，也是自讨苦吃（�
 
 > 其实是有点想把实验室祖传的屎山taichi代码重构一下~~虽然感觉是遥遥无期~~
 
-目前是简单搓了个logistic回归和mlp的demo，感觉写起来确实还是啰嗦。以及Kompute的抽象很多时候有点若智，`std::vector`和`std::shared_ptr`在函数接口上到处都是，`Tensor`不支持suballocate等等。但是要我自己写一个，暂时又懒，只好先凑合用一会了。
+目前是简单搓了个logistic回归和mlp的demo，感觉写起来确实还是啰嗦。以及Kompute的抽象很多时候有点若智，`std::vector`和`std::shared_ptr`在函数接口上到处都是，`Tensor`不支持view/span等等。但是要我自己写一个，暂时又懒，只好先凑合用一会了。
+
+本文中所用的代码可以在[slang-kompute/reduce at main · Locietta/slang-kompute](https://github.com/Locietta/slang-kompute/tree/main/reduce)中找到。
 
 ## 什么是Parallel Reduce
 
@@ -48,7 +50,8 @@ description: 好好的CUDA不用，要写compute shader，也是自讨苦吃（�
 首先最简单的想法就是把前面那个树状递归的过程实现出来，1和2求和，3和4求和，...，以此类推。但这么做需要注意：
 
 - warp divergence：由于GPU的SIMT架构特点，同一个warp必须同时执行相同的指令，如果同个warp内对某个if-else的分支选择不同，那么这个warp将按BFS顺序走完所有的分支。这意味着执行分支A和分支B的耗时并非$`\max(A, B)`$而是$`A + B`$。因此如果需要使用分支，那么尽量让分支情况随线程id连续，保证同warp走同一个分支。
-  > 不过需要注意的是：1. volta后的GPU实际上允许warp交错执行各分支间以减少延迟：[Independent Thread Scheduling](https://zhuanlan.zhihu.com/p/186192189)；2. 你写CUDA的话在nv分享中的那种简单warp divergence会被nvcc直接优化掉。所以究竟有没有提升需要**benchmark**
+  > 1. volta后的GPU实际上允许warp交错执行各分支间以减少延迟：[Independent Thread Scheduling](https://zhuanlan.zhihu.com/p/186192189)；
+  > 2. 你写CUDA的话，讲义中的那种简单warp divergence会被nvcc直接优化掉。所以究竟有没有提升需要**benchmark**
 - [bank conflict](https://zhuanlan.zhihu.com/p/659142274): 为了线程组内高速访存得用共享内存（shared memory）。为了提高带宽共享内存被分为多个bank，各个bank间可以并行存取数据（这个和多通道内存条是一个原理）。但多个线程同时访问同一个bank时就只能进行串行访问了，相当于只有1个bank。因此我们得设法避免bank conflict以最大化带宽。
   > 不过如果是读取同bank上同一个word，则会触发**broadcast**或者**multicast**机制，这种情况不会串行。
 
@@ -146,7 +149,7 @@ double measure_time(F &&func, int warmup_runs = 10, int measurement_runs = 30) {
     partial_sums[local_idx] += idx + THREAD_GROUP_SIZE < num_elements ? source[idx + THREAD_GROUP_SIZE] : 0.0f;  // [!code ++]
 ```
 
-这样一来逻辑上相当于把线程组大小扩大了一倍，原来那些idle的线程并没有实际分配线程，这样就节约了线程资源。同时在调用侧，我们也需要将线程组大小视为`2 * THREAD_GROUP_SIZE`来计算dispatch数。
+这样一来逻辑上相当于把线程组大小扩大了一倍，扩大的线程组中那些idle的线程现在并没有实际被分配，这样就节约了线程资源。同时在C++侧，我们也需要将线程组大小视为`2 * THREAD_GROUP_SIZE`来计算dispatch数。
 
 经过这个优化，reduce 32M个float的耗时来到了0.59ms，用时削减了大半。
 
@@ -194,7 +197,7 @@ shader方面的修改并不多，主要是需要修改C++侧的代码<del>（略
 
 ## Optimization 03: 展开！
 
-![图文无关](https://s2.loli.net/2025/03/18/GDh46pE1uibxRVW.png =30%)
+![图文无关](https://s2.loli.net/2025/03/18/GDh46pE1uibxRVW.png =50%)
 
 ### Loop Unroll
 
@@ -257,17 +260,17 @@ void main(uint3 DTid: SV_DispatchThreadID, uint3 GTid: SV_GroupThreadID, uint3 G
 
 ### Wave Intrinsic
 
-其实之前也提到过了，对N卡来说，在volta架构之后（也就是计算能力7.0+的卡）同warp内的线程调度方式有所变化，不再保证同时执行同个指令。也就是说，上面手动展开warp去掉同步的手法在比较新（20系以后）的N卡上就不对了。NV这个讲义年代有点太久远了，示例还在用Tesla G80，自然也就不知道未来GPU架构的变化。
+其实之前也提到过了，对N卡来说，在volta架构之后（也就是计算能力7.0+的卡）warp内的线程调度方式有所变化，不再保证同时执行同个指令。也就是说，上面手动展开warp去掉同步的手法在比较新（20系以后）的N卡上就不对了。NV这个讲义年代有点太久远了，示例还在用Tesla G80，自然也就不知道未来GPU架构的变化。
 
-> 网上的资料说A卡全系保证warp同步<del>（不过我没验证过）</del>。不过下面就介绍不用隐式warp同步的写法了，还是尽量不要这么写。
+> 网上的资料说A卡全系保证warp同步<del>（不过我没验证过）</del>。
 
-正确的使用warp的方式应当是使用[Wave Intrinsic](https://zhuanlan.zhihu.com/p/469436345)指令，来显式指明需要使用warp级别的操作。
+使用warp的正确方式应当是使用[Wave Intrinsic](https://zhuanlan.zhihu.com/p/469436345)指令，来显式指明需要使用warp级别的操作。
 
 > 这个东西有很多叫法：Wave Intrinsic是DX的说法（其实是继承了AMD wavefront编程的叫法），Vulkan的说法是[subgroup](https://www.khronos.org/blog/vulkan-subgroup-tutorial)，CUDA中则直接称为[warp级原语](https://zhuanlan.zhihu.com/p/572820783)。
 
 > warp级别的指令进入各家API的原因是一样的：volta架构以后，隐式使用warp同步的代码全都失效。不提供warp操作的话，在shader编程里就完全无法使用GPU分warp的架构特点来写高性能代码了。
 
-如果熟悉CUDA的话就知道，我们可以使用`__shfl_down_sync`来实现reduce操作。唯一的问题是DX12并不支持shuffle down的wave intrinsic，但好在vulkan支持相应的subgroup操作，我们可以在Slang中直接内联spirv汇编，来实现对应的wave intrinsic：
+如果熟悉CUDA的话就知道，我们可以使用`__shfl_down_sync`来实现reduce操作。唯一的问题是DX12并不支持shuffle down的wave intrinsic，但好在vulkan支持相应的subgroup操作，我们可以在Slang中直接内联SPIR-V汇编，来实现对应的wave intrinsic：
 
 ```hlsl
 float WaveShuffleDown(float value, uint offset) {
@@ -281,7 +284,7 @@ float WaveShuffleDown(float value, uint offset) {
 }
 ```
 
-于是reduce一个小于等于warp大小的数据，可以实现为：
+于是reduce一个小于等于warp大小的数据块，可以实现为：
 
 ```hlsl
 float WarpReduce<let group_size : uint>(float sum) {
@@ -294,7 +297,7 @@ float WarpReduce<let group_size : uint>(float sum) {
 }
 ```
 
-因为可以直接使用`WaveShuffleDown`来接读取同warp内其他线程的寄存器，因此我们可以使用更少的共享内存来实现原来的算法了。
+因为可以使用`WaveShuffleDown`来直接读取同warp内其他线程的寄存器，因此我们可以使用更少的共享内存来实现原来的算法了。
 
 ```hlsl
 #define THREAD_GROUP_SIZE 256
@@ -356,9 +359,9 @@ void main(uint3 DTid: SV_DispatchThreadID, uint3 GTid: SV_GroupThreadID, uint3 G
 
 这个版本比起之前的版本只有一点点提升，大概快了0.02ms.
 
-不过使用`WaveShuffleDown`自己搓一个`Reduce`实际上有点舍近求远，因为实际上有个`WaveActiveSum`的wave指令可用，实际上并没有自己实现一个的必要（）。
+不过使用`WaveShuffleDown`自己搓一个`Reduce`多少有点舍近求远，因为实际上有个`WaveActiveSum`的wave指令可用，并没有自己实现一个的必要（）。
 
-> 对应CUDA的`__reduce_add_sync`原语，不过CUDA这边要求计算能力8.0+（30系以后）才可用。估计DX这边的更老的卡也是手动用shuffle指令软件实现的。
+> `WaveActiveSum`对应CUDA的`__reduce_add_sync`原语，不过CUDA这边要求计算能力8.0+（30系以后）才可用。估计DX这边的更老的卡也是手动用shuffle指令软件实现的。
 
 ```hlsl
 #define THREAD_GROUP_SIZE 256
@@ -400,7 +403,11 @@ void main(uint3 DTid: SV_DispatchThreadID, uint3 GTid: SV_GroupThreadID, uint3 G
 
 这一版性能上没有啥大的差别，但是结果和用shuffle down手工实现的reduce相比相对误差小了一半，也不知道底层究竟有啥区别。
 
-> **思考**：第二次调用`WaveActiveSum`时有没有可能剩下的线程数还是比一个warp大，即有没有可能需要调用第3次`WaveActiveSum`？
+:::details 思考：需要调用第3次`WaveActiveSum`吗？
+
+不需要。如今GPU支持的线程组大小最大是1024，恰好是$`32\times32`$，两个warp reduce刚好解决。
+
+:::
 
 ## 总结
 
@@ -421,16 +428,16 @@ void main(uint3 DTid: SV_DispatchThreadID, uint3 GTid: SV_GroupThreadID, uint3 G
   > - 如果某项资源已经接近硬件极限，例如带宽已经接近100%，就别想着改进访存了
   > - 如果不清楚瓶颈在何处，盲目地去优化，即便优化的部分提升了10倍，按照Amdahl定律很可能总体连1%的提升也没有
 - 修改的代码最后被层层转译之后是有效修改吗？
-  > - 如果编译后端/驱动等已经完成了相关的优化，那么自己手动去实现一遍是在做无用功
+  > - 如果编译后端/驱动等已经完成了相关的优化，那么自己手动去实现一遍是在做无用功，甚至阻碍自动优化
 
-不过遗憾的是我目前仍然没搞懂咋在这种没有frame的demo程序里面用NSight Graphics抓Compute，只得用NSight System来简单弄一弄——L1命中率之类的数据是别想看了，但简单看看带宽和占用率还是可以的：
+遗憾的是我目前仍然没搞懂咋在这种没有frame的demo程序里面用NSight Graphics抓Compute，只得用NSight System来简单弄一弄——L1命中率之类的数据是别想看了，但简单看看带宽和占用率还是可以的：
 
 ![Naive实现](https://s2.loli.net/2025/03/20/14exSNFk6LQYPyg.png)
 
 ![优化后实现](https://s2.loli.net/2025/03/20/8luGLosRvgI7jM9.png)
 
-对比两版compute shader，可以看到最大的差别是共享内存的带宽相差了2倍。Reduce操作是典型的memory bound的算子，访存性能提升两倍基本就是最终性能提升了两倍——这也和我们前面的测试结果对的上。这也能解释为啥我们减少idle线程的那步提升最大：同样的occupancy，多了一倍的线程在工作，将带宽几乎放大了一倍。
+对比两版compute shader，可以看到最大的差别是共享内存的带宽相差了2倍。Reduce是典型的memory bound的算子，访存性能提升两倍基本就是最终性能提升了两倍——这也和我们前面的测试结果对的上。这也能解释为啥我们减少idle线程的那步提升最大：同样的occupancy，多了一倍的线程在工作，将带宽几乎放大了一倍。
 
-但同样的，Mark Harris的讲义里还有个优化我们没实现——在load时不是取两个数先reduce，而是取n个数。我们基本可以预见即使实现了这个优化也不会有什么大的提升，因为DRAM基本上已经被我们跑满了，很难再在这个层面上获得性能提升。
+Mark Harris的讲义里还有个优化我们没实现——在load时不是取两个数先reduce，而是取n个数。我们基本可以预见即使实现了这个优化也不会有什么大的提升，因为DRAM基本上已经被我们跑满了，很难再在这个层面上获得性能提升。
 
 作为思考，读者可以尝试profile最后两版优化后的compute shader，观察用shuffle指令手写的wave reduce和hlsl内建的指令之间的访存模式有什么区别。并指出上图中使用的是哪一版优化shader.
