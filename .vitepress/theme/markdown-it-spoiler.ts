@@ -13,8 +13,13 @@ export default function spoiler_plugin(md: MarkdownIt) {
     }
 
     let end = -1
-    // Find the closing delimiter.  Iterate to handle escaped delimiters.
+    // Find the closing delimiter and skip escaped delimiters.
     for (let i = start + 2; i < state.src.length - 1; i++) {
+      if (state.src[i] === '\\') {
+        i += 1
+        continue
+      }
+
       if (state.src.slice(i, i + 2) === '!!') {
         end = i
         break
@@ -34,7 +39,7 @@ export default function spoiler_plugin(md: MarkdownIt) {
     return true
   }
   md.inline.ruler.push('spoiler', spoiler_rule)
-  md.renderer.rules.shade = (tokens: Token[], idx: number) => {
-    return `<Spoiler>${tokens[idx].content}</Spoiler>`
+  md.renderer.rules.spoiler = (tokens: Token[], idx: number) => {
+    return `<Spoiler>${tokens[idx]?.content}</Spoiler>`
   }
 }
