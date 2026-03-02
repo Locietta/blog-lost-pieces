@@ -1,14 +1,14 @@
 <template>
   <div
-    v-for="yearList in data"
-    :key="yearList[0].frontMatter.date"
+    v-for="yearGroup in data"
+    :key="yearGroup.year"
   >
     <div class="year">
-      {{ yearList[0].frontMatter.date.split('-')[0] }}
+      {{ yearGroup.year }}
     </div>
     <ul>
       <li
-        v-for="(article, index) in yearList"
+        v-for="(article, index) in yearGroup.posts"
         :key="index"
       >
         <div class="article">
@@ -26,19 +26,26 @@ import { computed } from 'vue'
 import { data as posts } from '@theme/data/posts.data.ts'
 import type { Post } from '@/theme'
 
+type YearGroup = {
+  year: string
+  posts: Post[]
+}
+
 function groupByYear(posts: Post[]) {
-  const data: Array<Post[]> = []
-  let currentYear: string | null = null
+  const data: YearGroup[] = []
+  let currentGroup: YearGroup | undefined = undefined
 
   posts.forEach((post) => {
-    if (post.frontMatter.date) {
-      const year = post.frontMatter.date.split('-')[0]
-      if (year !== currentYear) {
-        currentYear = year
-        data.push([]) // Start a new group for the new year
-      }
-      data[data.length - 1].push(post) // Add the post to the current year's group
+    const date = post.frontMatter.date
+    if (!date) return
+
+    const year = date.split('-')[0] ?? ''
+    if (year !== currentGroup?.year) {
+      currentGroup = { year, posts: [] }
+      data.push(currentGroup)
     }
+
+    currentGroup.posts.push(post)
   })
 
   return data

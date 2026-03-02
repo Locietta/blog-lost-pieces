@@ -6,7 +6,7 @@
       class="post-tag"
       @click="toggleTag(key.toString())"
     >
-      {{ key }} <strong>{{ data[key].length }}</strong>
+      {{ key }} <strong>{{ item.length }}</strong>
     </span>
   </div>
   <div class="header">{{ selectedTag }}</div>
