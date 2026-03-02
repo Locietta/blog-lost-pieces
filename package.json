@@ -45,7 +45,7 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "vitepress": "patches/vitepress.patch"
+      "vitepress@1.6.4": "patches/vitepress@1.6.4.patch"
     },
     "onlyBuiltDependencies": [
       "esbuild",
