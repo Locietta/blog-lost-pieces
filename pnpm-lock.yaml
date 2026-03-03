@@ -86,7 +86,7 @@ importers:
         specifier: ^8.56.1
         version: 8.56.1(eslint@10.0.2)(typescript@5.9.3)
       vitepress:
-        specifier: next
+        specifier: 2.0.0-alpha.16
         version: 2.0.0-alpha.16(patch_hash=19369ed069fb1e0a1266c514ac97d549bf4765c202ddf95c80a0e470ad33fa69)(@types/node@25.3.3)(async-validator@4.2.5)(oxc-minify@0.116.0)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
       vitepress-plugin-rss:
         specifier: ^0.4.2
