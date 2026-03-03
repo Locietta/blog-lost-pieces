@@ -2,6 +2,7 @@
   <NConfigProvider
     abstract
     inline-theme-disabled
+    preflight-style-disabled
     :theme="isDark ? darkTheme : lightTheme"
   >
     <Layout>

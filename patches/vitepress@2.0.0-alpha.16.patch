@@ -1,31 +1,29 @@
 diff --git a/dist/client/theme-default/composables/outline.js b/dist/client/theme-default/composables/outline.js
-index 6746cc170c65ffa4f0439d2e8f8cdaa85e36e156..2e000a407a07acee9be6bfcaab805dddce6dd567 100644
+index e9c5a111f4611ae82cb090622e06c62db7d3dbc0..3a037a99b9b02c7cd078dd5f24088c05b3360e2e 100644
 --- a/dist/client/theme-default/composables/outline.js
 +++ b/dist/client/theme-default/composables/outline.js
-@@ -34,6 +34,26 @@ function serializeHeader(h) {
+@@ -34,6 +34,24 @@ function serializeHeader(h) {
          if (node.nodeType === 1) {
              if (ignoreRE.test(node.className))
                  continue;
-+
 +            // Handle KaTeX nodes and wrappers (e.g. .katex-display)
 +            // to avoid duplicated text from mathml + annotation + html.
 +            const katex = node.classList.contains('katex')
 +                ? node
 +                : node.querySelector('.katex');
 +            if (katex) {
-+                const katex_html = katex.querySelector('.katex-html');
-+                if (katex_html) {
-+                    ret += katex_html.textContent;
++                const katexHtml = katex.querySelector('.katex-html');
++                if (katexHtml) {
++                    ret += katexHtml.textContent;
 +                    continue;
 +                }
-+                const katex_annotation = katex.querySelector('.katex-mathml annotation');
-+                if (katex_annotation) {
-+                    ret += katex_annotation.textContent;
++                const katexAnnotation = katex.querySelector('.katex-mathml annotation');
++                if (katexAnnotation) {
++                    ret += katexAnnotation.textContent;
 +                    continue;
 +                }
 +                continue;
 +            }
-+
              ret += node.textContent;
          }
          else if (node.nodeType === 3) {
