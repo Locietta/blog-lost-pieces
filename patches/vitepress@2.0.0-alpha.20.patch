@@ -1,0 +1,24 @@
+diff --git a/dist/client/theme-default/composables/outline.js b/dist/client/theme-default/composables/outline.js
+index 1bf9e8b..ef84727 100644
+--- a/dist/client/theme-default/composables/outline.js
++++ b/dist/client/theme-default/composables/outline.js
+@@ -22,6 +22,19 @@ function serializeHeader(h) {
+ 	let ret = "";
+ 	for (const node of h.childNodes) if (node.nodeType === 1) {
+ 		if (ignoreRE.test(node.className)) continue;
++		// Handle KaTeX nodes and wrappers (e.g. .katex-display)
++		// to avoid duplicated text from mathml + annotation + html.
++		const katex = node.classList.contains("katex") ? node : node.querySelector(".katex");
++		if (katex) {
++			const katexHtml = katex.querySelector(".katex-html");
++			if (katexHtml) {
++				ret += katexHtml.textContent;
++				continue;
++			}
++			const katexAnnotation = katex.querySelector(".katex-mathml annotation");
++			if (katexAnnotation) ret += katexAnnotation.textContent;
++			continue;
++		}
+ 		ret += node.textContent;
+ 	} else if (node.nodeType === 3) ret += node.textContent;
+ 	return ret.trim();

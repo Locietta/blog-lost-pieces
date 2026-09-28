@@ -103,7 +103,7 @@ const imgSizeRule: RuleInline = (state, silent) => {
   let char: string
 
   let href = ''
-  let title = ''
+  let title: string
   let percent = ''
 
   if (pos < max && state.src.charAt(pos) === '(') {

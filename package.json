@@ -10,31 +10,30 @@
     "@giscus/vue": "^3.1.1",
     "@img-comparison-slider/vue": "^8.0.0",
     "@types/katex": "^0.16.8",
-    "@types/markdown-it": "^14.1.2",
-    "@types/node": "^25.3.3",
+    "@types/markdown-it": "^14.2.0",
+    "@types/node": "^26.6.3",
     "@vue/eslint-config-prettier": "^10.2.0",
-    "@vue/tsconfig": "^0.9.0",
-    "eslint": "^10.0.2",
-    "eslint-plugin-vue": "^10.8.0",
-    "globals": "^17.4.0",
+    "@vue/tsconfig": "^0.9.1",
+    "eslint": "^10.11.0",
+    "eslint-plugin-vue": "^10.11.1",
+    "globals": "^17.12.0",
     "gray-matter": "^4.0.3",
     "husky": "^9.1.7",
-    "katex": "^0.16.33",
-    "lightningcss": "^1.31.1",
-    "lint-staged": "^16.3.1",
+    "katex": "^0.18.9",
+    "lightningcss": "^1.33.0",
+    "lint-staged": "^17.6.0",
     "markdown-it-wordless": "^1.1.1",
-    "naive-ui": "^2.43.2",
-    "oxc-minify": "^0.116.0",
-    "postcss": "^8.5.6",
-    "prettier": "^3.8.1",
+    "naive-ui": "^2.45.3",
+    "postcss": "^8.5.28",
+    "prettier": "^3.9.9",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.56.1",
-    "vitepress": "2.0.0-alpha.16",
-    "vitepress-plugin-rss": "^0.4.2",
-    "vue": "^3.5.29",
-    "vue-eslint-parser": "^10.4.0",
+    "typescript-eslint": "^8.70.1",
+    "vitepress": "2.0.0-alpha.20",
+    "vitepress-plugin-rss": "^0.4.5",
+    "vue": "^3.5.43",
+    "vue-eslint-parser": "^10.4.1",
     "vue-icons-plus": "^0.1.9",
-    "vue-tweet-pure": "^0.2.1"
+    "vue-tweet-pure": "^0.3.0"
   },
   "scripts": {
     "dev": "vitepress dev",
@@ -43,18 +42,6 @@
     "lint-fix": "eslint --fix .vitepress/**/*.{ts,vue}",
     "preview": "vitepress preview",
     "prepare": "husky"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "sharp"
-    ],
-    "overrides": {
-      "vite": "npm:rolldown-vite@7.3.1"
-    },
-    "patchedDependencies": {
-      "vitepress@2.0.0-alpha.16": "patches/vitepress@2.0.0-alpha.16.patch"
-    }
   },
   "lint-staged": {
     "*.{js,ts,vue}": [
@@ -69,5 +56,5 @@
       "url": "https://github.com/Locietta/blog-lost-pieces/blob/main/LICENSE"
     }
   ],
-  "packageManager": "pnpm@10.28.2"
+  "packageManager": "pnpm@12.7.0"
 }

@@ -4,13 +4,13 @@ import {
   type HeadConfig,
   postcssIsolateStyles,
 } from 'vitepress'
-import mk from './theme/markdown-it-katex'
-import img_fig from './theme/markdown-it-img-figure'
-import append_title from './theme/markdown-it-append-title'
-import spoiler from './theme/markdown-it-spoiler'
-import img_size from './theme/markdown-it-img-size'
+import mk from './theme/markdown-it-katex.ts'
+import img_fig from './theme/markdown-it-img-figure.ts'
+import append_title from './theme/markdown-it-append-title.ts'
+import spoiler from './theme/markdown-it-spoiler.ts'
+import img_size from './theme/markdown-it-img-size.ts'
 import { wordless, chineseAndJapanese, type Options } from 'markdown-it-wordless'
-import custom_components from './theme/custom_component'
+import custom_components from './theme/custom_component.ts'
 import path from 'path'
 import { type RSSOptions, RssPlugin } from 'vitepress-plugin-rss'
 
@@ -198,13 +198,13 @@ export default defineConfigWithTheme<LoiaTheme.Config>({
     plugins: [RssPlugin(rssConfig)],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '.'),
-        '@theme': path.resolve(__dirname, './theme'),
-        '@components': path.resolve(__dirname, './theme/components'),
+        '@': path.resolve(import.meta.dirname, '.'),
+        '@theme': path.resolve(import.meta.dirname, './theme'),
+        '@components': path.resolve(import.meta.dirname, './theme/components'),
       },
     },
     build: {
-      rollupOptions: {
+      rolldownOptions: {
         onwarn: (warning, warn) => {
           // Module level directives cause errors when bundled, "use client" was ignored
           // https://stackoverflow.com/a/76694634/21554202
