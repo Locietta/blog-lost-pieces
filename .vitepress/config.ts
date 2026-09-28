@@ -2,6 +2,7 @@ import {
   type DefaultTheme,
   defineConfigWithTheme,
   type HeadConfig,
+  type Plugin,
   postcssIsolateStyles,
 } from 'vitepress'
 import mk from './theme/markdown-it-katex.ts'
@@ -22,6 +23,17 @@ const rssConfig: RSSOptions = {
   language: 'zh-CN',
   filter(post) {
     return post.url.startsWith('/posts/')
+  },
+}
+
+// KaTeX's @font-face lists woff2, woff and ttf. Every modern browser picks woff2,
+// so strip the fallbacks before vite resolves url() to avoid emitting unused fonts.
+const katexWoff2Only: Plugin = {
+  name: 'katex-woff2-only',
+  enforce: 'pre',
+  transform(code, id) {
+    if (!/[\\/]katex[\\/]dist[\\/]katex(\.min)?\.css/.test(id)) return
+    return code.replace(/,\s*url\([^)]*\.(?:woff|ttf)\)\s*format\(["'](?:woff|truetype)["']\)/g, '')
   },
 }
 
@@ -195,7 +207,7 @@ export default defineConfigWithTheme<LoiaTheme.Config>({
     },
   },
   vite: {
-    plugins: [RssPlugin(rssConfig)],
+    plugins: [RssPlugin(rssConfig), katexWoff2Only],
     resolve: {
       alias: {
         '@': path.resolve(import.meta.dirname, '.'),
