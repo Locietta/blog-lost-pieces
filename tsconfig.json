@@ -1,14 +1,17 @@
 {
-  "extends": ["@vue/tsconfig/tsconfig.lib.json", "@vue/tsconfig/tsconfig.dom.json"],
+  "extends": ["@vue/tsconfig/tsconfig.json", "@vue/tsconfig/tsconfig.dom.json"],
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
     "sourceMap": true,
+    "noUncheckedIndexedAccess": true,
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "paths": {
       "@/*": [".vitepress/*"],
       "@theme/*": [".vitepress/theme/*"],
-      "@components/*": [".vitepress/theme/components/*"]
+      "@components/*": [".vitepress/theme/components/*"],
+      // its exports list "import" before "types", so TS resolves the shipped .ts sources
+      "markdown-it-wordless": ["./node_modules/markdown-it-wordless/index.d.ts"]
     },
     "baseUrl": "./"
   },

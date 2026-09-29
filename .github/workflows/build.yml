@@ -47,6 +47,8 @@ jobs:
       run: |
         git config --global --add safe.directory '*'
         pnpm i
+    - name: Type Check
+      run: pnpm typecheck
     - name: Build
       run: |
         pnpm build

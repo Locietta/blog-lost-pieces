@@ -93,8 +93,9 @@ function math_inline(state: StateInline, silent: boolean) {
 }
 
 function math_block(state: StateBlock, start: number, end: number, silent: boolean): boolean {
-  const startPos = state.bMarks[start] + state.tShift[start]
-  const maxPos = state.eMarks[start]
+  // line indices below nd always have entries in the line maps
+  const startPos = state.bMarks[start]! + state.tShift[start]!
+  const maxPos = state.eMarks[start]!
 
   // Ensure the line is long enough and starts with "$$"
   if (startPos + 2 > maxPos || state.src.slice(startPos, startPos + 2) !== '$$') {
@@ -118,11 +119,11 @@ function math_block(state: StateBlock, start: number, end: number, silent: boole
   }
   let next = start
   while (!found && ++next < end) {
-    const pos = state.bMarks[next] + state.tShift[next]
-    const max = state.eMarks[next]
+    const pos = state.bMarks[next]! + state.tShift[next]!
+    const max = state.eMarks[next]!
 
     // Stop if the line has negative indent or is out of block scope
-    if (pos < max && state.tShift[next] < state.blkIndent) {
+    if (pos < max && state.tShift[next]! < state.blkIndent) {
       break
     }
 
@@ -142,7 +143,7 @@ function math_block(state: StateBlock, start: number, end: number, silent: boole
   token.block = true
   token.content =
     (firstLine && firstLine + '\n') +
-    state.getLines(start + 1, next, state.tShift[start], true) +
+    state.getLines(start + 1, next, state.tShift[start]!, true) +
     lastLine
   token.map = [start, state.line]
   token.markup = '$$'
@@ -160,7 +161,7 @@ export default function math_plugin(md: MarkdownIt, options: KatexOptions = {}) 
   }
 
   const inlineRenderer = function (tokens: Token[], idx: number) {
-    return katexInline(tokens[idx].content)
+    return katexInline(tokens[idx]!.content)
   }
 
   const katexBlock = function (latex: string) {
@@ -169,7 +170,7 @@ export default function math_plugin(md: MarkdownIt, options: KatexOptions = {}) 
   }
 
   const blockRenderer = function (tokens: Token[], idx: number) {
-    return katexBlock(tokens[idx].content) + '\n'
+    return katexBlock(tokens[idx]!.content) + '\n'
   }
 
   md.inline.ruler.after('escape', 'math_inline', math_inline)

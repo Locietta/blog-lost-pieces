@@ -17,7 +17,7 @@ description: 初中的时候瞎琢磨过的问题，现在捡起来看还是很�
 然后我就在书上翻到这样一个结论：
 
 :::tip 命题2（伯特兰-切比雪夫定理）
-对任意的正整数$n$，总是存在素数$p$，满足$n<p\leq2n$.
+对任意的正整数$n$，总是存在素数$p$，满足$n\lt p\leq2n$.
 :::
 
 简单尝试一下：
@@ -29,7 +29,7 @@ description: 初中的时候瞎琢磨过的问题，现在捡起来看还是很�
 
 这结论一看就强了不少，想证明却又无从下手——当时我就拿来折磨整数竞的一个小伙伴了。
 
-记得我和他一块想了两天没啥进展，不过他声称找到了$n<p\leq n^2$情况下的证明（~~现在想想多半不靠谱~~）。我倒是想到个耍赖的证明：
+记得我和他一块想了两天没啥进展，不过他声称找到了$n\lt p\leq n^2$情况下的证明（~~现在想想多半不靠谱~~）。我倒是想到个耍赖的证明：
 
 :::info “证明”
 由于$2n$是一个偶数，所以由**哥德巴赫猜想**可知存在两个素数$p, q$使得$2n=p+q$.
@@ -59,10 +59,10 @@ $$
 从而可以把${2n \choose n}$的素因数分解写成
 
 $$
-{2n \choose n} = \prod_{p_i\leq \sqrt{2n}} p_i^{\alpha_i} \prod_{\sqrt{2n}<p_i\leq \frac{2}{3}n} p_i \prod_{n<p_i\leq 2n} p_i
+{2n \choose n} = \prod_{p_i\leq \sqrt{2n}} p_i^{\alpha_i} \prod_{\sqrt{2n}\lt p_i\leq \frac{2}{3}n} p_i \prod_{n\lt p_i\leq 2n} p_i
 $$
 
-分别估计其它几项的大小后可知$\displaystyle \prod_{n<p_i\leq 2n} p_i$比1大，从而得出证明。
+分别估计其它几项的大小后可知$\displaystyle \prod_{n\lt p_i\leq 2n} p_i$比1大，从而得出证明。
 
 ## 估计素因子$p_i$与指数$\alpha_i$的大小
 
@@ -138,13 +138,13 @@ $p_i$的其他倍数都比$2n$大，因此它在分子和分母的指数都是2�
 $n\geq 5$时，$\sqrt{2n}<\dfrac{2n}{3}$，此时可以把${2n \choose n}$的素因数分解写成
 
 $$
-{2n \choose n} = \prod_{p_i\leq \sqrt{2n}} p_i^{\alpha_i} \prod_{\sqrt{2n}<p_i\leq \frac{2}{3}n} p_i \prod_{n<p_i\leq 2n} p_i
+{2n \choose n} = \prod_{p_i\leq \sqrt{2n}} p_i^{\alpha_i} \prod_{\sqrt{2n}\lt p_i\leq \frac{2}{3}n} p_i \prod_{n\lt p_i\leq 2n} p_i
 $$
 
 设$(n, 2n]$中素数的个数为$\omega(n)$，我们对最后一项做一点粗暴的放缩，把$\omega(n)$代到上面的式子里面，就能得到：
 
 $$
-{2n \choose n} \leq \prod_{p_i\leq \sqrt{2n}} p_i^{\alpha_i} \prod_{\sqrt{2n}<p_i\leq \frac{2}{3}n} p_i \ \cdot (2n)^{\omega(n)} \tag{2}
+{2n \choose n} \leq \prod_{p_i\leq \sqrt{2n}} p_i^{\alpha_i} \prod_{\sqrt{2n}\lt p_i\leq \frac{2}{3}n} p_i \ \cdot (2n)^{\omega(n)} \tag{2}
 $$
 
 接下来只要对二项式系数以及不等式右侧的两个乘积进行放缩，就能得到$\omega(n)$的取值范围了。只要证明$\omega(n)>0$就算胜利！
@@ -253,12 +253,12 @@ $\pi(n)\leq \dfrac{n}{3} + 2$
 
 > 有很多更严密的上界，但对这个问题来讲这已经足够了。（由素数定理$\pi(x)\sim \frac{x}{\ln x}$，所以紧上界应与$\frac{n}{\ln n}$同阶）
 
-### 估算$\displaystyle\prod_{\sqrt{2n}<p_i\leq \frac{2}{3}n} p_i$
+### 估算$\displaystyle\prod_{\sqrt{2n}\lt p_i\leq \frac{2}{3}n} p_i$ {#估算-displaystyle-prod-sqrt-2n-p-i-leq-frac-2-3-n-p-i}
 
 这一项的估计相对复杂许多，我们考虑$n$以下所有素数的乘积函数$\displaystyle P(n)=\prod_{p_i\leq n} p_i$，那么
 
 $$
-\prod_{\sqrt{2n}<p_i\leq \frac{2}{3}n} p_i = \dfrac{P\left(\dfrac{2n}{3}\right)}{P(\sqrt{2n})}
+\prod_{\sqrt{2n}\lt p_i\leq \frac{2}{3}n} p_i = \dfrac{P\left(\dfrac{2n}{3}\right)}{P(\sqrt{2n})}
 $$
 
 我们来寻找$P(n)$的取值范围。
@@ -323,11 +323,11 @@ $$
 
 :::
 
-现在我们回到对$\displaystyle\prod_{\sqrt{2n}<p_i\leq \frac{2}{3}n} p_i$的估计，对$n\geq 5$我们有
+现在我们回到对$\displaystyle\prod_{\sqrt{2n}\lt p_i\leq \frac{2}{3}n} p_i$的估计，对$n\geq 5$我们有
 
 $$
 \begin{aligned}
-\prod_{\sqrt{2n}<p_i\leq \frac{2}{3}n} p_i &= \dfrac{P\left(\dfrac{2n}{3}\right)}{P(\sqrt{2n})}\\
+\prod_{\sqrt{2n}\lt p_i\leq \frac{2}{3}n} p_i &= \dfrac{P\left(\dfrac{2n}{3}\right)}{P(\sqrt{2n})}\\
 &< \dfrac{2^{\frac{4}{3}n-3}}{P(3)}\\
 &<2^{\frac{4}{3}n-5}
 \end{aligned}
@@ -339,7 +339,7 @@ $$
 
 $$
 \begin{aligned}
-  \dfrac{4^n}{\sqrt{\pi(n+\frac{1}{2})}} &\leq {2n \choose n} \leq \prod_{p_i\leq \sqrt{2n}} p_i^{\alpha_i} \prod_{\sqrt{2n}<p_i\leq \frac{2}{3}n} p_i \ \cdot (2n)^{\omega(n)}\\
+  \dfrac{4^n}{\sqrt{\pi(n+\frac{1}{2})}} &\leq {2n \choose n} \leq \prod_{p_i\leq \sqrt{2n}} p_i^{\alpha_i} \prod_{\sqrt{2n}\lt p_i\leq \frac{2}{3}n} p_i \ \cdot (2n)^{\omega(n)}\\
   &<(2n)^{\frac{\sqrt{2n}}{3}+2}\cdot 2^{\frac{4}{3}n-5}\cdot (2n)^{\omega(n)}
 \end{aligned}
 $$
@@ -384,7 +384,7 @@ $$
 综上，我们就证明了
 
 :::tip 定理1 (Betrand-Chebyshev)
-对任意的正整数$n$，总是存在素数$p$，满足$n<p\leq2n$.
+对任意的正整数$n$，总是存在素数$p$，满足$n\lt p\leq2n$.
 :::
 
 由$f(\sqrt{2n})$发散到正无穷的事实，我们还得到以下定理

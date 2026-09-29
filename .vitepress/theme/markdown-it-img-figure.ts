@@ -61,7 +61,10 @@ export default function imageFiguresPlugin(md: MarkdownIt, options: FigureOption
 
     // do not process first and last token
     for (let i = 1, l = state.tokens.length; i < l - 1; ++i) {
-      const token = state.tokens[i]
+      // the loop bounds guarantee the previous and next tokens exist
+      const prev = state.tokens[i - 1]!
+      const token = state.tokens[i]!
+      const next = state.tokens[i + 1]!
 
       if (token.type !== 'inline') {
         continue
@@ -71,12 +74,12 @@ export default function imageFiguresPlugin(md: MarkdownIt, options: FigureOption
         continue
       }
       // one child, should be img
-      if (token.children.length === 1 && token.children[0].type !== 'image') {
+      if (token.children.length === 1 && token.children[0]!.type !== 'image') {
         continue
       }
       // three children, should be image enclosed in link
       if (token.children.length === 3) {
-        const [childA, childB, childC] = token.children
+        const [childA, childB, childC] = token.children as [Token, Token, Token]
         const isEnclosed =
           childA.type !== 'link_open' || childB.type !== 'image' || childC.type !== 'link_close'
 
@@ -85,11 +88,11 @@ export default function imageFiguresPlugin(md: MarkdownIt, options: FigureOption
         }
       }
       // prev token is paragraph open
-      if (i !== 0 && state.tokens[i - 1].type !== 'paragraph_open') {
+      if (prev.type !== 'paragraph_open') {
         continue
       }
       // next token is paragraph close
-      if (i !== l - 1 && state.tokens[i + 1].type !== 'paragraph_close') {
+      if (next.type !== 'paragraph_close') {
         continue
       }
 
@@ -97,19 +100,19 @@ export default function imageFiguresPlugin(md: MarkdownIt, options: FigureOption
       // Previous token is paragraph open.
       // Next token is paragraph close.
       // Lets replace the paragraph tokens with figure tokens.
-      const figure = state.tokens[i - 1]
+      const figure = prev
       figure.type = 'figure_open'
       figure.tag = 'figure'
-      state.tokens[i + 1].type = 'figure_close'
-      state.tokens[i + 1].tag = 'figure'
+      next.type = 'figure_close'
+      next.tag = 'figure'
 
       if (options.dataType) {
-        state.tokens[i - 1].attrPush(['data-type', 'image'])
+        figure.attrPush(['data-type', 'image'])
       }
       let image: Token
 
       if (options.link && token.children.length === 1) {
-        ;[image] = token.children
+        image = token.children[0]!
         const link = new state.Token('link_open', 'a', 1)
         link.attrPush(['href', image.attrGet('src')!])
 
@@ -118,7 +121,7 @@ export default function imageFiguresPlugin(md: MarkdownIt, options: FigureOption
       }
 
       // for linked images, image is one off
-      image = token.children.length === 1 ? token.children[0] : token.children[1]
+      image = token.children[token.children.length === 1 ? 0 : 1]!
 
       // image.attrs must present
       if (!image.attrs) continue
@@ -129,7 +132,7 @@ export default function imageFiguresPlugin(md: MarkdownIt, options: FigureOption
         if (figCaption) {
           const [captionContent] = md.parseInline(figCaption, state.env)
           token.children.push(new state.Token('figcaption_open', 'figcaption', 1))
-          if (captionContent.children) token.children.push(...captionContent.children)
+          if (captionContent?.children) token.children.push(...captionContent.children)
           token.children.push(new state.Token('figcaption_close', 'figcaption', -1))
 
           if (image.attrs) {
@@ -147,7 +150,7 @@ export default function imageFiguresPlugin(md: MarkdownIt, options: FigureOption
       if (options.tabindex) {
         // add a tabindex property
         // you could use this with css-tricks.com/expanding-images-html5
-        state.tokens[i - 1].attrPush(['tabindex', tabIndex.toString()])
+        figure.attrPush(['tabindex', tabIndex.toString()])
         tabIndex++
       }
 
@@ -168,18 +171,11 @@ export default function imageFiguresPlugin(md: MarkdownIt, options: FigureOption
       }
 
       if (options.classes && typeof options.classes === 'string') {
-        let hasClass = false
+        const classAttr = image.attrs.find(([k]) => k === 'class')
 
-        for (let j = 0, length = image.attrs.length; j < length && !hasClass; j++) {
-          const attrPair = image.attrs[j]
-
-          if (attrPair[0] === 'class') {
-            attrPair[1] = `${attrPair[1]} ${options.classes}`
-            hasClass = true
-          }
-        }
-
-        if (!hasClass) {
+        if (classAttr) {
+          classAttr[1] = `${classAttr[1]} ${options.classes}`
+        } else {
           image.attrs.push(['class', options.classes])
         }
       }

@@ -33,6 +33,7 @@
     "vue": "^3.5.43",
     "vue-eslint-parser": "^10.4.1",
     "vue-icons-plus": "^0.1.9",
+    "vue-tsc": "^3.3.11",
     "vue-tweet-pure": "^0.3.0"
   },
   "scripts": {
@@ -40,6 +41,7 @@
     "build": "vitepress build",
     "lint": "eslint .vitepress/**/*.{ts,vue}",
     "lint-fix": "eslint --fix .vitepress/**/*.{ts,vue}",
+    "typecheck": "vue-tsc --noEmit",
     "preview": "vitepress preview",
     "prepare": "husky"
   },

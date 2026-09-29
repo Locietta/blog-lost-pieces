@@ -15,4 +15,4 @@ const { theme, params } = useData()
 const pageSize = theme.value.pageSize
 </script>
 
-<Page :posts="posts" :pageSize="pageSize" :page="Number(params.num)" />
+<Page :posts="posts" :pageSize="pageSize" :page="Number(params?.num)" />
