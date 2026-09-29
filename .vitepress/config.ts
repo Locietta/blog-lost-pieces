@@ -10,6 +10,7 @@ import img_fig from './theme/markdown-it-img-figure.ts'
 import append_title from './theme/markdown-it-append-title.ts'
 import spoiler from './theme/markdown-it-spoiler.ts'
 import img_size from './theme/markdown-it-img-size.ts'
+import post_meta from './theme/markdown-it-post-meta.ts'
 import { wordless, chineseAndJapanese, type Options } from 'markdown-it-wordless'
 import custom_components from './theme/custom_component.ts'
 import path from 'path'
@@ -173,6 +174,7 @@ export default defineConfigWithTheme<LoiaTheme.Config>({
         .use(append_title)
         .use(spoiler)
         .use(img_size)
+        .use(post_meta)
     },
   },
   transformPageData(pageData) {

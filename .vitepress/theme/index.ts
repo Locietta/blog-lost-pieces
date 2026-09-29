@@ -5,6 +5,7 @@ import DefaultTheme from 'vitepress/theme'
 import Tweet from '@components/Tweet.vue'
 import Spoiler from '@/theme/components/Spoiler.vue'
 import LinkCard from '@components/LinkCard.vue'
+import PostMeta from '@components/PostMeta.vue'
 
 import LoiaLayout from '@components/LoiaLayout.vue'
 
@@ -19,5 +20,6 @@ export default {
     app.component('Tweet', Tweet)
     app.component('Spoiler', Spoiler)
     app.component('LinkCard', LinkCard)
+    app.component('PostMeta', PostMeta)
   },
 } satisfies Theme
