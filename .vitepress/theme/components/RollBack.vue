@@ -1,54 +1,46 @@
 <template>
-  <ClientOnly>
-    <NButton
-      v-if="isPosts"
-      type="default"
-      class="rollback-btn"
-      dashed
-      @click="rollBack"
-    >
-      <template #icon><HiMiniArrowUturnLeft /></template>
-      {{ '回到上一页' }}
-    </NButton>
-  </ClientOnly>
+  <a
+    v-if="isPosts"
+    class="rollback-btn"
+    :href="lastListPage"
+  >
+    <HiMiniArrowUturnLeft class="icon" />
+    回到上一页
+  </a>
 </template>
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vitepress'
 import { HiMiniArrowUturnLeft } from 'vue-icons-plus/hi2'
-import { NButton } from 'naive-ui'
+import { useLastListPage } from '@theme/list-page'
 
 const route = useRoute()
 const isPosts = computed(() => route.path.startsWith('/posts'))
-
-const rollBack = () => {
-  if (history.length <= 1 || !document.referrer.startsWith(location.origin)) {
-    // If no history or the referrer is not from the site, go to '/'
-    location.href = '/'
-  } else {
-    // Otherwise, roll back within the site
-    history.go(hashChangeCount.value)
-    hashChangeCount.value = -1
-  }
-}
-
-const hashChangeCount = ref(-1)
-onMounted(() => {
-  window.onhashchange = () => {
-    hashChangeCount.value--
-  }
-})
-
-onUnmounted(() => {
-  window.onhashchange = null
-})
+const lastListPage = useLastListPage()
 </script>
 <style scoped>
-/* .rollback-btn {
-  border-style: dashed;
-} */
-/* change color when hover on the button */
-/* .rollback-btn:hover {
-  color: var(--vp-c-brand);
-} */
+.rollback-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  height: 34px;
+  padding: 0 14px;
+  border: 1px dashed var(--vp-c-divider);
+  border-radius: 6px;
+  color: var(--vp-c-text-1);
+  font-size: 14px;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.rollback-btn:hover {
+  color: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-1);
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
 </style>

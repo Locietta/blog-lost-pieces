@@ -1,57 +1,54 @@
 <template>
-  <n-card
+  <a
     class="link-card"
-    :title="title"
-    :bordered="bordered"
-    embedded
-    hoverable
-    @click="navigateToLink"
+    :class="{ bordered }"
+    :href="url"
+    target="_blank"
+    rel="noopener noreferrer"
   >
-    <template
+    <div
       v-if="image"
-      #cover
+      class="link-card-image"
     >
-      <div class="link-card-image">
-        <img
-          :src="image"
-          :alt="title"
-          loading="lazy"
-        />
-      </div>
-    </template>
-    <div class="link-card-content">
-      <div class="link-card-main">
-        <div
-          v-if="description"
-          class="link-card-description"
-        >
-          {{ description }}
+      <img
+        :src="image"
+        :alt="title"
+        loading="lazy"
+      />
+    </div>
+    <div class="link-card-body">
+      <div class="link-card-title">{{ title }}</div>
+      <div class="link-card-content">
+        <div class="link-card-main">
+          <div
+            v-if="description"
+            class="link-card-description"
+          >
+            {{ description }}
+          </div>
+          <span
+            v-if="showUrl"
+            class="link-card-url"
+            >{{ displayUrl }}</span
+          >
         </div>
-        <n-tag
-          v-if="showUrl"
-          type="primary"
-          class="link-card-url"
-          round
-          >{{ displayUrl }}
-        </n-tag>
-      </div>
-      <div
-        v-if="iconImage"
-        class="link-card-icon"
-      >
-        <img
-          :src="iconImage"
-          :alt="`${title} icon`"
-          loading="lazy"
-        />
+        <div
+          v-if="iconImage"
+          class="link-card-icon"
+        >
+          <img
+            :src="iconImage"
+            :alt="`${title} icon`"
+            loading="lazy"
+          />
+        </div>
       </div>
     </div>
-  </n-card>
+  </a>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { NCard, NTag } from 'naive-ui'
 
 type Props = {
   title: string
@@ -79,22 +76,27 @@ const displayUrl = computed(() => {
     return props.url
   }
 })
-
-const navigateToLink = () => {
-  window.open(props.url, '_blank', 'noopener,noreferrer')
-}
 </script>
 
 <style scoped>
 .link-card {
-  cursor: pointer;
-  transition: transform 0.2s;
-  margin-bottom: 16px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  margin: 0 auto;
-  border: 1px solid var(--vp-c-border);
+  display: block;
   max-width: 85%;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: var(--vp-c-bg-soft);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  color: var(--vp-c-text-1);
+  font-weight: normal;
+  text-decoration: none;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.link-card.bordered {
+  border: 1px solid var(--vp-c-border);
 }
 
 .dark .link-card {
@@ -102,7 +104,9 @@ const navigateToLink = () => {
 }
 
 .link-card:hover {
+  color: var(--vp-c-text-1);
   transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .link-card-image {
@@ -114,6 +118,17 @@ const navigateToLink = () => {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.link-card-body {
+  padding: 18px 24px 24px;
+}
+
+.link-card-title {
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 .link-card-content {
@@ -155,6 +170,11 @@ const navigateToLink = () => {
 
 .link-card-url {
   align-self: flex-start;
-  cursor: pointer;
+  padding: 0 12px;
+  border-radius: 999px;
+  background-color: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  font-size: 0.8125rem;
+  line-height: 26px;
 }
 </style>

@@ -244,11 +244,5 @@ export default defineConfigWithTheme<LoiaTheme.Config>({
     //   // define this to show mismatch details
     //   __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: true,
     // },
-    ssr: {
-      // workaround for:
-      // * xxx: TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".css"
-      // https://github.com/antfu/vite-ssg/issues/156#issuecomment-1208009117
-      noExternal: ['naive-ui', 'date-fns', 'vueuc'],
-    },
   },
 })

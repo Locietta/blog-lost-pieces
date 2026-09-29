@@ -1,32 +1,26 @@
 <template>
-  <NConfigProvider
-    abstract
-    preflight-style-disabled
-    :theme="isDark ? darkTheme : lightTheme"
-  >
-    <Layout>
-      <template #doc-after>
-        <Comment />
-      </template>
-      <template #aside-top>
-        <RollBack />
-      </template>
-    </Layout>
+  <Layout>
+    <template #doc-after>
+      <Comment />
+    </template>
+    <template #aside-top>
+      <RollBack />
+    </template>
+  </Layout>
 
-    <Copyright />
-  </NConfigProvider>
+  <Copyright />
 </template>
 <script setup lang="ts">
 import DefaultTheme from 'vitepress/theme'
 import Comment from '@components/Comment.vue'
 import Copyright from '@components/Copyright.vue'
 import RollBack from '@components/RollBack.vue'
+import { trackListPage } from '@theme/list-page'
 const { Layout } = DefaultTheme
 
-import { NConfigProvider, darkTheme, lightTheme } from 'naive-ui'
-import { useData } from 'vitepress'
 import { onMounted, onUnmounted } from 'vue'
-const { isDark } = useData()
+
+trackListPage()
 
 /// mark overflowing equations, part of solution to https://github.com/KaTeX/KaTeX/issues/1983
 
