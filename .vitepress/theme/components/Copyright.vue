@@ -1,16 +1,11 @@
 <template>
   <div class="site-footer">
-    MIT Licensed | Copyright © 2021-{{ year }}
-    <a
-      class="vitepress"
-      :href="website"
-      >{{ webTitle }}</a
+    MIT Licensed | Copyright © 2021-{{ year }} <a :href="website">{{ webTitle }}</a
     ><br />
     Powered by
     <a
-      class="vitepress"
       target="_blank"
-      href="https://vitepress.vuejs.org/"
+      href="https://vitepress.dev/"
       >VitePress</a
     >
   </div>
@@ -26,14 +21,22 @@ const year = new Date().getFullYear()
 
 <style scoped>
 .site-footer {
-  color: #999;
-  height: 50px;
-  text-align: center;
-  font-size: 0.75rem;
   width: 100%;
+  padding: 1.5rem 1.5rem 2rem;
+  border-top: 1px solid var(--vp-c-gutter);
+  color: var(--vp-c-text-2);
+  font-size: 0.8125rem;
+  line-height: 1.75;
+  text-align: center;
 }
-.vitepress {
+
+.site-footer a {
   color: var(--vp-c-text-1);
-  font-weight: 700;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.site-footer a:hover {
+  color: var(--vp-c-brand-1);
 }
 </style>

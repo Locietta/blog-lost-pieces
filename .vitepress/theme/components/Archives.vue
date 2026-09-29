@@ -1,29 +1,29 @@
 <template>
-  <div
+  <PageHeader
+    title="归档"
+    :subtitle="`共 ${posts.length} 篇文章`"
+  />
+  <section
     v-for="yearGroup in data"
     :key="yearGroup.year"
+    class="year-group"
   >
-    <div class="year">
+    <h2 class="year">
       {{ yearGroup.year }}
-    </div>
-    <ul>
-      <li
-        v-for="(article, index) in yearGroup.posts"
-        :key="index"
-      >
-        <div class="article">
-          <a :href="withBase(article.regularPath)">{{ article.frontMatter.title }}</a>
-          <div class="date">{{ article.frontMatter.date.slice(5) }}</div>
-        </div>
-      </li>
-    </ul>
-  </div>
+      <span class="year-count">{{ yearGroup.posts.length }}</span>
+    </h2>
+    <PostRows
+      :posts="yearGroup.posts"
+      date-format="month-day"
+    />
+  </section>
 </template>
 
 <script lang="ts" setup>
-import { withBase } from 'vitepress'
 import { computed } from 'vue'
 import { data as posts } from '@theme/data/posts.data.ts'
+import PageHeader from '@components/PageHeader.vue'
+import PostRows from '@components/PostRows.vue'
 import type { Post } from '@/theme'
 
 type YearGroup = {
@@ -54,17 +54,26 @@ const data = computed(() => groupByYear(posts))
 </script>
 
 <style scoped>
+.year-group {
+  margin-top: 1.5rem;
+}
+
 .year {
-  padding: 16px 0 0 0;
-  font-size: 1.25rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--vp-c-divider);
+  font-size: 1.375rem;
   font-weight: 700;
+  line-height: 2rem;
+  letter-spacing: -0.01em;
 }
 
-.vp-doc a:hover {
-  text-decoration: none;
-}
-
-.article .date {
-  width: 4rem;
+.year-count {
+  color: var(--vp-c-text-2);
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 </style>

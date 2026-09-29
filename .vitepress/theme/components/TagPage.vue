@@ -1,38 +1,43 @@
 <template>
+  <PageHeader
+    title="标签"
+    :subtitle="`共 ${Object.keys(data).length} 个标签`"
+  />
   <div class="tag-container">
     <a
       v-for="(item, key) in data"
       :key="key"
-      class="post-tag"
+      class="tag-chip tag-chip-large"
       :class="{ active: key === selectedTag }"
       :href="tagLink(key.toString())"
     >
-      {{ key }} <strong>{{ item.length }}</strong>
+      {{ key }} <span class="tag-count">{{ item.length }}</span>
     </a>
   </div>
-  <div
-    v-if="selectedTag"
-    class="header"
-  >
-    {{ selectedTag }}
-  </div>
 
-  <ul v-if="selectedTag">
-    <li
-      v-for="(article, index) in data[selectedTag]"
-      :key="index"
-    >
-      <div class="article">
-        <a :href="withBase(article.regularPath)">{{ article.frontMatter.title }}</a>
-        <div class="date">{{ article.frontMatter.date.slice(0, 7) }}</div>
-      </div>
-    </li>
-  </ul>
+  <section
+    v-if="selectedTag"
+    class="tag-section"
+  >
+    <h2 class="tag-title">
+      <span class="tag-hash">#</span>{{ selectedTag }}
+      <span class="tag-title-count">{{ data[selectedTag]?.length ?? 0 }} 篇</span>
+    </h2>
+    <PostRows :posts="data[selectedTag] ?? []" />
+  </section>
+  <p
+    v-else-if="mounted"
+    class="tag-hint"
+  >
+    选择一个标签，查看相关的文章
+  </p>
 </template>
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, withBase } from 'vitepress'
 import { data as posts } from '@theme/data/posts.data'
+import PageHeader from '@components/PageHeader.vue'
+import PostRows from '@components/PostRows.vue'
 import type { Post } from '@/theme'
 
 const data = computed(() => {
@@ -65,52 +70,54 @@ const selectedTag = computed(() =>
 </script>
 <style scoped>
 .tag-container {
-  margin-top: 14px;
   display: flex;
   flex-wrap: wrap;
+  gap: 0.625rem;
+  margin-top: 1.25rem;
 }
 
-.post-tag {
-  padding: 4px 16px;
-  margin: 6px 8px;
+.tag-container .tag-chip-large {
+  padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 600;
-  line-height: 25px;
-  color: var(--vp-c-text-1);
-  text-decoration: none;
 }
 
-.post-tag:hover,
-.post-tag.active {
-  color: var(--tag-hover);
-}
-
-.post-tag strong {
-  padding-left: 0.125rem;
-  font-size: 0.875rem;
-  font-weight: 700;
+.tag-count {
   color: var(--tag-count);
+  font-weight: 700;
 }
 
-.header {
-  font-size: 2rem;
-  font-weight: 600;
-  margin: 1rem 0;
-  text-align: center;
+.tag-section {
+  margin-top: 2rem;
 }
 
-a:hover {
-  text-decoration: none;
+.tag-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  margin: 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--vp-c-divider);
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 2rem;
+  letter-spacing: -0.01em;
 }
 
-.article .date {
-  white-space: nowrap;
-  width: 6rem;
+.tag-hash {
+  color: var(--vp-c-green-1);
 }
 
-@media screen and (max-width: 700px) {
-  .header {
-    font-size: 1.5rem;
-  }
+.tag-title-count {
+  margin-left: 0.25rem;
+  color: var(--vp-c-text-2);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.tag-hint {
+  margin-top: 2rem;
+  color: var(--vp-c-text-2);
+  font-size: 0.9375rem;
 }
 </style>

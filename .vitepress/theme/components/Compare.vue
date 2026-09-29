@@ -67,13 +67,8 @@ withDefaults(
 </script>
 <style>
 :root {
-  --cmp-tag-bg: #eff6ff;
-  --cmp-tag-text: #2e3452;
-}
-
-.dark {
-  --cmp-tag-bg: #2e3452;
-  --cmp-tag-text: #eff6ff;
+  --cmp-tag-bg: var(--vp-c-bg);
+  --cmp-tag-text: var(--vp-c-text-1);
 }
 </style>
 <style scoped>

@@ -23,7 +23,7 @@
       <a
         v-for="tag in tags"
         :key="tag"
-        class="meta-tag"
+        class="tag-chip"
         :href="withBase(`/tags?tag=${encodeURIComponent(tag)}`)"
         >{{ tag }}</a
       >
@@ -80,20 +80,7 @@ const tags = computed<string[]>(() => frontmatter.value.tags ?? [])
 }
 
 time.meta-item {
+  color: var(--date-color);
   font-family: var(--vp-font-family-mono);
-}
-
-.meta-tag {
-  padding: 0 0.5rem;
-  border-radius: 0.375rem;
-  background-color: var(--vp-c-default-soft);
-  color: var(--vp-c-text-2);
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.meta-tag:hover {
-  color: var(--vp-c-brand-1);
 }
 </style>

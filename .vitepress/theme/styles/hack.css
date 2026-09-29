@@ -1,13 +1,13 @@
-/* Hack for wider page */
+/* Hack for page width */
 
-/* Pages w/o aside */
+/* Pages w/o aside: home, archives, tags; wide, so more posts fit on one screen */
 .VPDoc .content {
   max-width: 60rem !important;
 }
 
-/* Pages w/ aside */
+/* Pages w/ aside: posts, ~48rem of text for readable line length */
 .VPDoc.has-aside .content-container {
-  max-width: 60rem !important;
+  max-width: 48rem !important;
 }
 
 /* Overall width for content+aside */

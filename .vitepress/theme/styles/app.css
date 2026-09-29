@@ -5,13 +5,12 @@
 @import './katex.css';
 
 :root {
-  --vp-c-brand-light: #5e5e5e;
+  /* blue (vitepress brand) for links and titles, green for metadata: dates and tags */
+  --date-color: var(--vp-c-green-1);
 
-  /* loia theme color */
-  --li-dot-color: #737373;
-  --date-color: #65b486;
+  /* neutral inline code, so it doesn't read as a link (code in links keeps the link color) */
+  --vp-code-color: var(--vp-c-text-1);
 
-  --vp-code-line-number-color: var(--vp-c-brand);
   --vp-code-block-bg: #f7f7f7;
   --vp-code-line-highlight-color: rgba(0, 0, 0, 0.2);
   --vp-code-line-diff-add-color: rgba(125, 191, 123, 0.3);
@@ -21,26 +20,30 @@
 }
 
 .dark {
-  --vp-c-brand-light: #aaa;
   --vp-code-block-bg: var(--vp-c-bg-soft);
-  --vp-code-line-number-color: var(--vp-c-brand-light);
   --vp-code-line-highlight-color: rgba(0, 0, 0, 1);
+}
+
+::selection {
+  background-color: var(--vp-c-brand-soft);
 }
 
 figure img {
   margin: 0 auto;
+  border-radius: 8px;
 }
 
 figcaption {
   font-size: small;
   display: block;
   text-align: center;
-  color: var(--vp-c-text-3);
+  color: var(--vp-c-text-2);
 }
 
 a:link {
   text-decoration: none;
-  word-break: break-all;
+  /* break long urls only when they would overflow, not in the middle of every word */
+  overflow-wrap: anywhere;
 }
 
 h3 {
@@ -55,30 +58,4 @@ h3 {
 /* Logo */
 .VPNavBarTitle a > img {
   height: 2.25rem !important;
-}
-
-.article {
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  line-height: 0.925rem;
-  a {
-    font-weight: 600;
-  }
-  a:hover {
-    color: var(--vp-c-green-2);
-  }
-}
-
-.date {
-  color: var(--date-color);
-  font-family: var(--vp-font-family-mono);
-  text-align: right;
-}
-
-/*mobile*/
-@media screen and (max-width: 768px) {
-  .article {
-    padding: 0.25rem;
-  }
 }
