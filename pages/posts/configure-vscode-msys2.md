@@ -6,7 +6,7 @@ tags:
   - vscode
   - windows
   - MSYS2
-  - C/C++
+  - C++
   - 配置
 description: 使用vscode+MSYS2在windows上搭建C/C++环境，新手向
 ---

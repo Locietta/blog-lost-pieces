@@ -2,7 +2,7 @@
 date: 2023-01-27
 title: 当你想要写一个vector（一）：从纯C开始
 tags:
-  - C/C++
+  - C++
 description: 变长数组容器，结合我现在对C++的一些理解来写写看。
 ---
 
@@ -124,7 +124,7 @@ $$
 
 注意我们需要先分配新的内存，然后才能释放掉旧的内存，因此左边需要去掉$\displaystyle K^{n-1}$这一项。
 
-要使上面的不等式对任意$n\in \mathbb{N}$恒成立，则$\displaystyle \sup \left\{  \dfrac{1}{K^2}\sum_{i=0}^{n-2}\dfrac{1}{K^i} \right\} = \dfrac{1}{K(K-1)}\geq 1$，进而$1 \lt K \le \dfrac{1+\sqrt 5}{2}$. 在这个范围内，为了方便计算一般取$K=1.5$
+要使上面的不等式对任意$n\in \mathbb{N}$恒成立，则$\displaystyle \sup \left\{ \dfrac{1}{K^2}\sum_{i=0}^{n-2}\dfrac{1}{K^i} \right\} = \dfrac{1}{K(K-1)}\geq 1$，进而$1 \lt K \le \dfrac{1+\sqrt 5}{2}$. 在这个范围内，为了方便计算一般取$K=1.5$
 
 > [MSVC STL](https://github.com/microsoft/STL/blob/79e80412313b86f9d0f382ad91470292ea2c303c/stl/inc/vector#L1968)和 Facebook 的[Folly(FBVector)](https://github.com/facebook/folly/blob/main/folly/docs/FBVector.md)所采用的就是$K=1.5$
 

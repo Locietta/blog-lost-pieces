@@ -11,6 +11,4 @@ not_append_title: true
 import TagPage from '@components/TagPage.vue'
 </script>
 
-<ClientOnly>
 <TagPage/>
-</ClientOnly>

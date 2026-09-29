@@ -14,6 +14,7 @@ import { wordless, chineseAndJapanese, type Options } from 'markdown-it-wordless
 import custom_components from './theme/custom_component.ts'
 import path from 'path'
 import { type RSSOptions, RssPlugin } from 'vitepress-plugin-rss'
+import { draftPosts, pageSize } from './posts.ts'
 
 const rssConfig: RSSOptions = {
   title: "Lost Pieces - Locietta's Blog",
@@ -22,7 +23,7 @@ const rssConfig: RSSOptions = {
   baseUrl: 'https://blog.locietta.xyz',
   language: 'zh-CN',
   filter(post) {
-    return post.url.startsWith('/posts/')
+    return post.url.startsWith('/posts/') && !post.frontmatter.draft
   },
 }
 
@@ -106,7 +107,7 @@ const searchConfig: DefaultTheme.Config['search'] = {
 }
 
 const themeConfig: LoiaTheme.Config = {
-  pageSize: 6,
+  pageSize,
   website: 'https://github.com/Locietta/blog-lost-pieces',
   logo: '/favicon.ico',
   comment: true,
@@ -137,7 +138,7 @@ export default defineConfigWithTheme<LoiaTheme.Config>({
   description: 'Life Record & Tech Share',
   base: '/',
   srcDir: 'pages',
-  srcExclude: ['**/README.md'],
+  srcExclude: ['**/README.md', ...(process.env.NODE_ENV === 'production' ? draftPosts() : [])],
   lang: 'zh-CN',
   cleanUrls: true,
   lastUpdated: true,
@@ -176,6 +177,8 @@ export default defineConfigWithTheme<LoiaTheme.Config>({
   },
   transformPageData(pageData) {
     const host = 'https://blog.locietta.xyz'
+    if (pageData.params?.num)
+      pageData.title = `第 ${pageData.params.num} 页 | Page ${pageData.params.num}`
     const { description, title, relativePath } = pageData
 
     const metas: HeadConfig[] = [

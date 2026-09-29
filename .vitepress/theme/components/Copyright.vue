@@ -1,6 +1,6 @@
 <template>
   <div class="site-footer">
-    MIT Licensed | Copyright © 2021-2023
+    MIT Licensed | Copyright © 2021-{{ year }}
     <a
       class="vitepress"
       :href="website"
@@ -21,6 +21,7 @@ import { useData } from 'vitepress'
 const { site, theme } = useData<LoiaTheme.Config>()
 const website = theme.value.website
 const webTitle = site.value.title
+const year = new Date().getFullYear()
 </script>
 
 <style scoped>

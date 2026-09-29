@@ -2,7 +2,7 @@
 date: 2023-10-04
 title: C++踩坑：当你想要写一个vector（二）
 tags:
-  - C/C++
+  - C++
 description: 变长数组容器，结合我现在对C++的一些理解来写写看。
 ---
 

@@ -23,60 +23,80 @@
     </div>
   </div>
 
-  <div class="pagination-container">
-    <ClientOnly>
-      <NPagination
-        v-model:page="pageCurrent"
-        :page-count="pagesNum"
-        :page-slot="5"
-        size="large"
-        @update:page="onPageChange"
-      ></NPagination>
-    </ClientOnly>
-  </div>
+  <nav
+    v-if="pagesNum > 1"
+    class="pagination"
+    aria-label="Pagination"
+  >
+    <a
+      v-if="page > 1"
+      class="pager-link"
+      :href="pageLink(page - 1)"
+      aria-label="Previous page"
+      >‹</a
+    >
+    <template
+      v-for="n in pagesNum"
+      :key="n"
+    >
+      <span
+        v-if="n === page"
+        class="pager-link active"
+        aria-current="page"
+        >{{ n }}</span
+      >
+      <a
+        v-else
+        class="pager-link"
+        :href="pageLink(n)"
+        >{{ n }}</a
+      >
+    </template>
+    <a
+      v-if="page < pagesNum"
+      class="pager-link"
+      :href="pageLink(page + 1)"
+      aria-label="Next page"
+      >›</a
+    >
+  </nav>
 </template>
 
 <script lang="ts" setup>
-import { withBase } from 'vitepress'
-import { ref, computed, onMounted } from 'vue'
+import { useRouter, withBase } from 'vitepress'
+import { computed, onMounted } from 'vue'
 import type { Post } from '@/theme'
-import { NPagination } from 'naive-ui'
 
 const props = withDefaults(
   defineProps<{
     posts: Array<Post>
     pageSize?: number
+    page?: number
   }>(),
   {
     pageSize: 6,
+    page: 1,
   },
 )
 
-const pagesNum = Math.ceil(props.posts.length / props.pageSize)
+const pagesNum = computed(() => Math.ceil(props.posts.length / props.pageSize))
 
 const pagePosts = computed(() => {
-  const start = (pageCurrent.value - 1) * props.pageSize
+  const start = (props.page - 1) * props.pageSize
   const end = start + props.pageSize
   return props.posts.slice(start, end)
 })
 
-const pageCurrent = ref(1)
+const pageLink = (n: number) => withBase(n === 1 ? '/' : `/page/${n}`)
 
+// redirect legacy `/?page=n` links to the static page routes
+const router = useRouter()
 onMounted(() => {
-  const params = new URLSearchParams(location.search)
-  pageCurrent.value = +(params.get('page') || 1)
+  const legacyPage = Number(new URLSearchParams(location.search).get('page'))
+  if (props.page === 1 && legacyPage > 1 && legacyPage <= pagesNum.value) {
+    router.go(pageLink(legacyPage), { replace: true })
+  }
 })
-
-const onPageChange = (page: number) => {
-  const url = new URL(location.href)
-  url.searchParams.set('page', page.toString())
-  history.replaceState(null, '', url.toString()) // Update URL without adding to history
-
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  })
-}
 </script>
 
 <style scoped>
@@ -123,10 +143,34 @@ const onPageChange = (page: number) => {
   border-right: none;
 }
 
-.pagination-container {
-  margin-top: 0.75rem;
+.pagination {
+  margin-top: 1.5rem;
   display: flex;
   justify-content: center;
+  gap: 0.5rem;
+}
+
+.pager-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  padding: 0 0.5rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  color: var(--vp-c-text-2);
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.pager-link:hover,
+.pager-link.active {
+  color: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-1);
 }
 
 .date {
@@ -139,16 +183,27 @@ const onPageChange = (page: number) => {
     padding: 1rem 0 0 0;
   }
 
+  .post-header {
+    gap: 0.75rem;
+  }
+
   .post-title {
+    flex: 1;
+    min-width: 0;
     font-size: 1.125rem;
     font-weight: 400;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     line-clamp: 2;
     overflow: hidden;
-    width: 17rem;
   }
 
   .describe {
     font-size: 0.9375rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
     line-clamp: 3;
     overflow: hidden;
   }

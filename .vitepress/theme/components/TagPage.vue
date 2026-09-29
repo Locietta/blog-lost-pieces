@@ -1,17 +1,23 @@
 <template>
   <div class="tag-container">
-    <span
+    <a
       v-for="(item, key) in data"
       :key="key"
       class="post-tag"
-      @click="toggleTag(key.toString())"
+      :class="{ active: key === selectedTag }"
+      :href="tagLink(key.toString())"
     >
       {{ key }} <strong>{{ item.length }}</strong>
-    </span>
+    </a>
   </div>
-  <div class="header">{{ selectedTag }}</div>
+  <div
+    v-if="selectedTag"
+    class="header"
+  >
+    {{ selectedTag }}
+  </div>
 
-  <ul>
+  <ul v-if="selectedTag">
     <li
       v-for="(article, index) in data[selectedTag]"
       :key="index"
@@ -24,8 +30,8 @@
   </ul>
 </template>
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
-import { withBase } from 'vitepress'
+import { computed, onMounted, ref } from 'vue'
+import { useRoute, withBase } from 'vitepress'
 import { data as posts } from '@theme/data/posts.data'
 import type { Post } from '@/theme'
 
@@ -45,15 +51,17 @@ const data = computed(() => {
     Object.entries(collectedTagPost).sort((a, b) => b[1].length - a[1].length),
   )
 })
-const url = location.href.split('?')[1]
-const params = new URLSearchParams(url)
-const tagName = params.get('tag')
+const tagLink = (tag: string) => withBase(`/tags?tag=${encodeURIComponent(tag)}`)
 
-const selectedTag = ref(tagName ? tagName : '')
+// Tag links are handled by the vitepress router, which keeps `route.query` in sync
+// (including back/forward). Read it only after mount so SSR and hydration match.
+const route = useRoute()
+const mounted = ref(false)
+onMounted(() => (mounted.value = true))
 
-const toggleTag = (tag: string) => {
-  selectedTag.value = tag
-}
+const selectedTag = computed(() =>
+  mounted.value ? (new URLSearchParams(route.query).get('tag') ?? '') : '',
+)
 </script>
 <style scoped>
 .tag-container {
@@ -68,6 +76,13 @@ const toggleTag = (tag: string) => {
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 25px;
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+}
+
+.post-tag:hover,
+.post-tag.active {
+  color: var(--tag-hover);
 }
 
 .post-tag strong {

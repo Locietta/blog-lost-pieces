@@ -7,6 +7,7 @@ export declare const data: Post[]
 export default createContentLoader('posts/*.md', {
   transform(raw): Post[] {
     return raw
+      .filter(({ frontmatter }) => !frontmatter.draft)
       .map(({ url, frontmatter }) => {
         const date = frontmatter.date ? new Date(frontmatter.date) : new Date()
 
