@@ -2,29 +2,8 @@
   <footer
     v-if="isPost"
     class="post-footer"
+    :class="{ standalone: !hasLastUpdated }"
   >
-    <div
-      v-if="tags.length"
-      class="footer-tags"
-    >
-      <HiOutlineTag class="icon" />
-      <a
-        v-for="tag in tags"
-        :key="tag"
-        class="tag-chip"
-        :href="withBase(`/tags?tag=${encodeURIComponent(tag)}`)"
-        >{{ tag }}</a
-      >
-    </div>
-
-    <section
-      v-if="related.length"
-      class="related"
-    >
-      <h2 class="related-title">Related Posts</h2>
-      <PostRows :posts="related" />
-    </section>
-
     <p
       v-if="frontmatter.license !== false"
       class="license"
@@ -37,6 +16,33 @@
         >CC BY-NC-SA 4.0</a
       >
     </p>
+
+    <div
+      v-if="tags.length || related.length"
+      class="footer-nav"
+    >
+      <div
+        v-if="tags.length"
+        class="footer-tags"
+      >
+        <HiOutlineTag class="icon" />
+        <a
+          v-for="tag in tags"
+          :key="tag"
+          class="tag-chip"
+          :href="withBase(`/tags?tag=${encodeURIComponent(tag)}`)"
+          >{{ tag }}</a
+        >
+      </div>
+
+      <section
+        v-if="related.length"
+        class="related"
+      >
+        <h2 class="related-title">Related Posts</h2>
+        <PostRows :posts="related" />
+      </section>
+    </div>
   </footer>
 </template>
 
@@ -53,6 +59,9 @@ const { page, frontmatter, theme } = useData<LoiaTheme.Config>()
 
 const isPost = computed(() => page.value.relativePath.startsWith('posts/'))
 const tags = computed<string[]>(() => frontmatter.value.tags ?? [])
+
+// same condition as vitepress' VPDocFooter, which renders the "last updated" line above us
+const hasLastUpdated = computed(() => !!page.value.lastUpdated)
 
 // same UTC formatting as the post header, the written day doesn't shift with timezone
 const date = computed(() => {
@@ -83,6 +92,15 @@ const related = computed(() => {
 <style scoped>
 .post-footer {
   margin-bottom: 2rem;
+}
+
+/* without the "last updated" footer above, keep the same gap after the content */
+.post-footer.standalone {
+  margin-top: 4rem;
+}
+
+.footer-nav {
+  margin-top: 1.5rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--vp-c-divider);
 }
@@ -115,7 +133,7 @@ const related = computed(() => {
 }
 
 .license {
-  margin: 1.5rem 0 0;
+  margin: 0;
   padding: 0.625rem 1rem;
   border-radius: 8px;
   background-color: var(--vp-c-bg-soft);

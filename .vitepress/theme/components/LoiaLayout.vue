@@ -1,9 +1,8 @@
 <template>
   <Layout>
-    <template #doc-footer-before>
-      <PostFooter />
-    </template>
     <template #doc-after>
+      <!-- after vitepress' "last updated" footer -->
+      <PostFooter />
       <Comment />
     </template>
     <template #aside-top>
