@@ -2,6 +2,7 @@
   <a
     v-if="isPosts"
     class="rollback-btn"
+    :class="placement"
     :href="lastListPage"
   >
     <HiMiniArrowUturnLeft class="icon" />
@@ -13,6 +14,15 @@ import { computed } from 'vue'
 import { useRoute } from 'vitepress'
 import { HiMiniArrowUturnLeft } from 'vue-icons-plus/hi2'
 import { useLastListPage } from '@theme/list-page'
+
+withDefaults(
+  defineProps<{
+    /// `aside`: button above the outline, `top`: compact link above the title,
+    /// shown only on screens where vitepress hides the aside
+    placement?: 'aside' | 'top'
+  }>(),
+  { placement: 'aside' },
+)
 
 const route = useRoute()
 const isPosts = computed(() => route.path.startsWith('/posts'))
@@ -37,6 +47,23 @@ const lastListPage = useLastListPage()
 .rollback-btn:hover {
   color: var(--vp-c-brand-1);
   border-color: var(--vp-c-brand-1);
+}
+
+.rollback-btn.top {
+  height: auto;
+  margin-bottom: 0.75rem;
+  padding: 0;
+  border: none;
+  color: var(--vp-c-text-2);
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+/* same breakpoint where vitepress shows the aside */
+@media (min-width: 1280px) {
+  .rollback-btn.top {
+    display: none;
+  }
 }
 
 .icon {

@@ -5,6 +5,9 @@
       <PostFooter />
       <Comment />
     </template>
+    <template #doc-before>
+      <RollBack placement="top" />
+    </template>
     <template #aside-top>
       <RollBack />
     </template>
