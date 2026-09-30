@@ -28,7 +28,9 @@
   background-color: var(--vp-c-brand-soft);
 }
 
-figure img {
+/* center standalone images; `.vp-doc` outranks vitepress' `.vp-doc img { margin: 1rem 0 }` */
+figure img,
+.vp-doc figure img {
   margin: 0 auto;
   border-radius: 8px;
 }
