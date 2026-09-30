@@ -6,14 +6,16 @@
     "sourceMap": true,
     "noUncheckedIndexedAccess": true,
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    // TS 6 no longer includes all @types by default; this re-exports vite/client (e.g. `*.css` imports)
+    "types": ["vitepress/client"],
+    // resolved relative to this file, `baseUrl` is deprecated since TS 6
     "paths": {
-      "@/*": [".vitepress/*"],
-      "@theme/*": [".vitepress/theme/*"],
-      "@components/*": [".vitepress/theme/components/*"],
+      "@/*": ["./.vitepress/*"],
+      "@theme/*": ["./.vitepress/theme/*"],
+      "@components/*": ["./.vitepress/theme/components/*"],
       // its exports list "import" before "types", so TS resolves the shipped .ts sources
       "markdown-it-wordless": ["./node_modules/markdown-it-wordless/index.d.ts"]
-    },
-    "baseUrl": "./"
+    }
   },
   "include": [
     "pages/**/*.md",

@@ -1,6 +1,6 @@
 import { createContentLoader } from 'vitepress'
 
-import type { Post } from '.vitepress/theme'
+import type { Post } from '@/theme'
 
 export declare const data: Post[]
 
