@@ -37,19 +37,28 @@ function removeAttributeFromImage(image: Token, attribute: string) {
   }
 }
 
-// pre-confition: image.attrs!
-function findCaptionText(captionType: FigureOption['figcaption'], image: Token): string {
-  if (captionType === 'alt') {
-    return image.content
+/// Caption tokens for the image, built without parsing markdown again: a nested
+/// md.parseInline() would re-run every core rule, including other plugins'.
+/// - title: plain text (as in CommonMark), removed from the image
+/// - alt: markdown-it already parsed it inline into the image's children
+function findCaption(
+  state: StateCore,
+  captionType: FigureOption['figcaption'],
+  image: Token,
+): Token[] {
+  if (captionType !== 'alt') {
+    const title = image.attrGet('title')
+    if (title) {
+      removeAttributeFromImage(image, 'title')
+      const text = new state.Token('text', '', 0)
+      text.content = title
+      return [text]
+    }
+    if (captionType === 'title') return []
   }
 
-  const captionObj = image.attrs!.find(([k]) => k === 'title')
-  if (Array.isArray(captionObj) && captionObj[1]) {
-    removeAttributeFromImage(image, 'title')
-    return captionObj[1]
-  }
-
-  return captionType === 'title' ? '' : image.content
+  // the image still renders its alt text from these, so share them rather than move
+  return image.children ?? []
 }
 
 export default function imageFiguresPlugin(md: MarkdownIt, options: FigureOption) {
@@ -127,17 +136,15 @@ export default function imageFiguresPlugin(md: MarkdownIt, options: FigureOption
       if (!image.attrs) continue
 
       if (options.figcaption) {
-        const figCaption = findCaptionText(options.figcaption, image)
+        const caption = findCaption(state, options.figcaption, image)
 
-        if (figCaption) {
-          const [captionContent] = md.parseInline(figCaption, state.env)
-          token.children.push(new state.Token('figcaption_open', 'figcaption', 1))
-          if (captionContent?.children) token.children.push(...captionContent.children)
-          token.children.push(new state.Token('figcaption_close', 'figcaption', -1))
-
-          if (image.attrs) {
-            image.attrs = removeAttributeFromList(image.attrs, 'title')
-          }
+        if (caption.length > 0) {
+          token.children.push(
+            new state.Token('figcaption_open', 'figcaption', 1),
+            ...caption,
+            new state.Token('figcaption_close', 'figcaption', -1),
+          )
+          removeAttributeFromImage(image, 'title')
         }
       }
 
