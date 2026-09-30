@@ -43,7 +43,8 @@ function countWords(tokens: Token[]) {
 
 export default function postMetaPlugin(md: MarkdownIt) {
   md.core.ruler.push('post_meta', (state: StateCore) => {
-    if (!state.env?.relativePath?.startsWith('posts/')) return
+    // skip nested md.parseInline() calls, e.g. image captions rendered by markdown-it-img-figure
+    if (state.inlineMode || !state.env?.relativePath?.startsWith('posts/')) return
 
     const { words, minutes } = countWords(state.tokens)
     const meta = new state.Token('html_block', '', 0)
