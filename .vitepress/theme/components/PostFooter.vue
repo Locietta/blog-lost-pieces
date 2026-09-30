@@ -132,14 +132,19 @@ const related = computed(() => {
   line-height: 1.5rem;
 }
 
+/* plain text in the same style as vitepress' "last updated" line right above */
 .license {
   margin: 0;
-  padding: 0.625rem 1rem;
-  border-radius: 8px;
-  background-color: var(--vp-c-bg-soft);
   color: var(--vp-c-text-2);
-  font-size: 0.8125rem;
-  line-height: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.7142857;
+}
+
+@media (min-width: 640px) {
+  .license {
+    line-height: 2.2857143;
+  }
 }
 
 .license a {
