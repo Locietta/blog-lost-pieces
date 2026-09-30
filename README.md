@@ -50,6 +50,7 @@ lastUpdated: 是否显示最后更新时间（默认true）
 not_append_title: 是否禁用自动添加标题（默认false）
 comment: 是否开启评论（默认true）
 sidebar: 是否显示右侧的目录（默认true）
+license: 是否在文末显示CC BY-NC-SA许可声明（默认true），文章另有授权说明时设为false
 ---
 
 <!-- # 不用手写标题，会自动用frontmatter里的title生成，除非手动设置not_append_title: true -->
@@ -65,3 +66,9 @@ sidebar: 是否显示右侧的目录（默认true）
 用法上，在`.vitepress/config.ts`里指定`themeConfig: { comment: true }`就可以开启所有页面的评论，也可以在各个文章的frontmatter里手动设置`comment: false`覆盖全局设置（[about.md](./about.md)是个例子）。
 
 需要在`.vitepress/config.ts`中的主题设置里的`giscusConfig`条目中填入必要的配置并启用相关仓库的discussion后才能使用评论相关功能，具体可参考https://giscus.app/zh-CN
+
+### 许可协议
+
+- 博客内容（`pages/`下的文章和页面）采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可，文章中另有说明的除外，详见 [LICENSE-CONTENT](./LICENSE-CONTENT)
+- 文章中引用的第三方素材（图片、图表等）遵循其原作者的许可
+- 代码（主题、插件、配置等）采用 [MIT](./LICENSE) 许可

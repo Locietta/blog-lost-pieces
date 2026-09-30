@@ -25,7 +25,10 @@
       <PostRows :posts="related" />
     </section>
 
-    <p class="license">
+    <p
+      v-if="frontmatter.license !== false"
+      class="license"
+    >
       © {{ year }} {{ theme.author }} · Licensed under
       <a
         href="https://creativecommons.org/licenses/by-nc-sa/4.0/"

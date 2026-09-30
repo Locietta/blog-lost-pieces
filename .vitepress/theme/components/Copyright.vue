@@ -1,6 +1,14 @@
 <template>
   <div class="site-footer">
-    MIT Licensed | Copyright © 2021-{{ year }} <a :href="website">{{ webTitle }}</a
+    Posts licensed under
+    <a
+      href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+      target="_blank"
+      rel="license noopener noreferrer"
+      >CC BY-NC-SA 4.0</a
+    >
+    | Code MIT Licensed<br />
+    Copyright © 2021-{{ year }} <a :href="website">{{ webTitle }}</a
     ><br />
     Powered by
     <a
