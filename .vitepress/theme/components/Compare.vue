@@ -72,6 +72,11 @@ withDefaults(
 }
 </style>
 <style scoped>
+/* the slider is inline-block: align it to the top, so no descender space is left under it */
+.img-compare {
+  vertical-align: top;
+}
+
 .img-compare-title {
   margin: 0 0 0.5rem 0;
 }

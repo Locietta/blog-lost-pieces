@@ -42,6 +42,23 @@ figcaption {
   color: var(--vp-c-text-2);
 }
 
+/* image and image comparison captions, but not the before/after labels over the slider */
+.vp-doc figcaption:not(.img-compare *) {
+  margin-top: 0.125rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  text-wrap: balance;
+}
+
+/* a marker pointing at the image, so captions don't read as body text */
+.vp-doc figcaption:not(.img-compare *)::before {
+  content: '▲ ';
+  content: '▲ ' / ''; /* decorative, hidden from screen readers where supported */
+  color: var(--vp-c-text-3);
+  font-size: 0.625rem;
+  vertical-align: 0.1em;
+}
+
 a:link {
   text-decoration: none;
   /* break long urls only when they would overflow, not in the middle of every word */
