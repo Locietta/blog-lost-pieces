@@ -45,6 +45,7 @@ function findCaption(
   state: StateCore,
   captionType: FigureOption['figcaption'],
   image: Token,
+  linked: boolean,
 ): Token[] {
   if (captionType !== 'alt') {
     const title = image.attrGet('title')
@@ -57,8 +58,11 @@ function findCaption(
     if (captionType === 'title') return []
   }
 
-  // the image still renders its alt text from these, so share them rather than move
-  return image.children ?? []
+  const children = image.children ?? []
+  // the image renders its alt from these; move them to the caption, so screen readers
+  // don't read the same text twice. A linked image keeps them as the link's name.
+  if (!linked) image.children = []
+  return children
 }
 
 export default function imageFiguresPlugin(md: MarkdownIt, options: FigureOption) {
@@ -136,7 +140,8 @@ export default function imageFiguresPlugin(md: MarkdownIt, options: FigureOption
       if (!image.attrs) continue
 
       if (options.figcaption) {
-        const caption = findCaption(state, options.figcaption, image)
+        const linked = token.children[0]?.type === 'link_open'
+        const caption = findCaption(state, options.figcaption, image, linked)
 
         if (caption.length > 0) {
           token.children.push(
