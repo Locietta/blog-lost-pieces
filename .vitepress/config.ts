@@ -110,6 +110,7 @@ const searchConfig: DefaultTheme.Config['search'] = {
 const themeConfig: LoiaTheme.Config = {
   pageSize,
   website: 'https://github.com/Locietta/blog-lost-pieces',
+  author: 'Locietta',
   logo: '/favicon.ico',
   comment: true,
   giscusConfig: giscusConfig,

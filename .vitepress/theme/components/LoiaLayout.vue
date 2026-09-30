@@ -1,5 +1,8 @@
 <template>
   <Layout>
+    <template #doc-footer-before>
+      <PostFooter />
+    </template>
     <template #doc-after>
       <Comment />
     </template>
@@ -14,6 +17,7 @@
 import DefaultTheme from 'vitepress/theme'
 import Comment from '@components/Comment.vue'
 import Copyright from '@components/Copyright.vue'
+import PostFooter from '@components/PostFooter.vue'
 import RollBack from '@components/RollBack.vue'
 import { trackListPage } from '@theme/list-page'
 const { Layout } = DefaultTheme

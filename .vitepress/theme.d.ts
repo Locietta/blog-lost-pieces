@@ -23,6 +23,8 @@ declare namespace LoiaTheme {
 
   type Config = DefaultTheme.Config & {
     website: string
+    /// shown in the license notice of each post
+    author: string
     pageSize?: number
     comment?: boolean
     giscusConfig: GiscusConfig
