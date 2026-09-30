@@ -1,7 +1,7 @@
 <template>
   <PageHeader
-    title="归档"
-    :subtitle="`共 ${posts.length} 篇文章`"
+    title="Archives"
+    :subtitle="`${posts.length} posts`"
   />
   <section
     v-for="yearGroup in data"

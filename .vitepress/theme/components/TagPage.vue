@@ -1,7 +1,7 @@
 <template>
   <PageHeader
-    title="标签"
-    :subtitle="`共 ${Object.keys(data).length} 个标签`"
+    title="Tags"
+    :subtitle="`${Object.keys(data).length} tags`"
   />
   <div class="tag-container">
     <a
@@ -21,7 +21,7 @@
   >
     <h2 class="tag-title">
       <span class="tag-hash">#</span>{{ selectedTag }}
-      <span class="tag-title-count">{{ data[selectedTag]?.length ?? 0 }} 篇</span>
+      <span class="tag-title-count">{{ postCount(data[selectedTag]?.length ?? 0) }}</span>
     </h2>
     <PostRows :posts="data[selectedTag] ?? []" />
   </section>
@@ -29,7 +29,7 @@
     v-else-if="mounted"
     class="tag-hint"
   >
-    选择一个标签，查看相关的文章
+    Pick a tag to see its posts.
   </p>
 </template>
 <script lang="ts" setup>
@@ -56,6 +56,8 @@ const data = computed(() => {
     Object.entries(collectedTagPost).sort((a, b) => b[1].length - a[1].length),
   )
 })
+const postCount = (n: number) => (n === 1 ? '1 post' : `${n} posts`)
+
 const tagLink = (tag: string) => withBase(`/tags?tag=${encodeURIComponent(tag)}`)
 
 // Tag links are handled by the vitepress router, which keeps `route.query` in sync
