@@ -151,13 +151,27 @@ function math_block(state: StateBlock, start: number, end: number, silent: boole
   return true
 }
 
+// Vue compiles static markup into a plain string, which VitePress then leaves out of the page's
+// lean chunk, only if every attribute is on Vue's known-attribute lists. KaTeX's MathML copy
+// of each formula (visually hidden, read by screen readers) uses a few presentation attributes
+// missing from Vue's MathML list, so every formula was shipped a second time as render code.
+// They only lay out that hidden MathML; the visible formula is KaTeX's HTML.
+// (KaTeX writes some of them with a space before `=`, e.g. `<mtd class ="mtr-glue">`)
+const UNKNOWN_MATHML_ATTRS =
+  /\s(?:rowspacing|columnalign|columnspacing|linethickness|notation|minsize|class)\s*=\s*"[^"]*"/g
+
+const stripUnknownMathMLAttrs = (html: string) =>
+  html.replace(/<math\b[\s\S]*?<\/math>/g, (mathml) => mathml.replace(UNKNOWN_MATHML_ATTRS, ''))
+
 export default function math_plugin(md: MarkdownIt, options: KatexOptions = {}) {
   options = { throwOnError: false, ...options }
+
+  const render = (latex: string) => stripUnknownMathMLAttrs(katex.renderToString(latex, options))
 
   // set KaTeX as the renderer for markdown-it-simplemath
   const katexInline = function (latex: string) {
     options.displayMode = false
-    return katex.renderToString(latex, options)
+    return render(latex)
   }
 
   const inlineRenderer = function (tokens: Token[], idx: number) {
@@ -166,7 +180,7 @@ export default function math_plugin(md: MarkdownIt, options: KatexOptions = {}) 
 
   const katexBlock = function (latex: string) {
     options.displayMode = true
-    return '<p>' + katex.renderToString(latex, options) + '</p>'
+    return '<p>' + render(latex) + '</p>'
   }
 
   const blockRenderer = function (tokens: Token[], idx: number) {
