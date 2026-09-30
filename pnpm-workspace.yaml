@@ -1,5 +1,8 @@
 allowBuilds:
   sharp: true
 
+minimumReleaseAgeExclude:
+  - vue-tweet-pure@0.3.1
+
 patchedDependencies:
   vitepress@2.0.0-alpha.20: patches/vitepress@2.0.0-alpha.20.patch

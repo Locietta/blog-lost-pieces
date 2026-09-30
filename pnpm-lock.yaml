@@ -251,8 +251,8 @@ importers:
         specifier: ^3.3.11
         version: 3.3.11(typescript@5.9.3)
       vue-tweet-pure:
-        specifier: ^0.3.0
-        version: 0.3.0(vue@3.5.43(typescript@5.9.3))
+        specifier: ^0.3.1
+        version: 0.3.1(vue@3.5.43(typescript@5.9.3))
 
 packages:
 
@@ -1699,8 +1699,8 @@ packages:
     peerDependencies:
       typescript: '>=5.0.0'
 
-  vue-tweet-pure@0.3.0:
-    resolution: {integrity: sha512-Czk+givYepdruhBLbYvohIGS/SxNXSdV/EHy6EFvxg7q7jjKKiguT11cq1acfpdYoYL/dTalGLZgAgv2UkQYgA==}
+  vue-tweet-pure@0.3.1:
+    resolution: {integrity: sha512-xoQknW/EP77ZLdHhKnnZNsVF5bY/JMA9D6X1rfFMX8qHZ4vHnqpxZ3EPYV6CKe5lvxWfYYabgawS6JeNG9f9/w==}
     peerDependencies:
       vue: '>= 3.3.0'
 
@@ -3123,7 +3123,7 @@ snapshots:
       '@vue/language-core': 3.3.11
       typescript: 5.9.3
 
-  vue-tweet-pure@0.3.0(vue@3.5.43(typescript@5.9.3)):
+  vue-tweet-pure@0.3.1(vue@3.5.43(typescript@5.9.3)):
     dependencies:
       vue: 3.5.43(typescript@5.9.3)
 
