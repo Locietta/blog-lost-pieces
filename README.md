@@ -51,6 +51,7 @@ not_append_title: 是否禁用自动添加标题（默认false）
 comment: 是否开启评论（默认true）
 sidebar: 是否显示右侧的目录（默认true）
 license: 是否在文末显示CC BY-NC-SA许可声明（默认true），文章另有授权说明时设为false
+draft: 是否为草稿（默认false），草稿不会出现在主页、归档、标签和RSS中，生产构建时也不会生成页面（dev server下仍可通过链接访问）
 ---
 
 <!-- # 不用手写标题，会自动用frontmatter里的title生成，除非手动设置not_append_title: true -->
